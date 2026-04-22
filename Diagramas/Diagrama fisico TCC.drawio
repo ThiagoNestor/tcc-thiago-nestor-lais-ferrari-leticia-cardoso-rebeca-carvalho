@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="RzpbSdyIWzzeN3gXdZt5">
+    <mxGraphModel dx="748" dy="404" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-9" edge="1" parent="1" source="GWJEmMKSYQp-SIXB-DdX-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="GWJEmMKSYQp-SIXB-DdX-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;div&gt;CREATE TABLE USUARIO (&lt;/div&gt;&lt;div&gt;id int unique primary key,&lt;/div&gt;&lt;div&gt;nome varchar(400),&lt;/div&gt;&lt;div&gt;email text,&lt;/div&gt;&lt;div&gt;ursn varchar(20),&lt;/div&gt;&lt;div&gt;senha int(8) unique&lt;/div&gt;&lt;div style=&quot;&quot;&gt;);&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="220" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-10" edge="1" parent="1" source="GWJEmMKSYQp-SIXB-DdX-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="GWJEmMKSYQp-SIXB-DdX-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;div&gt;CREATE TABLE PANC(&lt;/div&gt;&lt;div&gt;id_panc int unique primary key,&lt;/div&gt;&lt;div&gt;n_PANC varchar(111),&lt;/div&gt;&lt;div&gt;infos text,&lt;/div&gt;&lt;div&gt;categ varchar(100)&lt;/div&gt;&lt;div&gt;);&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="220" x="320" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-11" edge="1" parent="1" source="GWJEmMKSYQp-SIXB-DdX-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="GWJEmMKSYQp-SIXB-DdX-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;div&gt;CREATE TABLE IDENTIFICACAO(&lt;/div&gt;&lt;div&gt;id_iden int unique primary key,&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;id int,&lt;/div&gt;&lt;div&gt;id_panc int,&lt;/div&gt;&lt;div&gt;foreign key (id) references USUARIO(id),&lt;/div&gt;&lt;div&gt;foreign key (id_panc) references PANC(id_panc),&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;dat date,&lt;/div&gt;&lt;div&gt;hora int,&lt;/div&gt;&lt;div&gt;padr text,&lt;/div&gt;&lt;div&gt;p_d_conf int&lt;/div&gt;&lt;div&gt;);&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="310" x="640" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-12" edge="1" parent="1" source="GWJEmMKSYQp-SIXB-DdX-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="GWJEmMKSYQp-SIXB-DdX-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;div&gt;CREATE TABLE JARDIM (&lt;/div&gt;&lt;div&gt;id_jardim int unique primary key,&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;id int,&lt;/div&gt;&lt;div&gt;foreign key (id) references USUARIO(id),&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;resg text&lt;/div&gt;&lt;div&gt;);&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="230" x="1050" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-13" edge="1" parent="1" source="GWJEmMKSYQp-SIXB-DdX-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="GWJEmMKSYQp-SIXB-DdX-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;div&gt;&lt;div&gt;CREATE TABLE JARDIM_PANC(&lt;/div&gt;&lt;div&gt;id_jardim int,&lt;/div&gt;&lt;div&gt;id_panc int,&lt;/div&gt;&lt;div&gt;foreign key (id_jardim) references JARDIM(id_jardim),&lt;/div&gt;&lt;div&gt;foreign key (id_panc) references PANC(id_panc),&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;quantidade text,&lt;/div&gt;&lt;div&gt;dat_add date&lt;/div&gt;&lt;div&gt;);&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="260" x="1380" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GWJEmMKSYQp-SIXB-DdX-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;" value="&lt;div&gt;&lt;div&gt;&lt;div&gt;CREATE TABLE MENSAGEM(&lt;/div&gt;&lt;div&gt;id_msg int unique primary key,&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;id int,&lt;/div&gt;&lt;div&gt;id_iden int,&lt;/div&gt;&lt;div&gt;foreign key (id) references USUARIO(id),&lt;/div&gt;&lt;div&gt;foreign key (id_iden) references IDENTIFICACAO(id_iden),&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;txt text,&lt;/div&gt;&lt;div&gt;resp text,&lt;/div&gt;&lt;div&gt;dat date,&lt;/div&gt;&lt;div&gt;hora int&lt;/div&gt;&lt;div&gt;);&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="300" x="1740" y="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
