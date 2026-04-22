@@ -26,7 +26,7 @@ foreign key (id) references USUARIO(id),
 foreign key (id_panc) references PANC(id_panc),
 
 dat date,
-hora int,
+hora time,
 padr text,
 p_d_conf int
 );
@@ -61,5 +61,5 @@ foreign key (id_iden) references IDENTIFICACAO(id_iden),
 txt text,
 resp text,
 dat date,
-hora int
+hora time
 );
