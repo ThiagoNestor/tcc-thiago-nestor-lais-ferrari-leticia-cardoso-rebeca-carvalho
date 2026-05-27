@@ -31,6 +31,11 @@ CREATE TABLE IDENTIFICACAO(
 	p_d_conf int
 );
 
+CREATE TABLE IMAGEM (
+	id_img int unique,
+    src text
+);
+
 CREATE TABLE JARDIM (
 	id_jardim int unique primary key,
 
