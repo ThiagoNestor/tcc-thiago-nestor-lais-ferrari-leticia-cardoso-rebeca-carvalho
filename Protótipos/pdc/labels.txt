@@ -1,0 +1,4 @@
+0 planta01   
+1 bambu
+2 spd
+3 nd
