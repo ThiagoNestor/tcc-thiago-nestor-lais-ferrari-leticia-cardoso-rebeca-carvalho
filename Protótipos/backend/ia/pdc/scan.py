@@ -4,14 +4,14 @@ import numpy as np
 
 
 # Carrega o modelo treinado no Teachable Machine
-model = load_model("keras_model.h5", compile=False)
+model = load_model("treinamento/keras_model.h5", compile=False)
 
 # Carrega os nomes das espécies
-with open("labels.txt", "r", encoding="utf-8") as arquivo:
+with open("treinamentp/labels.txt", "r", encoding="utf-8") as arquivo:
     labels = arquivo.readlines()
 
 # Carrega a imagem que será analisada
-image = Image.open("tst.jpg").convert("RGB")
+image = Image.open("testes/tst.jpg").convert("RGB")
 
 # Ajusta a imagem para o tamanho usado pelo modelo
 image = ImageOps.fit(image, (224, 224), Image.Resampling.LANCZOS)

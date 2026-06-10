@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Growly</title>
+
+    <style>
+        :root {
+            --verde-escuro: #12372a;
+            --verde-medio: #adbc9f;
+            --verde-claro: #c3d1b8;
+            --bege: #ffffe2;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: var(--verde-escuro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 360px;
+            background-color: var(--bege);
+            border-radius: 22px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        h1 {
+            margin: 0 0 24px;
+            color: var(--verde-claro);
+            font-family: Brazika, Georgia, serif;
+            font-size: 54px;
+            letter-spacing: 2px;
+        }
+
+        .upload-box {
+            width: 260px;
+            height: 190px;
+            margin: 0 auto 18px;
+            border: 2px dashed var(--verde-escuro);
+            border-radius: 18px;
+            background-color: rgba(195, 209, 184, 0.18);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #preview, #camera {
+            width: 95%;
+            height: 95%;
+            object-fit: contain;
+            display: none;
+        }
+
+        #texto-upload {
+            color: var(--verde-escuro);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .botao-upload {
+            width: 118px;
+            padding: 12px 8px;
+            border: none;
+            border-radius: 999px;
+            background-color: var(--verde-escuro);
+            color: var(--bege);
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .botao-upload:hover {
+            background-color: #1d4d3a;
+        }
+
+        .input-escondido {
+            display: none;
+        }
+
+        #botao-capturar {
+            display: none;
+            width: 250px;
+        }
+
+        #resultado {
+            margin-top: 10px;
+        }
+
+        .nome-planta {
+            color: var(--verde-escuro);
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .percentual {
+            display: inline-block;
+            background-color: var(--verde-medio);
+            color: var(--verde-escuro);
+            font-family: Brazika, Georgia, serif;
+            font-size: 46px;
+            font-weight: bold;
+            padding: 8px 38px;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="card">
+    <h1>GROWLY</h1>
+
+    <div class="upload-box">
+        <span id="texto-upload">Imagem da planta</span>
+        <img id="preview" src="" alt="Imagem selecionada">
+        <video id="camera" autoplay playsinline></video>
+    </div>
+
+    <div class="botoes">
+        <label class="botao-upload">
+            Escolher
+            <input class="input-escondido" type="file" id="input-galeria" accept="image/*">
+        </label>
+
+        <button class="botao-upload" id="botao-camera">Tirar foto</button>
+        <button class="botao-upload" id="botao-capturar">Capturar imagem</button>
+    </div>
+
+    <div id="resultado">
+        <p class="nome-planta">Selecione uma imagem</p>
+    </div>
+</main>
+
+<canvas id="canvas" style="display: none;"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+<script>
+    let model;
+    let streamCamera = null;
+
+    const labels = ["Planta01", "Bambu", "Espada-de-São-Jorge", "ND"];
+
+    const inputGaleria = document.getElementById("input-galeria");
+    const preview = document.getElementById("preview");
+    const camera = document.getElementById("camera");
+    const canvas = document.getElementById("canvas");
+    const textoUpload = document.getElementById("texto-upload");
+    const resultado = document.getElementById("resultado");
+    const botaoCamera = document.getElementById("botao-camera");
+    const botaoCapturar = document.getElementById("botao-capturar");
+
+    async function carregarModelo() {
+        model = await tf.loadLayersModel("model.json");
+        console.log("Modelo carregado!");
+    }
+
+    carregarModelo();
+
+    inputGaleria.addEventListener("change", function(event) {
+        const arquivo = event.target.files[0];
+
+        if (!arquivo) return;
+
+        pararCamera();
+
+        const urlImagem = URL.createObjectURL(arquivo);
+        mostrarImagem(urlImagem);
+
+        const img = document.createElement("img");
+        img.src = urlImagem;
+
+        img.onload = async function() {
+            await analisarImagem(img);
+        };
+    });
+
+    botaoCamera.addEventListener("click", async function() {
+        try {
+            streamCamera = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: "environment" },
+                audio: false
+            });
+
+            camera.srcObject = streamCamera;
+
+            textoUpload.style.display = "none";
+            preview.style.display = "none";
+            camera.style.display = "block";
+
+            resultado.innerHTML = `<p class="nome-planta">Posicione a planta</p>`;
+            botaoCapturar.style.display = "inline-block";
+        } catch (erro) {
+            resultado.innerHTML = `<p class="nome-planta">Não foi possível abrir a câmera</p>`;
+            console.error(erro);
+        }
+    });
+
+    botaoCapturar.addEventListener("click", async function() {
+        canvas.width = camera.videoWidth;
+        canvas.height = camera.videoHeight;
+
+        const contexto = canvas.getContext("2d");
+        contexto.drawImage(camera, 0, 0, canvas.width, canvas.height);
+
+        const urlImagem = canvas.toDataURL("image/png");
+
+        mostrarImagem(urlImagem);
+        pararCamera();
+
+        const img = document.createElement("img");
+        img.src = urlImagem;
+
+        img.onload = async function() {
+            await analisarImagem(img);
+        };
+    });
+
+    function mostrarImagem(urlImagem) {
+        preview.src = urlImagem;
+        preview.style.display = "block";
+        camera.style.display = "none";
+        textoUpload.style.display = "none";
+    }
+
+    function pararCamera() {
+        if (streamCamera) {
+            streamCamera.getTracks().forEach(track => track.stop());
+            streamCamera = null;
+        }
+
+        camera.style.display = "none";
+        botaoCapturar.style.display = "none";
+    }
+
+    async function analisarImagem(img) {
+        if (!model) {
+            resultado.innerHTML = `<p class="nome-planta">Modelo carregando...</p>`;
+            return;
+        }
+
+        resultado.innerHTML = `<p class="nome-planta">Analisando...</p>`;
+
+        const tensor = tf.browser.fromPixels(img)
+            .resizeNearestNeighbor([224, 224])
+            .toFloat()
+            .div(127.5)
+            .sub(1)
+            .expandDims();
+
+        const previsao = await model.predict(tensor).data();
+        const resultados = Array.from(previsao);
+
+        const maiorIndice = resultados.indexOf(Math.max(...resultados));
+        const nome = labels[maiorIndice];
+        const percentual = resultados[maiorIndice] * 100;
+
+        resultado.innerHTML = `
+            <p class="nome-planta">${nome}</p>
+            <span class="percentual">${percentual.toFixed(2)}%</span>
+        `;
+
+        tensor.dispose();
+    }
+</script>
+
+</body>
+</html>
