@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Explorar PANCs — Growly</title>
+    <meta
+      name="description"
+      content="Catálogo de Plantas Alimentícias Não Convencionais com usos, cuidados e nutrição."
+    />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="screen">
+      <img data-leaf="top-left" />
+      <img data-leaf="top-right" />
+      <main class="page-main">
+        <div data-header="Explorar Plantas"></div>
+        <p class="page-sub">Descubra PANCs e adicione ao seu jardim.</p>
+        <input class="search-input" type="search" id="busca" placeholder="Buscar planta..." />
+        <div class="plant-list" id="lista">
+          <p class="empty">Carregando plantas...</p>
+        </div>
+      </main>
+      <nav class="bottom-nav" data-nav></nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/explorar.js"></script>
+  </body>
+</html>

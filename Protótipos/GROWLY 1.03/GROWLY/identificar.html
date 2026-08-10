@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Identificar planta — Growly</title>
+    <meta
+      name="description"
+      content="Fotografe uma folha e a IA do Growly identifica a PANC com percentual de confiança."
+    />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="screen no-nav">
+      <img data-leaf="top-left" />
+      <img data-leaf="top-right" />
+      <img data-leaf="bottom-right" />
+      <main class="page-main">
+        <div data-header="Identificar"></div>
+        <p class="page-sub">Aponte a câmera para a folha ou planta que deseja identificar.</p>
+      </main>
+
+      <main class="id-main" id="tela-camera">
+        <div class="camera-frame">
+          <div class="error" id="erro-cam" hidden></div>
+          <video id="video" autoplay playsinline muted></video>
+          <img id="foto" alt="Foto capturada" hidden />
+        </div>
+        <canvas id="canvas" style="display: none"></canvas>
+
+        <p class="form-error" id="erro" style="margin-top: 1rem" hidden></p>
+        <p class="subtitle" id="carregando-ia" style="margin-top: 1rem">
+          Carregando a IA do Growly...
+        </p>
+
+        <div class="id-actions" id="acoes-captura">
+          <button class="shutter" type="button" id="btn-capturar" aria-label="Tirar foto">
+            <img src="assets/icon-camera.png" alt="" />
+          </button>
+          <label class="pill-btn secondary" style="cursor: pointer">
+            Escolher da galeria
+            <input type="file" accept="image/*" id="arquivo" style="display: none" />
+          </label>
+        </div>
+
+        <div class="id-actions" id="acoes-foto" hidden>
+          <button class="pill-btn secondary" type="button" id="btn-outra">Tirar outra</button>
+          <button class="pill-btn primary" type="button" id="btn-identificar" disabled>
+            Identificar planta
+          </button>
+        </div>
+      </main>
+
+      <main class="id-main" id="tela-analisando" hidden>
+        <div class="analisando">
+          <div class="spinner" aria-hidden="true"></div>
+          <h2>Analisando sua planta…</h2>
+          <p class="subtitle">Estamos comparando a imagem com nossa base de PANCs.</p>
+        </div>
+      </main>
+
+      <main class="id-main" id="tela-resultado" hidden>
+        <h2>Resultado</h2>
+        <div id="resultado"></div>
+        <div class="id-actions" style="margin-top: 0">
+          <button class="pill-btn secondary" type="button" id="btn-nova">Nova foto</button>
+          <button class="pill-btn primary" type="button" id="btn-salvar">Salvar no jardim</button>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/panc-model.js"></script>
+    <script src="js/identificar.js"></script>
+  </body>
+</html>
