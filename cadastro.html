@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastro — Growly</title>
+    <meta name="description" content="Crie sua conta Growly e comece a identificar PANCs." />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="screen no-nav">
+      <img data-leaf="top-left" />
+      <img data-leaf="bottom-right" />
+      <main class="auth-main">
+        <a href="index.html"><img class="auth-logo" src="assets/logo-inicio.png" alt="Growly" /></a>
+        <div class="auth-body">
+          <form class="stack" id="form-cadastro">
+            <p class="form-error" id="erro" hidden></p>
+            <p class="form-ok" id="aviso" hidden></p>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="username">Nome de Usuário</label>
+              <input id="username" type="text" autocomplete="username" required />
+            </div>
+            <div class="field">
+              <label for="password">Senha</label>
+              <input id="password" type="password" autocomplete="new-password" required />
+            </div>
+            <button class="btn btn-secondary btn-block" type="submit" id="enviar">Cadastrar</button>
+            <p class="form-footer">Já possui uma conta? <a href="login.html">Fazer login</a></p>
+          </form>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cadastro.js"></script>
+  </body>
+</html>

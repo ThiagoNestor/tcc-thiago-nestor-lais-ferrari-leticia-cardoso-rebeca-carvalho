@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Início — Growly</title>
+    <meta name="description" content="Seu painel Growly: identificar, explorar, jardim e suporte." />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="screen">
+      <header class="home-top">
+        <img data-leaf="top-right" />
+        <a href="configuracoes.html" class="settings-btn">
+          <img src="assets/icon-config.png" alt="Configurações" />
+        </a>
+        <div class="welcome">
+          <h1>Olá, <span id="nome">visitante 🌱</span></h1>
+          <p>Vamos cuidar das suas plantas hoje?</p>
+        </div>
+      </header>
+
+      <main class="home-cards">
+        <a href="identificar.html" class="action-card">
+          <img src="assets/card-identificar.png" alt="Identificar Planta" />
+        </a>
+        <a href="explorar.html" class="action-card">
+          <img src="assets/card-explorar.png" alt="Explorar Plantas" />
+        </a>
+        <a href="jardim.html" class="action-card">
+          <img src="assets/card-jardim.png" alt="Meu Jardim" />
+        </a>
+        <a href="suporte.html" class="action-card">
+          <img src="assets/card-suporte.png" alt="Suporte" />
+        </a>
+      </main>
+
+      <nav class="bottom-nav" data-nav></nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/home.js"></script>
+  </body>
+</html>
