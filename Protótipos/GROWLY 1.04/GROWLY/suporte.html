@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Suporte — Growly</title>
+    <meta name="description" content="Dúvidas frequentes e contato da equipe Growly." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="screen">
+      <img data-leaf="top-left" />
+      <img data-leaf="top-right" />
+      <main class="page-main">
+        <div data-header="Suporte"></div>
+        <p class="page-sub">Tire suas dúvidas sobre o Growly.</p>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Como funciona a identificação por foto?</summary>
+            <p>
+              O Growly usa um modelo de visão computacional treinado com fotos de PANCs. A análise
+              acontece no seu próprio aparelho, sem enviar a imagem para servidores.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>Posso comer qualquer planta identificada?</summary>
+            <p>
+              Não. Sempre confirme a espécie com uma fonte confiável antes de consumir. A
+              confiabilidade mostrada é uma estimativa da IA.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>Quais plantas o app reconhece hoje?</summary>
+            <p>
+              Peixinho-da-horta, tanchagem, ora-pro-nóbis, vinagreira e taioba. Novas espécies serão
+              adicionadas conforme o modelo for treinado.
+            </p>
+          </details>
+          <details class="faq-item">
+            <summary>Como salvo uma planta no meu jardim?</summary>
+            <p>
+              Na tela Explorar ou no resultado de uma identificação, toque em “Adicionar ao jardim”.
+            </p>
+          </details>
+        </div>
+
+        <div class="empty-box" style="margin-top: 1.5rem">
+          <p>Não encontrou o que precisava?</p>
+          <a class="pill-btn primary" href="eden.html">💬 Conversar com a Eden IA</a>
+          <p>Ou</p>
+          <a class="pill-btn primary" href="mailto:contato@growly.app">Falar com a equipe</a>
+        </div>
+
+        <section class="social-section">
+
+          <h2>Nossas Redes</h2>
+
+<div class="social-links">
+
+  <a
+    href="https://www.instagram.com/growlypancs"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn"
+  >
+    <img src="assets/leaves-bottom-right.png" alt="" class="social-leaves">
+    <span>@growlypancs</span>
+  </a>
+
+  <a
+    href="https://www.instagram.com/hortadasflores"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn"
+  >
+    <img src="assets/leaves-bottom-right.png" alt="" class="social-leaves">
+    <span>@hortadasflores</span>
+  </a>
+
+</div>
+
+        </section>
+
+      </main>
+
+<section class="support-logos">
+  <img src="assets/logo-ca.png" alt="ETEC Professor Camargo Aranha">
+  <img src="assets/logo-horta.jpg" alt="Horta das Flores">
+</section>
+
+      <nav class="bottom-nav" data-nav></nav>
+          </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      requireAuth();
+    </script>
+  </body>
+</html>
