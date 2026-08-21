@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eden IA — Growly</title>
+    <meta
+      name="description"
+      content="Converse com a Eden, assistente de IA do Growly, sobre cultivo e uso de PANCs."
+    />
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="screen eden-screen">
+      <img data-leaf="top-right" />
+      <header class="eden-header">
+        <a class="back-btn" href="home.html" aria-label="Voltar">
+          <img src="assets/icon-voltar.png" alt="" />
+        </a>
+        <div class="avatar big">E</div>
+        <div>
+          <h1>Eden IA</h1>
+          <p>Sua assistente de PANCs</p>
+        </div>
+      </header>
+
+      <div class="eden-messages" id="mensagens"></div>
+
+      <form class="eden-form" id="form-eden">
+        <input id="texto" placeholder="Pergunte à Eden..." autocomplete="off" />
+        <button type="submit" aria-label="Enviar">➤</button>
+      </form>
+
+      <nav class="bottom-nav" data-nav></nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/eden.js"></script>
+  </body>
+</html>
