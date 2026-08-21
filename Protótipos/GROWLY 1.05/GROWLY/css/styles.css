@@ -1254,3 +1254,33 @@ form.stack {
 .back-btn:active {
   transform: scale(0.92);
 }
+
+/* =========================================
+   LOGOS DOS PARCEIROS
+   ========================================= */
+
+.support-logos {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  gap: 24px !important;
+
+  width: 100%;
+  max-width: 500px;
+
+  margin: 0 auto;
+}
+
+.support-logos img {
+  display: block;
+
+  width: auto !important;
+  max-width: 85% !important;
+  height: auto !important;
+  max-height: 160px;
+
+  object-fit: contain !important;
+
+  border-radius: 12px;
+}
