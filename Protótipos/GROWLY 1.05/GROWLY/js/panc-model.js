@@ -3,10 +3,10 @@
 const MODEL_URL = "model/model.json";
 
 const MODEL_LABELS = [
-  { rotulo: "Peixinho-da-horta", pancId: "peixinho" },
-  { rotulo: "Tanchagem", pancId: "tanchagem" },
-  { rotulo: "Ora-pro-nóbis", pancId: "ora-pro-nobis" },
   { rotulo: "Vinagreira", pancId: "vinagreira" },
+  { rotulo: "Tanchagem", pancId: "tanchagem" },
+  { rotulo: "Peixinho-da-horta", pancId: "peixinho" },
+  { rotulo: "Ora-pro-nóbis", pancId: "ora-pro-nobis" },
   { rotulo: "Taioba", pancId: "taioba" },
   { rotulo: "Não identificado", pancId: null },
   { rotulo: "Pessoa", pancId: null },

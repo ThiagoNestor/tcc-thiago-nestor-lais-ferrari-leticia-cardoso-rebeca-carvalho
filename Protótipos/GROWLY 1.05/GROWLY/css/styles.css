@@ -1150,3 +1150,107 @@ form.stack {
   background: white;
   border-radius: 0.5rem;
 }
+
+/* ============================= */
+/* AVISO - IDENTIFICAÇÃO POR IA   */
+/* ============================= */
+
+.aviso-ia {
+  width: 100%;
+  max-width: 650px;
+  margin: 18px auto 5px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  padding: 16px 18px;
+
+  background: #fff8dc;
+  border: 1px solid #e3c96b;
+  border-radius: 16px;
+
+  box-sizing: border-box;
+}
+
+.aviso-ia-icone {
+  font-size: 24px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.aviso-ia-conteudo {
+  color: #4b421f;
+}
+
+.aviso-ia-conteudo > strong {
+  display: block;
+  margin-bottom: 5px;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.aviso-ia-conteudo p {
+  margin: 0;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.aviso-ia-conteudo p strong {
+  font-weight: 900;
+}
+
+.support-logos-title {
+  text-align: center;
+  margin: 30px 0 15px;
+  font-family: "Fraunces", serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #12372a;
+}
+
+/* =========================================
+   BOTÃO VOLTAR DESTACADO
+   ========================================= */
+
+.back-btn {
+  width: 46px !important;
+  height: 46px !important;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ffffff !important;
+
+  border: 2px solid #12372a !important;
+  border-radius: 50% !important;
+
+  padding: 0 !important;
+  box-sizing: border-box;
+
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.back-btn img {
+  width: 23px !important;
+  height: 23px !important;
+  object-fit: contain;
+}
+
+.back-btn:hover {
+  background-color: #ffffe2 !important;
+}
+
+.back-btn:active {
+  transform: scale(0.92);
+}

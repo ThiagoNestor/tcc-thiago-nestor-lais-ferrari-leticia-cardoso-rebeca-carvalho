@@ -59,9 +59,28 @@ busca.addEventListener("input", render);
   usuario = await requireAuth();
   if (!usuario) return;
   try {
-    pancs = await carregarPancs();
-    jardim = await carregarJardim();
-    render();
+pancs = await carregarPancs();
+
+/*
+  Por enquanto, o modelo de identificação do Growly
+  reconhece apenas as espécies treinadas.
+
+  Azedinha e Capuchinha continuam cadastradas no banco,
+  mas não aparecem no Explorar até serem adicionadas
+  ao modelo de IA.
+*/
+pancs = pancs.filter((p) => {
+  const nome = p.nome
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  return nome !== "azedinha" && nome !== "capuchinha";
+});
+
+jardim = await carregarJardim();
+
+render();
   } catch (e) {
     lista.innerHTML = '<p class="empty">Não foi possível carregar as plantas.</p>';
   }

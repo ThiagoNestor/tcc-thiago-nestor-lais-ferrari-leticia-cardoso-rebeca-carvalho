@@ -2,30 +2,54 @@ let usuario = null;
 let pancs = [];
 let jardim = [];
 let stream = null;
-let fotoDataUrl = null;
+
+const MAX_FOTOS = 4;
+
+let fotosDataUrl = [];
 let predicoes = [];
 let modeloPronto = false;
 
+
+// =============================
+// ELEMENTOS DA TELA
+// =============================
+
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
-const fotoEl = document.getElementById("foto");
+
 const erroCam = document.getElementById("erro-cam");
 const erro = document.getElementById("erro");
 const carregandoIa = document.getElementById("carregando-ia");
+
 const acoesCaptura = document.getElementById("acoes-captura");
 const acoesFoto = document.getElementById("acoes-foto");
+
 const telaCamera = document.getElementById("tela-camera");
 const telaAnalisando = document.getElementById("tela-analisando");
 const telaResultado = document.getElementById("tela-resultado");
+
 const btnCapturar = document.getElementById("btn-capturar");
 const btnIdentificar = document.getElementById("btn-identificar");
 const btnSalvar = document.getElementById("btn-salvar");
 
+const arquivo = document.getElementById("arquivo");
+
+
+// Estes elementos serão adicionados no identificar.html
+const previews = document.getElementById("previews");
+const contadorFotos = document.getElementById("contador-fotos");
+const btnLimparFotos = document.getElementById("btn-limpar-fotos");
+
+
 mostrarEtapa("camera");
+
+
+// =============================
+// CONTROLE DE TELAS
+// =============================
 
 function mostrarEtapa(etapa) {
 
-  // Esconde todas
   telaCamera.setAttribute("hidden", "");
   telaAnalisando.setAttribute("hidden", "");
   telaResultado.setAttribute("hidden", "");
@@ -46,187 +70,1168 @@ function mostrarEtapa(etapa) {
   }
 }
 
+
+// =============================
+// CÂMERA
+// =============================
+
 function pararCamera() {
-  if (stream) stream.getTracks().forEach((t) => t.stop());
+
+  if (stream) {
+    stream.getTracks().forEach((t) => t.stop());
+  }
+
   stream = null;
 }
 
+
 async function iniciarCamera() {
+
+  if (fotosDataUrl.length >= MAX_FOTOS) {
+    return;
+  }
+
+  if (stream) {
+    return;
+  }
+
   erroCam.hidden = true;
+
   try {
+
     stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" },
+
+      video: {
+        facingMode: "environment",
+      },
+
       audio: false,
     });
+
     video.srcObject = stream;
     video.hidden = false;
+
     await video.play();
+
   } catch (e) {
+
+    console.error(e);
+
     video.hidden = true;
     erroCam.hidden = false;
+
     erroCam.textContent =
-      "Não foi possível acessar a câmera. Conceda a permissão no navegador ou envie uma foto da galeria.";
+      "Não foi possível acessar a câmera. Conceda a permissão no navegador ou envie fotos da galeria.";
+
     btnCapturar.disabled = true;
   }
 }
 
-function definirFoto(dataUrl) {
-  fotoDataUrl = dataUrl;
-  pararCamera();
-  video.hidden = true;
-  erroCam.hidden = true;
-  fotoEl.hidden = false;
-  fotoEl.src = dataUrl;
-  acoesCaptura.hidden = true;
-  acoesFoto.hidden = false;
-  btnIdentificar.disabled = !modeloPronto;
+
+// =============================
+// INTERFACE DAS 4 FOTOS
+// =============================
+
+function atualizarInterfaceFotos() {
+
+  const quantidade = fotosDataUrl.length;
+
+  contadorFotos.textContent =
+    `Fotos selecionadas: ${quantidade}/${MAX_FOTOS}`;
+
+
+  // Só permite identificar quando:
+  // 1. modelo estiver carregado
+  // 2. exatamente 4 fotos existirem
+  btnIdentificar.disabled =
+    !modeloPronto || quantidade !== MAX_FOTOS;
+
+
+  // Não permite capturar mais de 4
+  btnCapturar.disabled =
+    quantidade >= MAX_FOTOS;
+
+
+  // Esconde os controles de captura
+  // quando chegar em 4 fotos
+  acoesCaptura.hidden =
+    quantidade >= MAX_FOTOS;
+
+
+  // Mostra ações das fotos
+  acoesFoto.hidden =
+    quantidade === 0;
+
+
+  // =============================
+  // PREVIEWS
+  // =============================
+
+  if (quantidade === 0) {
+
+    previews.hidden = true;
+    previews.innerHTML = "";
+
+  } else {
+
+    previews.hidden = false;
+
+    previews.innerHTML = fotosDataUrl
+
+      .map((foto, index) => {
+
+        return `
+
+          <div
+            style="
+              position: relative;
+              aspect-ratio: 1;
+              overflow: hidden;
+              border-radius: 14px;
+              background: #eee;
+            "
+          >
+
+            <img
+              src="${foto}"
+              alt="Foto ${index + 1}"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+              "
+            >
+
+            <div
+              style="
+                position: absolute;
+                bottom: 6px;
+                left: 6px;
+                background: rgba(0,0,0,.65);
+                color: white;
+                padding: 3px 8px;
+                border-radius: 10px;
+                font-size: 12px;
+              "
+            >
+              Foto ${index + 1}
+            </div>
+
+
+            <button
+              type="button"
+              data-remover-foto="${index}"
+
+              style="
+                position: absolute;
+                top: 6px;
+                right: 6px;
+
+                width: 30px;
+                height: 30px;
+
+                border: none;
+                border-radius: 50%;
+
+                cursor: pointer;
+
+                font-size: 18px;
+                font-weight: bold;
+
+                background: white;
+                color: #333;
+              "
+            >
+              ×
+            </button>
+
+          </div>
+
+        `;
+      })
+
+      .join("");
+  }
+
+
+  // =============================
+  // CONTROLE DA CÂMERA
+  // =============================
+
+  if (quantidade >= MAX_FOTOS) {
+
+    pararCamera();
+
+    video.hidden = true;
+
+  } else {
+
+    video.hidden = false;
+
+    if (!stream) {
+      iniciarCamera();
+    }
+  }
 }
 
-function novaFoto() {
 
-  fotoDataUrl = null;
+// =============================
+// ADICIONAR FOTO
+// =============================
+
+function adicionarFoto(dataUrl) {
+
+  if (!dataUrl) {
+    return;
+  }
+
+  if (fotosDataUrl.length >= MAX_FOTOS) {
+    return;
+  }
+
+  fotosDataUrl.push(dataUrl);
+
+  erro.hidden = true;
+
+  atualizarInterfaceFotos();
+}
+
+
+// =============================
+// REMOVER FOTO
+// =============================
+
+function removerFoto(index) {
+
+  if (
+    index < 0 ||
+    index >= fotosDataUrl.length
+  ) {
+    return;
+  }
+
+  fotosDataUrl.splice(index, 1);
+
   predicoes = [];
 
-  fotoEl.hidden = true;
-  fotoEl.src = "";
+  atualizarInterfaceFotos();
+}
 
-  video.hidden = false;
 
-  acoesCaptura.hidden = false;
-  acoesFoto.hidden = true;
+// =============================
+// LIMPAR TODAS AS FOTOS
+// =============================
 
-  btnCapturar.disabled = false;
-  btnIdentificar.disabled = !modeloPronto;
+function limparFotos() {
+
+  fotosDataUrl = [];
+
+  predicoes = [];
+
+  arquivo.value = "";
+
+  erro.hidden = true;
+
+  pararCamera();
 
   mostrarEtapa("camera");
 
-  iniciarCamera();
+  atualizarInterfaceFotos();
 }
+
+
+// =============================
+// CAPTURAR FOTO DA CÂMERA
+// =============================
 
 btnCapturar.addEventListener("click", () => {
-  if (!video.videoWidth) return;
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext("2d").drawImage(video, 0, 0);
-  definirFoto(canvas.toDataURL("image/jpeg", 0.92));
-});
 
-document.getElementById("arquivo").addEventListener("change", (event) => {
-  const file = event.target.files && event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => definirFoto(String(reader.result));
-  reader.readAsDataURL(file);
-});
-
-document.getElementById("btn-outra").addEventListener("click", novaFoto);
-document.getElementById("btn-nova").addEventListener("click", novaFoto);
-
-btnIdentificar.addEventListener("click", async () => {
-  if (!fotoDataUrl) return;
-  erro.hidden = true;
-  mostrarEtapa("analisando");
-  try {
-    const img = new Image();
-    img.src = fotoDataUrl;
-    await img.decode();
-    predicoes = await classificarImagem(img);
-    renderResultado();
-    mostrarEtapa("resultado");
-
-    await db.from("identificacoes").insert({
-      user_id: usuario.id,
-      panc_id: predicoes[0].pancId,
-      rotulo: predicoes[0].rotulo,
-      confianca: Number(predicoes[0].confianca.toFixed(4)),
-    });
-  } catch (e) {
-    console.error(e);
-    erro.textContent = "Não foi possível analisar a imagem. Tente novamente.";
-    erro.hidden = false;
-    mostrarEtapa("camera");
+  if (!video.videoWidth) {
+    return;
   }
+
+  if (fotosDataUrl.length >= MAX_FOTOS) {
+    return;
+  }
+
+
+  canvas.width = video.videoWidth;
+
+  canvas.height = video.videoHeight;
+
+
+  canvas
+    .getContext("2d")
+    .drawImage(
+      video,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+
+  const foto = canvas.toDataURL(
+    "image/jpeg",
+    0.92
+  );
+
+
+  adicionarFoto(foto);
 });
 
-function renderResultado() {
-  const topo = predicoes[0];
-  const panc = topo.pancId ? pancs.find((p) => p.id === topo.pancId) : null;
-  const percentual = Math.round(topo.confianca * 100);
-  const jaNoJardim = panc ? jardim.includes(panc.id) : false;
 
-  document.getElementById("resultado").innerHTML = `
-    <div class="result-card" style="margin-top:1rem">
-      <img class="result-photo" src="${fotoDataUrl}" alt="Foto analisada">
-      <div class="result-body">
-        <h3>${esc(panc ? panc.nome : topo.rotulo)}</h3>
-        <p class="scientific">${esc(panc ? panc.nome_cientifico : "Espécie não catalogada")}</p>
-        <div class="confidence">
-          <div class="confidence-top"><span>Confiabilidade</span><strong>${percentual}%</strong></div>
-          <div class="confidence-bar"><span style="width:${percentual}%"></span></div>
-        </div>
-        <p class="badge ${panc ? "" : "badge-danger"}">${panc ? "PANC comestível" : "Não confirmado — não consuma"}</p>
-        <p class="result-text">${esc(
-          panc
-            ? panc.descricao
-            : "A IA não reconheceu uma PANC do catálogo nesta imagem. Tente uma foto mais próxima da folha, com boa iluminação e fundo limpo.",
-        )}</p>
-        ${
-          panc
-            ? `<div class="result-block"><h4>Usos</h4><p class="result-text">${esc(panc.usos)}</p></div>
-               <div class="result-block"><h4>Cuidados</h4><p class="result-text">${esc(panc.cuidados)}</p></div>`
-            : ""
-        }
-        <div class="result-block">
-          <h4>Outras possibilidades</h4>
-          <ul class="alt-list">
-            ${predicoes
-              .slice(1, 4)
-              .map(
-                (p) =>
-                  `<li><strong>${esc(p.rotulo)}</strong><span>${(p.confianca * 100).toFixed(1)}%</span></li>`,
-              )
-              .join("")}
-          </ul>
-        </div>
-      </div>
-    </div>`;
+// =============================
+// ESCOLHER FOTOS DA GALERIA
+// =============================
 
-  btnSalvar.disabled = !panc || jaNoJardim;
-  btnSalvar.textContent = jaNoJardim ? "✓ No meu jardim" : "Salvar no jardim";
-  btnSalvar.onclick = async () => {
-    if (!panc) return;
-    btnSalvar.disabled = true;
-    try {
-      await alternarJardim(usuario.id, panc.id, false);
-      jardim = await carregarJardim();
-      btnSalvar.textContent = "✓ No meu jardim";
-    } catch (e) {
-      alert(e.message || "Não foi possível salvar no jardim.");
+arquivo.addEventListener("change", (event) => {
+
+  const arquivos =
+    Array.from(event.target.files || []);
+
+
+  if (!arquivos.length) {
+    return;
+  }
+
+
+  const quantidadeDisponivel =
+    MAX_FOTOS - fotosDataUrl.length;
+
+
+  const arquivosSelecionados =
+    arquivos.slice(
+      0,
+      quantidadeDisponivel
+    );
+
+
+  // Aviso se selecionar fotos demais
+  if (
+    arquivos.length >
+    quantidadeDisponivel
+  ) {
+
+    erro.textContent =
+      `Você pode usar no máximo ${MAX_FOTOS} fotos. ` +
+      `Foram adicionadas apenas ${quantidadeDisponivel}.`;
+
+    erro.hidden = false;
+  }
+
+
+  arquivosSelecionados.forEach((file) => {
+
+    if (!file.type.startsWith("image/")) {
+      return;
     }
-  };
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload = () => {
+
+      adicionarFoto(
+        String(reader.result)
+      );
+    };
+
+
+    reader.readAsDataURL(file);
+  });
+
+
+  // Permite selecionar o mesmo arquivo novamente depois
+  arquivo.value = "";
+});
+
+
+// =============================
+// REMOVER FOTO PELO X
+// =============================
+
+previews.addEventListener(
+  "click",
+  (event) => {
+
+    const botao =
+      event.target.closest(
+        "[data-remover-foto]"
+      );
+
+
+    if (!botao) {
+      return;
+    }
+
+
+    const index =
+      Number(
+        botao.dataset.removerFoto
+      );
+
+
+    removerFoto(index);
+  }
+);
+
+
+// =============================
+// LIMPAR
+// =============================
+
+btnLimparFotos.addEventListener(
+  "click",
+  limparFotos
+);
+
+
+// =============================
+// CONVERTER DATA URL EM IMAGEM
+// =============================
+
+async function carregarImagem(dataUrl) {
+
+  const img =
+    new Image();
+
+
+  img.src =
+    dataUrl;
+
+
+  await img.decode();
+
+
+  return img;
 }
 
-window.addEventListener("beforeunload", pararCamera);
+
+// =============================
+// COMBINAR RESULTADOS DAS 4 FOTOS
+// =============================
+
+function combinarPredicoes(
+  predicoesPorFoto
+) {
+
+  const mapa =
+    new Map();
+
+
+  // Percorre as previsões
+  // retornadas para cada foto
+  predicoesPorFoto.forEach(
+    (resultadoFoto) => {
+
+      resultadoFoto.forEach(
+        (previsao) => {
+
+          /*
+            pancId é usado como identificador.
+
+            Para classes sem pancId,
+            usamos o rótulo.
+          */
+
+          const chave =
+            previsao.pancId ??
+            `rotulo:${previsao.rotulo}`;
+
+
+          if (!mapa.has(chave)) {
+
+            mapa.set(chave, {
+
+              pancId:
+                previsao.pancId,
+
+              rotulo:
+                previsao.rotulo,
+
+              soma:
+                0,
+            });
+          }
+
+
+          const classe =
+            mapa.get(chave);
+
+
+          classe.soma +=
+            Number(
+              previsao.confianca
+            ) || 0;
+        }
+      );
+    }
+  );
+
+
+  /*
+    Média:
+
+    confiança foto 1
+    + confiança foto 2
+    + confiança foto 3
+    + confiança foto 4
+    ---------------------------
+                 4
+  */
+
+  return Array
+    .from(mapa.values())
+
+    .map((classe) => {
+
+      return {
+
+        pancId:
+          classe.pancId,
+
+        rotulo:
+          classe.rotulo,
+
+        confianca:
+          classe.soma /
+          predicoesPorFoto.length,
+      };
+    })
+
+    .sort(
+      (a, b) =>
+        b.confianca -
+        a.confianca
+    );
+}
+
+
+// =============================
+// ANALISAR AS QUATRO FOTOS
+// =============================
+
+btnIdentificar.addEventListener(
+  "click",
+  async () => {
+
+    if (
+      fotosDataUrl.length !==
+      MAX_FOTOS
+    ) {
+
+      erro.textContent =
+        "Adicione 4 fotos da planta antes de analisar.";
+
+      erro.hidden = false;
+
+      return;
+    }
+
+
+    if (!modeloPronto) {
+
+      erro.textContent =
+        "A IA ainda está carregando.";
+
+      erro.hidden = false;
+
+      return;
+    }
+
+
+    erro.hidden = true;
+
+
+    mostrarEtapa(
+      "analisando"
+    );
+
+
+    pararCamera();
+
+
+    try {
+
+      const predicoesPorFoto =
+        [];
+
+
+      /*
+        Cada foto é enviada
+        separadamente para o modelo.
+      */
+
+      for (
+        const foto of fotosDataUrl
+      ) {
+
+        const img =
+          await carregarImagem(
+            foto
+          );
+
+
+        const resultado =
+          await classificarImagem(
+            img
+          );
+
+
+        predicoesPorFoto.push(
+          resultado
+        );
+      }
+
+
+      /*
+        Agora combinamos
+        as quatro previsões.
+      */
+
+      predicoes =
+        combinarPredicoes(
+          predicoesPorFoto
+        );
+
+
+      if (!predicoes.length) {
+
+        throw new Error(
+          "Nenhuma previsão foi retornada."
+        );
+      }
+
+
+      console.log(
+        "Resultados individuais:",
+        predicoesPorFoto
+      );
+
+
+      console.log(
+        "Resultado combinado:",
+        predicoes
+      );
+
+
+      renderResultado();
+
+
+      mostrarEtapa(
+        "resultado"
+      );
+
+
+      // =============================
+      // SALVAR IDENTIFICAÇÃO
+      // =============================
+
+      await db
+        .from("identificacoes")
+        .insert({
+
+          user_id:
+            usuario.id,
+
+          panc_id:
+            predicoes[0].pancId,
+
+          rotulo:
+            predicoes[0].rotulo,
+
+          confianca:
+            Number(
+              predicoes[0]
+                .confianca
+                .toFixed(4)
+            ),
+        });
+
+
+    } catch (e) {
+
+      console.error(e);
+
+
+      erro.textContent =
+        "Não foi possível analisar as fotos. Tente novamente.";
+
+
+      erro.hidden = false;
+
+
+      mostrarEtapa(
+        "camera"
+      );
+
+
+      atualizarInterfaceFotos();
+    }
+  }
+);
+
+
+// =============================
+// RESULTADO
+// =============================
+
+function renderResultado() {
+
+  const topo =
+    predicoes[0];
+
+
+  const panc =
+    topo.pancId
+
+      ? pancs.find(
+          (p) =>
+            p.id === topo.pancId
+        )
+
+      : null;
+
+
+  const percentual =
+    Math.round(
+      topo.confianca * 100
+    );
+
+
+  const jaNoJardim =
+    panc
+
+      ? jardim.includes(
+          panc.id
+        )
+
+      : false;
+
+
+  // =============================
+  // MINIATURAS DAS 4 FOTOS
+  // =============================
+
+  const fotosHtml =
+    fotosDataUrl
+
+      .map(
+        (foto, index) => `
+
+          <img
+            src="${foto}"
+            alt="Foto ${index + 1} analisada"
+
+            style="
+              width: 100%;
+              aspect-ratio: 1;
+              object-fit: cover;
+              border-radius: 12px;
+            "
+          >
+
+        `
+      )
+
+      .join("");
+
+
+  // =============================
+  // CARD
+  // =============================
+
+  document
+    .getElementById("resultado")
+    .innerHTML = `
+
+      <div
+        class="result-card"
+        style="margin-top:1rem"
+      >
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns:
+              repeat(2, minmax(0,1fr));
+
+            gap: .5rem;
+            padding: .5rem;
+          "
+        >
+
+          ${fotosHtml}
+
+        </div>
+
+
+        <div class="result-body">
+
+
+          <h3>
+
+            ${esc(
+              panc
+                ? panc.nome
+                : topo.rotulo
+            )}
+
+          </h3>
+
+
+          <p class="scientific">
+
+            ${esc(
+              panc
+                ? panc.nome_cientifico
+                : "Espécie não catalogada"
+            )}
+
+          </p>
+
+
+          <div class="confidence">
+
+            <div
+              class="confidence-top"
+            >
+
+              <span>
+                Confiabilidade média
+              </span>
+
+              <strong>
+                ${percentual}%
+              </strong>
+
+            </div>
+
+
+            <div
+              class="confidence-bar"
+            >
+
+              <span
+                style="
+                  width:
+                  ${Math.min(
+                    percentual,
+                    100
+                  )}%
+                "
+              >
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="
+              badge
+              ${
+                panc
+                  ? ""
+                  : "badge-danger"
+              }
+            "
+          >
+
+            ${
+              panc
+
+                ? "PANC comestível"
+
+                : "Não confirmado — não consuma"
+            }
+
+          </p>
+
+
+          <p class="result-text">
+
+            ${esc(
+
+              panc
+
+                ? panc.descricao
+
+                :
+                "A IA não reconheceu uma PANC do catálogo nas quatro fotos. Tente novamente com outros ângulos, boa iluminação e foco nas folhas."
+
+            )}
+
+          </p>
+
+
+          ${
+            panc
+
+              ? `
+
+                <div
+                  class="result-block"
+                >
+
+                  <h4>
+                    Usos
+                  </h4>
+
+                  <p
+                    class="result-text"
+                  >
+                    ${esc(panc.usos)}
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="result-block"
+                >
+
+                  <h4>
+                    Cuidados
+                  </h4>
+
+                  <p
+                    class="result-text"
+                  >
+                    ${esc(panc.cuidados)}
+                  </p>
+
+                </div>
+
+              `
+
+              : ""
+          }
+
+
+          <div
+            class="result-block"
+          >
+
+            <h4>
+              Outras possibilidades
+            </h4>
+
+
+            <ul class="alt-list">
+
+              ${predicoes
+
+                .slice(1, 4)
+
+                .map(
+                  (p) => `
+
+                    <li>
+
+                      <strong>
+                        ${esc(p.rotulo)}
+                      </strong>
+
+                      <span>
+
+                        ${
+                          (
+                            p.confianca *
+                            100
+                          ).toFixed(1)
+                        }%
+
+                      </span>
+
+                    </li>
+
+                  `
+                )
+
+                .join("")}
+
+            </ul>
+
+          </div>
+
+
+          <p
+            class="subtitle"
+            style="margin-top:1rem"
+          >
+
+            Resultado calculado
+            combinando as quatro fotos.
+
+          </p>
+
+
+        </div>
+
+      </div>
+
+    `;
+
+
+  // =============================
+  // SALVAR NO JARDIM
+  // =============================
+
+  btnSalvar.disabled =
+    !panc ||
+    jaNoJardim;
+
+
+  btnSalvar.textContent =
+    jaNoJardim
+
+      ? "✓ No meu jardim"
+
+      : "Salvar no jardim";
+
+
+  btnSalvar.onclick =
+    async () => {
+
+      if (!panc) {
+        return;
+      }
+
+
+      btnSalvar.disabled =
+        true;
+
+
+      try {
+
+        await alternarJardim(
+          usuario.id,
+          panc.id,
+          false
+        );
+
+
+        jardim =
+          await carregarJardim();
+
+
+        btnSalvar.textContent =
+          "✓ No meu jardim";
+
+
+      } catch (e) {
+
+        alert(
+          e.message ||
+          "Não foi possível salvar no jardim."
+        );
+
+
+        btnSalvar.disabled =
+          false;
+      }
+    };
+}
+
+
+// =============================
+// NOVA IDENTIFICAÇÃO
+// =============================
+
+document
+  .getElementById("btn-nova")
+  .addEventListener(
+    "click",
+    limparFotos
+  );
+
+
+// =============================
+// FECHAR CÂMERA AO SAIR
+// =============================
+
+window.addEventListener(
+  "beforeunload",
+  pararCamera
+);
+
+
+// =============================
+// INICIALIZAÇÃO
+// =============================
 
 (async () => {
-  usuario = await requireAuth();
-  if (!usuario) return;
-  iniciarCamera();
+
+  usuario =
+    await requireAuth();
+
+
+  if (!usuario) {
+    return;
+  }
+
+
+  // =============================
+  // BANCO
+  // =============================
+
   try {
-    pancs = await carregarPancs();
-    jardim = await carregarJardim();
+
+    pancs =
+      await carregarPancs();
+
+
+    jardim =
+      await carregarJardim();
+
+
   } catch (e) {
+
     console.error(e);
   }
+
+
+  // =============================
+  // IA
+  // =============================
+
   try {
+
     await getModel();
-    modeloPronto = true;
-    carregandoIa.hidden = true;
-    btnIdentificar.disabled = !fotoDataUrl;
+
+
+    modeloPronto =
+      true;
+
+
+    carregandoIa.hidden =
+      true;
+
+
+    atualizarInterfaceFotos();
+
+
   } catch (e) {
+
     console.error(e);
-    carregandoIa.hidden = true;
-    erro.textContent = "Não foi possível carregar o modelo de IA.";
-    erro.hidden = false;
+
+
+    carregandoIa.hidden =
+      true;
+
+
+    erro.textContent =
+      "Não foi possível carregar o modelo de IA.";
+
+
+    erro.hidden =
+      false;
   }
+
 })();
