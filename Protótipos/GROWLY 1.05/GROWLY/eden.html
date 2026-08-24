@@ -32,11 +32,28 @@
       </header>
 
       <div class="eden-messages" id="mensagens"></div>
+      
+<form class="eden-form" id="form-eden">
 
-      <form class="eden-form" id="form-eden">
-        <input id="texto" placeholder="Pergunte à Eden..." autocomplete="off" />
-        <button type="submit" aria-label="Enviar">➤</button>
-      </form>
+  <button
+    id="btnDescerChat"
+    class="eden-scroll-bottom"
+    type="button"
+    aria-label="Ir para a mensagem mais recente"
+    hidden
+  >
+    ↓
+  </button>
+
+  <input
+    id="texto"
+    placeholder="Pergunte à Eden..."
+    autocomplete="off"
+  />
+
+  <button type="submit" aria-label="Enviar">➤</button>
+
+</form>
 
       <nav class="bottom-nav" data-nav></nav>
     </div>

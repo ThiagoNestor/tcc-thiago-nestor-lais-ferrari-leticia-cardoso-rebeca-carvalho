@@ -1284,3 +1284,407 @@ form.stack {
 
   border-radius: 12px;
 }
+
+/* =========================================
+   CORREÇÃO DO CHAT DA EDEN
+   ========================================= */
+
+.eden-screen {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+}
+
+
+/* Cabeçalho não se move */
+
+.eden-header {
+  flex-shrink: 0;
+}
+
+
+/* Área das mensagens */
+
+.eden-messages {
+  flex: 1 1 auto !important;
+
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  -webkit-overflow-scrolling: touch;
+
+  overscroll-behavior: contain;
+
+  padding-bottom: 25px !important;
+
+  scroll-behavior: smooth;
+}
+
+
+/* Barra de escrever */
+
+.eden-form {
+  position: relative !important;
+
+  bottom: auto !important;
+
+  flex-shrink: 0 !important;
+
+  z-index: 20 !important;
+
+  background: #ffffe2;
+}
+
+
+/* Menu inferior */
+
+.eden-screen .bottom-nav {
+  position: relative !important;
+
+  bottom: auto !important;
+
+  flex-shrink: 0 !important;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .eden-messages {
+    touch-action: pan-y;
+
+    padding-bottom: 20px !important;
+  }
+
+}
+
+/* =========================================
+   SETA PARA DESCER O CHAT DA EDEN
+   ========================================= */
+
+.eden-form .eden-scroll-bottom {
+  position: absolute !important;
+
+  /* Posição */
+  left: 50% !important;
+  right: auto !important;
+  top: -62px !important;
+
+  /* Círculo praticamente invisível */
+  border: 1px solid rgba(18, 55, 42, 0.04) !important;
+  background: rgba(18, 55, 42, 0.025) !important;
+
+  /* A seta continua visível */
+  color: #12372a !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+
+  /* Sem aquele efeito cinza */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+
+  /* Comportamento */
+  cursor: pointer;
+  z-index: 100;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Quando passa o mouse */
+.eden-form .eden-scroll-bottom:hover {
+  background: rgba(18, 55, 42, 0.07) !important;
+
+  transform:
+    translateX(-50%)
+    scale(1.06);
+}
+
+/* Quando clica */
+.eden-form .eden-scroll-bottom:active {
+  transform:
+    translateX(-50%)
+    scale(0.94);
+}
+
+/* Esconde quando já está no final do chat */
+.eden-form .eden-scroll-bottom[hidden] {
+  display: none !important;
+}
+
+/* =========================================
+   REQUISITOS DA SENHA - CADASTRO
+   ========================================= */
+
+.password-requisitos {
+  margin-top: 8px;
+
+  padding: 12px 14px;
+
+  background:
+    rgba(255, 255, 255, 0.45);
+
+  border:
+    1px solid rgba(31, 59, 44, 0.12);
+
+  border-radius: 14px;
+
+  transition:
+    0.2s ease;
+}
+
+
+/* Título */
+
+.password-requisitos-titulo {
+  margin:
+    0 0 8px;
+
+  font-size:
+    13px;
+
+  font-weight:
+    700;
+
+  color:
+    #1f3b2c;
+}
+
+
+/* Cada requisito */
+
+.password-regra {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+
+  margin:
+    5px 0;
+
+  font-size:
+    12px;
+
+  font-weight:
+    600;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* Ícone */
+
+.regra-icone {
+  width:
+    16px;
+
+  font-size:
+    14px;
+
+  font-weight:
+    900;
+
+  text-align:
+    center;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* =========================================
+   REQUISITO NÃO CUMPRIDO
+   ========================================= */
+
+.password-regra.invalida {
+  color:
+    #a83d32;
+}
+
+.password-regra.invalida .regra-icone {
+  color:
+    #c24a3d;
+}
+
+
+/* =========================================
+   REQUISITO CUMPRIDO
+   ========================================= */
+
+.password-regra.valida {
+  color:
+    #287344;
+}
+
+.password-regra.valida .regra-icone {
+  color:
+    #287344;
+
+  transform:
+    scale(1.12);
+}
+
+
+/* =========================================
+   CONFIRMAÇÃO DE SENHA
+   ========================================= */
+
+.password-match {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+
+  margin-top:
+    6px;
+
+  padding-left:
+    2px;
+
+  font-size:
+    12px;
+
+  font-weight:
+    600;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* Senhas diferentes */
+
+.password-match.invalida {
+  color:
+    #a83d32;
+}
+
+.password-match.invalida .regra-icone {
+  color:
+    #c24a3d;
+}
+
+
+/* Senhas iguais */
+
+.password-match.valida {
+  color:
+    #287344;
+}
+
+.password-match.valida .regra-icone {
+  color:
+    #287344;
+
+  transform:
+    scale(1.12);
+}
+
+
+/* =========================================
+   BOTÃO BLOQUEADO
+   ========================================= */
+
+#enviar:disabled {
+  opacity:
+    0.55;
+
+  cursor:
+    not-allowed;
+}
+
+/* =========================================
+   BOTÃO MOSTRAR / ESCONDER SENHA
+   ========================================= */
+
+.password-input-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+
+/* Campo */
+
+.password-input-wrapper input {
+  width: 100%;
+
+  /* espaço para o olhinho */
+  padding-right: 48px !important;
+}
+
+
+/* Olhinho */
+
+.password-toggle {
+  position: absolute;
+
+  top: 50%;
+  right: 14px;
+
+  transform: translateY(-50%);
+
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #12372a;
+
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  opacity: 0.65;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.password-toggle:hover {
+  opacity: 1;
+
+  transform:
+    translateY(-50%)
+    scale(1.08);
+}
+
+
+.password-toggle:active {
+  transform:
+    translateY(-50%)
+    scale(0.92);
+}

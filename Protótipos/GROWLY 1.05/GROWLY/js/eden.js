@@ -13,7 +13,14 @@ const campo = document.getElementById("texto");
 let mensagens = [{ role: "assistant", content: "Olá! Sou a Eden 🌱 Como posso te ajudar hoje?" }];
 let pensando = false;
 
+
 function render() {
+
+  if (!box) {
+    console.error("ERRO: elemento #mensagens não encontrado.");
+    return;
+  }
+
   box.innerHTML =
     mensagens
       .map(
@@ -80,3 +87,46 @@ form.addEventListener("submit", (e) => {
   if (!user) return;
   render();
 })();
+
+// ==========================================
+// SETA PARA DESCER O CHAT
+// ==========================================
+
+const mensagensChat = document.getElementById("mensagens");
+const btnDescerChat = document.getElementById("btnDescerChat");
+
+function atualizarSetaChat() {
+
+  if (!mensagensChat || !btnDescerChat) return;
+
+  const distanciaDoFinal =
+    mensagensChat.scrollHeight -
+    mensagensChat.scrollTop -
+    mensagensChat.clientHeight;
+
+  // Se estiver mais de 80px acima do final,
+  // mostramos a seta.
+  btnDescerChat.hidden = distanciaDoFinal < 80;
+}
+
+
+// Detecta quando o usuário sobe/desce o chat
+
+mensagensChat?.addEventListener("scroll", atualizarSetaChat);
+
+
+// Ao clicar na seta, desce suavemente
+
+btnDescerChat?.addEventListener("click", () => {
+
+  mensagensChat.scrollTo({
+    top: mensagensChat.scrollHeight,
+    behavior: "smooth"
+  });
+
+});
+
+
+// Verificação inicial
+
+atualizarSetaChat();
