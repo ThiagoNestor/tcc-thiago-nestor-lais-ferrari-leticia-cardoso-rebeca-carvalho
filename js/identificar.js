@@ -34,8 +34,6 @@ const btnSalvar = document.getElementById("btn-salvar");
 
 const arquivo = document.getElementById("arquivo");
 
-
-// Estes elementos serão adicionados no identificar.html
 const previews = document.getElementById("previews");
 const contadorFotos = document.getElementById("contador-fotos");
 const btnLimparFotos = document.getElementById("btn-limpar-fotos");
@@ -72,13 +70,124 @@ function mostrarEtapa(etapa) {
 
 
 // =============================
+// LOCALIZAR PANC NO BANCO NOVO
+// =============================
+
+function normalizarPanc(valor) {
+
+  return String(valor || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+
+function encontrarPanc(pancId, rotulo = "") {
+
+  if (!pancId && !rotulo) {
+    return null;
+  }
+
+  const idNormalizado =
+    normalizarPanc(pancId);
+
+  const rotuloNormalizado =
+    normalizarPanc(rotulo);
+
+
+  /*
+    O modelo pode utilizar um nome e o banco outro slug.
+
+    Exemplo:
+
+    Modelo:
+    "Peixinho-da-horta"
+
+    Banco:
+    "peixinho"
+  */
+
+  const aliases = {
+
+    "peixinho":
+      "peixinho",
+
+    "peixinho-da-horta":
+      "peixinho",
+
+    "tanchagem":
+      "tanchagem",
+
+    "ora":
+      "ora-pro-nobis",
+
+    "ora-pro-nobis":
+      "ora-pro-nobis",
+
+    "vinagreira":
+      "vinagreira",
+
+    "taioba":
+      "taioba"
+  };
+
+
+  const slugEsperado =
+    aliases[idNormalizado] ||
+    aliases[rotuloNormalizado] ||
+    idNormalizado ||
+    rotuloNormalizado;
+
+
+  const encontrada =
+    pancs.find((p) => {
+
+      const slugBanco =
+        normalizarPanc(p.slug);
+
+      const nomeBanco =
+        normalizarPanc(p.nome);
+
+      return (
+
+        String(p.id) ===
+          String(pancId)
+
+        ||
+
+        slugBanco ===
+          slugEsperado
+
+        ||
+
+        nomeBanco ===
+          rotuloNormalizado
+
+        ||
+
+        nomeBanco ===
+          idNormalizado
+
+      );
+    });
+
+
+  return encontrada || null;
+}
+
+
+// =============================
 // CÂMERA
 // =============================
 
 function pararCamera() {
 
   if (stream) {
-    stream.getTracks().forEach((t) => t.stop());
+    stream
+      .getTracks()
+      .forEach((t) => t.stop());
   }
 
   stream = null;
@@ -99,19 +208,22 @@ async function iniciarCamera() {
 
   try {
 
-    stream = await navigator.mediaDevices.getUserMedia({
+    stream =
+      await navigator.mediaDevices.getUserMedia({
 
-      video: {
-        facingMode: "environment",
-      },
+        video: {
+          facingMode: "environment",
+        },
 
-      audio: false,
-    });
+        audio: false,
+      });
+
 
     video.srcObject = stream;
     video.hidden = false;
 
     await video.play();
+
 
   } catch (e) {
 
@@ -134,7 +246,9 @@ async function iniciarCamera() {
 
 function atualizarInterfaceFotos() {
 
-  const quantidade = fotosDataUrl.length;
+  const quantidade =
+    fotosDataUrl.length;
+
 
   contadorFotos.textContent =
     `Fotos selecionadas: ${quantidade}/${MAX_FOTOS}`;
@@ -143,22 +257,27 @@ function atualizarInterfaceFotos() {
   // Só permite identificar quando:
   // 1. modelo estiver carregado
   // 2. exatamente 4 fotos existirem
+
   btnIdentificar.disabled =
-    !modeloPronto || quantidade !== MAX_FOTOS;
+    !modeloPronto ||
+    quantidade !== MAX_FOTOS;
 
 
   // Não permite capturar mais de 4
+
   btnCapturar.disabled =
     quantidade >= MAX_FOTOS;
 
 
   // Esconde os controles de captura
   // quando chegar em 4 fotos
+
   acoesCaptura.hidden =
     quantidade >= MAX_FOTOS;
 
 
   // Mostra ações das fotos
+
   acoesFoto.hidden =
     quantidade === 0;
 
@@ -176,82 +295,95 @@ function atualizarInterfaceFotos() {
 
     previews.hidden = false;
 
-    previews.innerHTML = fotosDataUrl
 
-      .map((foto, index) => {
+    previews.innerHTML =
+      fotosDataUrl
 
-        return `
+        .map((foto, index) => {
 
-          <div
-            style="
-              position: relative;
-              aspect-ratio: 1;
-              overflow: hidden;
-              border-radius: 14px;
-              background: #eee;
-            "
-          >
-
-            <img
-              src="${foto}"
-              alt="Foto ${index + 1}"
-              style="
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-              "
-            >
+          return `
 
             <div
               style="
-                position: absolute;
-                bottom: 6px;
-                left: 6px;
-                background: rgba(0,0,0,.65);
-                color: white;
-                padding: 3px 8px;
-                border-radius: 10px;
-                font-size: 12px;
+                position: relative;
+                aspect-ratio: 1;
+                overflow: hidden;
+                border-radius: 14px;
+                background: #eee;
               "
             >
-              Foto ${index + 1}
+
+              <img
+                src="${foto}"
+                alt="Foto ${index + 1}"
+
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  display: block;
+                "
+              >
+
+              <div
+                style="
+                  position: absolute;
+                  bottom: 6px;
+                  left: 6px;
+
+                  background: rgba(0,0,0,.65);
+
+                  color: white;
+
+                  padding: 3px 8px;
+
+                  border-radius: 10px;
+
+                  font-size: 12px;
+                "
+              >
+
+                Foto ${index + 1}
+
+              </div>
+
+
+              <button
+                type="button"
+
+                data-remover-foto="${index}"
+
+                style="
+                  position: absolute;
+                  top: 6px;
+                  right: 6px;
+
+                  width: 30px;
+                  height: 30px;
+
+                  border: none;
+                  border-radius: 50%;
+
+                  cursor: pointer;
+
+                  font-size: 18px;
+                  font-weight: bold;
+
+                  background: white;
+                  color: #333;
+                "
+              >
+
+                ×
+
+              </button>
+
             </div>
 
+          `;
+        })
 
-            <button
-              type="button"
-              data-remover-foto="${index}"
-
-              style="
-                position: absolute;
-                top: 6px;
-                right: 6px;
-
-                width: 30px;
-                height: 30px;
-
-                border: none;
-                border-radius: 50%;
-
-                cursor: pointer;
-
-                font-size: 18px;
-                font-weight: bold;
-
-                background: white;
-                color: #333;
-              "
-            >
-              ×
-            </button>
-
-          </div>
-
-        `;
-      })
-
-      .join("");
+        .join("");
   }
 
 
@@ -286,11 +418,16 @@ function adicionarFoto(dataUrl) {
     return;
   }
 
-  if (fotosDataUrl.length >= MAX_FOTOS) {
+  if (
+    fotosDataUrl.length >=
+    MAX_FOTOS
+  ) {
     return;
   }
 
-  fotosDataUrl.push(dataUrl);
+  fotosDataUrl.push(
+    dataUrl
+  );
 
   erro.hidden = true;
 
@@ -311,7 +448,10 @@ function removerFoto(index) {
     return;
   }
 
-  fotosDataUrl.splice(index, 1);
+  fotosDataUrl.splice(
+    index,
+    1
+  );
 
   predicoes = [];
 
@@ -335,7 +475,9 @@ function limparFotos() {
 
   pararCamera();
 
-  mostrarEtapa("camera");
+  mostrarEtapa(
+    "camera"
+  );
 
   atualizarInterfaceFotos();
 }
@@ -345,109 +487,138 @@ function limparFotos() {
 // CAPTURAR FOTO DA CÂMERA
 // =============================
 
-btnCapturar.addEventListener("click", () => {
+btnCapturar.addEventListener(
+  "click",
+  () => {
 
-  if (!video.videoWidth) {
-    return;
-  }
+    if (!video.videoWidth) {
+      return;
+    }
 
-  if (fotosDataUrl.length >= MAX_FOTOS) {
-    return;
-  }
-
-
-  canvas.width = video.videoWidth;
-
-  canvas.height = video.videoHeight;
+    if (
+      fotosDataUrl.length >=
+      MAX_FOTOS
+    ) {
+      return;
+    }
 
 
-  canvas
-    .getContext("2d")
-    .drawImage(
-      video,
-      0,
-      0,
-      canvas.width,
-      canvas.height
+    canvas.width =
+      video.videoWidth;
+
+    canvas.height =
+      video.videoHeight;
+
+
+    canvas
+      .getContext("2d")
+      .drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+    const foto =
+      canvas.toDataURL(
+        "image/jpeg",
+        0.92
+      );
+
+
+    adicionarFoto(
+      foto
     );
-
-
-  const foto = canvas.toDataURL(
-    "image/jpeg",
-    0.92
-  );
-
-
-  adicionarFoto(foto);
-});
+  }
+);
 
 
 // =============================
 // ESCOLHER FOTOS DA GALERIA
 // =============================
 
-arquivo.addEventListener("change", (event) => {
+arquivo.addEventListener(
+  "change",
+  (event) => {
 
-  const arquivos =
-    Array.from(event.target.files || []);
-
-
-  if (!arquivos.length) {
-    return;
-  }
-
-
-  const quantidadeDisponivel =
-    MAX_FOTOS - fotosDataUrl.length;
+    const arquivos =
+      Array.from(
+        event.target.files || []
+      );
 
 
-  const arquivosSelecionados =
-    arquivos.slice(
-      0,
-      quantidadeDisponivel
-    );
-
-
-  // Aviso se selecionar fotos demais
-  if (
-    arquivos.length >
-    quantidadeDisponivel
-  ) {
-
-    erro.textContent =
-      `Você pode usar no máximo ${MAX_FOTOS} fotos. ` +
-      `Foram adicionadas apenas ${quantidadeDisponivel}.`;
-
-    erro.hidden = false;
-  }
-
-
-  arquivosSelecionados.forEach((file) => {
-
-    if (!file.type.startsWith("image/")) {
+    if (!arquivos.length) {
       return;
     }
 
 
-    const reader =
-      new FileReader();
+    const quantidadeDisponivel =
+      MAX_FOTOS -
+      fotosDataUrl.length;
 
 
-    reader.onload = () => {
-
-      adicionarFoto(
-        String(reader.result)
+    const arquivosSelecionados =
+      arquivos.slice(
+        0,
+        quantidadeDisponivel
       );
-    };
 
 
-    reader.readAsDataURL(file);
-  });
+    // Aviso se selecionar fotos demais
+
+    if (
+      arquivos.length >
+      quantidadeDisponivel
+    ) {
+
+      erro.textContent =
+        `Você pode usar no máximo ${MAX_FOTOS} fotos. ` +
+        `Foram adicionadas apenas ${quantidadeDisponivel}.`;
+
+      erro.hidden = false;
+    }
 
 
-  // Permite selecionar o mesmo arquivo novamente depois
-  arquivo.value = "";
-});
+    arquivosSelecionados
+      .forEach((file) => {
+
+        if (
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
+          return;
+        }
+
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          () => {
+
+            adicionarFoto(
+              String(
+                reader.result
+              )
+            );
+          };
+
+
+        reader.readAsDataURL(
+          file
+        );
+      });
+
+
+    // Permite selecionar o mesmo arquivo novamente
+
+    arquivo.value = "";
+  }
+);
 
 
 // =============================
@@ -475,7 +646,9 @@ previews.addEventListener(
       );
 
 
-    removerFoto(index);
+    removerFoto(
+      index
+    );
   }
 );
 
@@ -494,7 +667,9 @@ btnLimparFotos.addEventListener(
 // CONVERTER DATA URL EM IMAGEM
 // =============================
 
-async function carregarImagem(dataUrl) {
+async function carregarImagem(
+  dataUrl
+) {
 
   const img =
     new Image();
@@ -525,6 +700,7 @@ function combinarPredicoes(
 
   // Percorre as previsões
   // retornadas para cada foto
+
   predicoesPorFoto.forEach(
     (resultadoFoto) => {
 
@@ -543,19 +719,24 @@ function combinarPredicoes(
             `rotulo:${previsao.rotulo}`;
 
 
-          if (!mapa.has(chave)) {
+          if (
+            !mapa.has(chave)
+          ) {
 
-            mapa.set(chave, {
+            mapa.set(
+              chave,
+              {
 
-              pancId:
-                previsao.pancId,
+                pancId:
+                  previsao.pancId,
 
-              rotulo:
-                previsao.rotulo,
+                rotulo:
+                  previsao.rotulo,
 
-              soma:
-                0,
-            });
+                soma:
+                  0,
+              }
+            );
           }
 
 
@@ -584,30 +765,122 @@ function combinarPredicoes(
                  4
   */
 
+
   return Array
-    .from(mapa.values())
 
-    .map((classe) => {
+    .from(
+      mapa.values()
+    )
 
-      return {
+    .map(
+      (classe) => {
 
-        pancId:
-          classe.pancId,
+        return {
 
-        rotulo:
-          classe.rotulo,
+          pancId:
+            classe.pancId,
 
-        confianca:
-          classe.soma /
-          predicoesPorFoto.length,
-      };
-    })
+          rotulo:
+            classe.rotulo,
+
+          confianca:
+            classe.soma /
+            predicoesPorFoto.length,
+        };
+      }
+    )
 
     .sort(
       (a, b) =>
         b.confianca -
         a.confianca
     );
+}
+
+
+// =============================
+// SALVAR HISTÓRICO
+// =============================
+
+async function salvarIdentificacao(
+  previsao
+) {
+
+  /*
+    IMPORTANTE:
+
+    O modelo retorna pancId como
+    "taioba", "peixinho", etc.
+
+    A tabela identificacoes precisa
+    receber o ID NUMÉRICO da PANC.
+  */
+
+  const pancIdentificada =
+    encontrarPanc(
+      previsao.pancId,
+      previsao.rotulo
+    );
+
+
+  const {
+    error: erroIdentificacao
+  } =
+    await db
+      .from(
+        "identificacoes"
+      )
+      .insert({
+
+        user_id:
+          usuario.id,
+
+        panc_id:
+          pancIdentificada
+            ? pancIdentificada.id
+            : null,
+
+        resultado:
+          previsao.rotulo,
+
+        confiabilidade:
+          Number(
+            (
+              previsao.confianca *
+              100
+            ).toFixed(2)
+          ),
+      });
+
+
+  /*
+    Se o histórico falhar,
+    NÃO interrompemos o scanner.
+
+    Isso é importante porque o usuário
+    ainda precisa conseguir salvar a
+    planta no jardim.
+  */
+
+  if (
+    erroIdentificacao
+  ) {
+
+    console.error(
+      "Erro ao salvar identificação:",
+      erroIdentificacao
+    );
+
+    return false;
+  }
+
+
+  console.log(
+    "Identificação salva no histórico."
+  );
+
+
+  return true;
 }
 
 
@@ -719,6 +992,13 @@ btnIdentificar.addEventListener(
       );
 
 
+      /*
+        PRIMEIRO exibimos o resultado.
+
+        O botão Salvar no jardim é
+        configurado dentro de renderResultado().
+      */
+
       renderResultado();
 
 
@@ -727,30 +1007,29 @@ btnIdentificar.addEventListener(
       );
 
 
-      // =============================
-      // SALVAR IDENTIFICAÇÃO
-      // =============================
+      /*
+        Depois tentamos salvar o histórico.
 
-      await db
-        .from("identificacoes")
-        .insert({
+        Mesmo se houver erro nessa operação,
+        o resultado e o botão do jardim
+        continuam funcionando.
+      */
 
-          user_id:
-            usuario.id,
+      try {
 
-          panc_id:
-            predicoes[0].pancId,
+        await salvarIdentificacao(
+          predicoes[0]
+        );
 
-          rotulo:
-            predicoes[0].rotulo,
+      } catch (
+        erroHistorico
+      ) {
 
-          confianca:
-            Number(
-              predicoes[0]
-                .confianca
-                .toFixed(4)
-            ),
-        });
+        console.error(
+          "Erro inesperado ao salvar histórico:",
+          erroHistorico
+        );
+      }
 
 
     } catch (e) {
@@ -786,20 +1065,45 @@ function renderResultado() {
     predicoes[0];
 
 
+  /*
+    CORREÇÃO DO SUPABASE NOVO.
+
+    Antes:
+
+    p.id === topo.pancId
+
+    Exemplo que não funcionava:
+
+    p.id = 5
+    topo.pancId = "taioba"
+
+    Agora a busca aceita ID,
+    slug e nome da espécie.
+  */
+
   const panc =
-    topo.pancId
+    encontrarPanc(
+      topo.pancId,
+      topo.rotulo
+    );
 
-      ? pancs.find(
-          (p) =>
-            p.id === topo.pancId
-        )
 
-      : null;
+  console.log(
+    "Resultado principal:",
+    topo
+  );
+
+
+  console.log(
+    "PANC correspondente no banco:",
+    panc
+  );
 
 
   const percentual =
     Math.round(
-      topo.confianca * 100
+      topo.confianca *
+      100
     );
 
 
@@ -846,7 +1150,9 @@ function renderResultado() {
   // =============================
 
   document
-    .getElementById("resultado")
+    .getElementById(
+      "resultado"
+    )
     .innerHTML = `
 
       <div
@@ -857,6 +1163,7 @@ function renderResultado() {
         <div
           style="
             display: grid;
+
             grid-template-columns:
               repeat(2, minmax(0,1fr));
 
@@ -986,7 +1293,11 @@ function renderResultado() {
                   <p
                     class="result-text"
                   >
-                    ${esc(panc.usos)}
+
+                    ${esc(
+                      panc.usos
+                    )}
+
                   </p>
 
                 </div>
@@ -1003,7 +1314,11 @@ function renderResultado() {
                   <p
                     class="result-text"
                   >
-                    ${esc(panc.cuidados)}
+
+                    ${esc(
+                      panc.cuidados
+                    )}
+
                   </p>
 
                 </div>
@@ -1027,7 +1342,10 @@ function renderResultado() {
 
               ${predicoes
 
-                .slice(1, 4)
+                .slice(
+                  1,
+                  4
+                )
 
                 .map(
                   (p) => `
@@ -1035,7 +1353,9 @@ function renderResultado() {
                     <li>
 
                       <strong>
-                        ${esc(p.rotulo)}
+                        ${esc(
+                          p.rotulo
+                        )}
                       </strong>
 
                       <span>
@@ -1100,6 +1420,12 @@ function renderResultado() {
     async () => {
 
       if (!panc) {
+
+        console.error(
+          "Não foi possível salvar: a PANC não foi encontrada no banco.",
+          topo
+        );
+
         return;
       }
 
@@ -1109,6 +1435,29 @@ function renderResultado() {
 
 
       try {
+
+        console.log(
+          "Tentando salvar no jardim:",
+          {
+            user_id:
+              usuario.id,
+
+            panc_id:
+              panc.id,
+
+            slug:
+              panc.slug,
+          }
+        );
+
+
+        /*
+          Usa a MESMA função
+          utilizada pelo Explorar.
+
+          Essa função já funciona,
+          conforme o teste feito.
+        */
 
         await alternarJardim(
           usuario.id,
@@ -1125,7 +1474,22 @@ function renderResultado() {
           "✓ No meu jardim";
 
 
+        btnSalvar.disabled =
+          true;
+
+
+        console.log(
+          "PANC salva no jardim com sucesso."
+        );
+
+
       } catch (e) {
+
+        console.error(
+          "Erro ao salvar no jardim:",
+          e
+        );
+
 
         alert(
           e.message ||
@@ -1145,7 +1509,9 @@ function renderResultado() {
 // =============================
 
 document
-  .getElementById("btn-nova")
+  .getElementById(
+    "btn-nova"
+  )
   .addEventListener(
     "click",
     limparFotos
@@ -1191,9 +1557,24 @@ window.addEventListener(
       await carregarJardim();
 
 
+    console.log(
+      "PANCs carregadas:",
+      pancs
+    );
+
+
+    console.log(
+      "Jardim carregado:",
+      jardim
+    );
+
+
   } catch (e) {
 
-    console.error(e);
+    console.error(
+      "Erro ao carregar dados:",
+      e
+    );
   }
 
 
