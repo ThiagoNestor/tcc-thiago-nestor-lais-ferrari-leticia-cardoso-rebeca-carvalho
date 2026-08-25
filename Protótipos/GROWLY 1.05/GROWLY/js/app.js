@@ -1,11 +1,12 @@
 /* Growly — núcleo compartilhado (JS puro, sem build) */
+const SUPABASE_URL = "https://gjsweqyckjxycbwzzqys.supabase.co";
 
-const SUPABASE_URL = "https://aswbsearncuzvqlyjiqp.supabase.co";
-const SUPABASE_KEY = "sb_publishable_SQQLTNU8PpLa8OHaswzDLA_kQJfKoRv";
+const SUPABASE_KEY = "sb_publishable_MKPsiIWRlD_aVnRwiMY1Cg_MSeatyF0";
 
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: { persistSession: true, autoRefreshToken: true, storageKey: "growly-auth" },
-});
+const db = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 const ASSETS = {
   cardExplorar: "assets/card-explorar.png",
