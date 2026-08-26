@@ -1,3 +1,5 @@
+console.log("IDENTIFICAR NOVO COM TREINAMENTO CARREGADO");
+
 let usuario = null;
 let pancs = [];
 let jardim = [];
@@ -8,6 +10,7 @@ const MAX_FOTOS = 4;
 let fotosDataUrl = [];
 let predicoes = [];
 let modeloPronto = false;
+let ultimaIdentificacaoId = null;
 
 
 // =============================
@@ -96,18 +99,6 @@ function encontrarPanc(pancId, rotulo = "") {
   const rotuloNormalizado =
     normalizarPanc(rotulo);
 
-
-  /*
-    O modelo pode utilizar um nome e o banco outro slug.
-
-    Exemplo:
-
-    Modelo:
-    "Peixinho-da-horta"
-
-    Banco:
-    "peixinho"
-  */
 
   const aliases = {
 
@@ -254,37 +245,22 @@ function atualizarInterfaceFotos() {
     `Fotos selecionadas: ${quantidade}/${MAX_FOTOS}`;
 
 
-  // Só permite identificar quando:
-  // 1. modelo estiver carregado
-  // 2. exatamente 4 fotos existirem
-
   btnIdentificar.disabled =
     !modeloPronto ||
     quantidade !== MAX_FOTOS;
 
 
-  // Não permite capturar mais de 4
-
   btnCapturar.disabled =
     quantidade >= MAX_FOTOS;
 
-
-  // Esconde os controles de captura
-  // quando chegar em 4 fotos
 
   acoesCaptura.hidden =
     quantidade >= MAX_FOTOS;
 
 
-  // Mostra ações das fotos
-
   acoesFoto.hidden =
     quantidade === 0;
 
-
-  // =============================
-  // PREVIEWS
-  // =============================
 
   if (quantidade === 0) {
 
@@ -387,10 +363,6 @@ function atualizarInterfaceFotos() {
   }
 
 
-  // =============================
-  // CONTROLE DA CÂMERA
-  // =============================
-
   if (quantidade >= MAX_FOTOS) {
 
     pararCamera();
@@ -468,6 +440,7 @@ function limparFotos() {
   fotosDataUrl = [];
 
   predicoes = [];
+  ultimaIdentificacaoId = null;
 
   arquivo.value = "";
 
@@ -566,8 +539,6 @@ arquivo.addEventListener(
       );
 
 
-    // Aviso se selecionar fotos demais
-
     if (
       arquivos.length >
       quantidadeDisponivel
@@ -613,8 +584,6 @@ arquivo.addEventListener(
         );
       });
 
-
-    // Permite selecionar o mesmo arquivo novamente
 
     arquivo.value = "";
   }
@@ -698,21 +667,11 @@ function combinarPredicoes(
     new Map();
 
 
-  // Percorre as previsões
-  // retornadas para cada foto
-
   predicoesPorFoto.forEach(
     (resultadoFoto) => {
 
       resultadoFoto.forEach(
         (previsao) => {
-
-          /*
-            pancId é usado como identificador.
-
-            Para classes sem pancId,
-            usamos o rótulo.
-          */
 
           const chave =
             previsao.pancId ??
@@ -752,18 +711,6 @@ function combinarPredicoes(
       );
     }
   );
-
-
-  /*
-    Média:
-
-    confiança foto 1
-    + confiança foto 2
-    + confiança foto 3
-    + confiança foto 4
-    ---------------------------
-                 4
-  */
 
 
   return Array
@@ -806,16 +753,6 @@ async function salvarIdentificacao(
   previsao
 ) {
 
-  /*
-    IMPORTANTE:
-
-    O modelo retorna pancId como
-    "taioba", "peixinho", etc.
-
-    A tabela identificacoes precisa
-    receber o ID NUMÉRICO da PANC.
-  */
-
   const pancIdentificada =
     encontrarPanc(
       previsao.pancId,
@@ -824,6 +761,7 @@ async function salvarIdentificacao(
 
 
   const {
+    data: identificacao,
     error: erroIdentificacao
   } =
     await db
@@ -850,17 +788,10 @@ async function salvarIdentificacao(
               100
             ).toFixed(2)
           ),
-      });
+      })
+      .select("id")
+      .single();
 
-
-  /*
-    Se o histórico falhar,
-    NÃO interrompemos o scanner.
-
-    Isso é importante porque o usuário
-    ainda precisa conseguir salvar a
-    planta no jardim.
-  */
 
   if (
     erroIdentificacao
@@ -871,12 +802,207 @@ async function salvarIdentificacao(
       erroIdentificacao
     );
 
-    return false;
+    return null;
   }
 
 
   console.log(
-    "Identificação salva no histórico."
+    "Identificação salva no histórico:",
+    identificacao
+  );
+
+
+  return identificacao
+    ? identificacao.id
+    : null;
+}
+
+
+// =============================
+// FOTOS PARA TREINAMENTO DA IA
+// =============================
+
+function dataUrlParaBlob(dataUrl) {
+
+  const partes =
+    dataUrl.split(",");
+
+  const cabecalho =
+    partes[0] || "";
+
+  const base64 =
+    partes[1] || "";
+
+  const mimeEncontrado =
+    cabecalho.match(/data:(.*?);base64/);
+
+  const mime =
+    mimeEncontrado
+      ? mimeEncontrado[1]
+      : "image/jpeg";
+
+  const binario =
+    atob(base64);
+
+  const bytes =
+    new Uint8Array(
+      binario.length
+    );
+
+  for (
+    let i = 0;
+    i < binario.length;
+    i++
+  ) {
+    bytes[i] =
+      binario.charCodeAt(i);
+  }
+
+  return new Blob(
+    [bytes],
+    { type: mime }
+  );
+}
+
+
+async function enviarFotosParaTreinamento(
+  panc,
+  topo
+) {
+
+  if (
+    !usuario ||
+    !panc ||
+    !fotosDataUrl.length
+  ) {
+    return false;
+  }
+
+
+  const loteId =
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2)}`;
+
+
+  const registros = [];
+  const arquivosEnviados = [];
+
+
+  for (
+    let index = 0;
+    index < fotosDataUrl.length;
+    index++
+  ) {
+
+    const blob =
+      dataUrlParaBlob(
+        fotosDataUrl[index]
+      );
+
+
+    const caminho =
+      `${usuario.id}/${loteId}/foto-${index + 1}.jpg`;
+
+
+    const {
+      error: erroUpload
+    } =
+      await db.storage
+        .from(
+          "imagens-treinamento"
+        )
+        .upload(
+          caminho,
+          blob,
+          {
+            contentType:
+              blob.type || "image/jpeg",
+
+            upsert: false
+          }
+        );
+
+
+    if (erroUpload) {
+
+      console.error(
+        "Erro ao enviar foto de treinamento:",
+        erroUpload
+      );
+
+      throw erroUpload;
+    }
+
+
+    arquivosEnviados.push(
+      caminho
+    );
+
+
+    registros.push({
+
+      user_id:
+        usuario.id,
+
+      panc_id:
+        panc.id,
+
+      identificacao_id:
+        ultimaIdentificacaoId || null,
+
+      caminho_storage:
+        caminho,
+
+      rotulo_ia:
+        topo.rotulo,
+
+      confiabilidade:
+        Number(
+          (
+            topo.confianca *
+            100
+          ).toFixed(2)
+        ),
+
+      autorizado:
+        true,
+
+      status:
+        "pendente"
+    });
+  }
+
+
+  const {
+    error: erroRegistro
+  } =
+    await db
+      .from(
+        "imagens_treinamento"
+      )
+      .insert(
+        registros
+      );
+
+
+  if (erroRegistro) {
+
+    console.error(
+      "Erro ao registrar imagens de treinamento:",
+      erroRegistro
+    );
+
+    throw erroRegistro;
+  }
+
+
+  console.log(
+    "Fotos autorizadas enviadas para treinamento:",
+    arquivosEnviados
   );
 
 
@@ -934,11 +1060,6 @@ btnIdentificar.addEventListener(
         [];
 
 
-      /*
-        Cada foto é enviada
-        separadamente para o modelo.
-      */
-
       for (
         const foto of fotosDataUrl
       ) {
@@ -960,11 +1081,6 @@ btnIdentificar.addEventListener(
         );
       }
 
-
-      /*
-        Agora combinamos
-        as quatro previsões.
-      */
 
       predicoes =
         combinarPredicoes(
@@ -992,13 +1108,6 @@ btnIdentificar.addEventListener(
       );
 
 
-      /*
-        PRIMEIRO exibimos o resultado.
-
-        O botão Salvar no jardim é
-        configurado dentro de renderResultado().
-      */
-
       renderResultado();
 
 
@@ -1007,19 +1116,12 @@ btnIdentificar.addEventListener(
       );
 
 
-      /*
-        Depois tentamos salvar o histórico.
-
-        Mesmo se houver erro nessa operação,
-        o resultado e o botão do jardim
-        continuam funcionando.
-      */
-
       try {
 
-        await salvarIdentificacao(
-          predicoes[0]
-        );
+        ultimaIdentificacaoId =
+          await salvarIdentificacao(
+            predicoes[0]
+          );
 
       } catch (
         erroHistorico
@@ -1064,22 +1166,6 @@ function renderResultado() {
   const topo =
     predicoes[0];
 
-
-  /*
-    CORREÇÃO DO SUPABASE NOVO.
-
-    Antes:
-
-    p.id === topo.pancId
-
-    Exemplo que não funcionava:
-
-    p.id = 5
-    topo.pancId = "taioba"
-
-    Agora a busca aceita ID,
-    slug e nome da espécie.
-  */
 
   const panc =
     encontrarPanc(
@@ -1430,6 +1516,15 @@ function renderResultado() {
       }
 
 
+      const autorizaTreinamento =
+        window.confirm(
+          "Ajude a melhorar a IA do Growly 🌱\n\n" +
+          "Você autoriza o uso destas 4 fotos, de forma vinculada apenas à identificação técnica, para melhorar o modelo de reconhecimento do Growly?\n\n" +
+          "OK = autorizar e salvar no jardim\n" +
+          "Cancelar = apenas salvar no jardim"
+        );
+
+
       btnSalvar.disabled =
         true;
 
@@ -1450,14 +1545,6 @@ function renderResultado() {
           }
         );
 
-
-        /*
-          Usa a MESMA função
-          utilizada pelo Explorar.
-
-          Essa função já funciona,
-          conforme o teste feito.
-        */
 
         await alternarJardim(
           usuario.id,
@@ -1481,6 +1568,40 @@ function renderResultado() {
         console.log(
           "PANC salva no jardim com sucesso."
         );
+
+
+        if (
+          autorizaTreinamento
+        ) {
+
+          try {
+
+            await enviarFotosParaTreinamento(
+              panc,
+              topo
+            );
+
+
+            alert(
+              "PANC salva no jardim e fotos enviadas para ajudar a melhorar a IA do Growly. 🌱"
+            );
+
+
+          } catch (
+            erroTreinamento
+          ) {
+
+            console.error(
+              "A PANC foi salva no jardim, mas houve erro ao enviar as fotos para treinamento:",
+              erroTreinamento
+            );
+
+
+            alert(
+              "A PANC foi salva no jardim, mas não foi possível enviar as fotos para melhorar a IA. O jardim não foi afetado."
+            );
+          }
+        }
 
 
       } catch (e) {
