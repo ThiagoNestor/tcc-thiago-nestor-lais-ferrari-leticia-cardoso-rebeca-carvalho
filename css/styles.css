@@ -1731,3 +1731,1319 @@ form.stack {
 .eden-screen .bottom-nav {
   margin-top: 0 !important;
 }
+
+
+/* =========================================
+   REVISÃO DE IMAGENS - ADMIN
+   ========================================= */
+
+.revisao-screen {
+  min-height: 100dvh;
+  padding-bottom: 2rem;
+}
+
+.revisao-header {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+
+  max-width: 28rem;
+
+  margin: 0 auto;
+
+  padding:
+    2rem
+    1.25rem
+    1rem;
+}
+
+.revisao-header-texto {
+  flex: 1;
+}
+
+.revisao-header h1 {
+  margin: 0;
+
+  font-family:
+    "Gill Sans",
+    "Gill Sans MT",
+    Calibri,
+    "Trebuchet MS",
+    sans-serif;
+
+  font-size: 1.5rem;
+
+  color: #1f3b2c;
+}
+
+.revisao-header p {
+  margin-top: 0.2rem;
+
+  font-size: 0.8rem;
+
+  line-height: 1.3;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.68
+    );
+}
+
+
+/* =========================================
+   ÁREA PRINCIPAL
+   ========================================= */
+
+.revisao-main {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 28rem;
+
+  margin: 0 auto;
+
+  padding:
+    0
+    1rem
+    2rem;
+}
+
+
+/* =========================================
+   CONTADOR / PROGRESSO
+   ========================================= */
+
+.revisao-progresso {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  margin:
+    0.4rem
+    0
+    0.9rem;
+
+  padding:
+    0
+    0.2rem;
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.75
+    );
+}
+
+.revisao-pendentes {
+  padding:
+    0.3rem
+    0.65rem;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      31,
+      59,
+      44,
+      0.08
+    );
+
+  color:
+    #1f3b2c;
+}
+
+
+/* =========================================
+   ÁREA DO CARD
+   ========================================= */
+
+.revisao-card-area {
+  position: relative;
+
+  min-height: 470px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+/* =========================================
+   CARD ESTILO TINDER
+   ========================================= */
+
+.revisao-card {
+  position: relative;
+
+  width: 100%;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.97
+    );
+
+  border-radius:
+    1.5rem;
+
+  overflow: hidden;
+
+  box-shadow:
+    0
+    12px
+    35px
+    rgba(
+      31,
+      59,
+      44,
+      0.16
+    );
+
+  border:
+    1px
+    solid
+    rgba(
+      31,
+      59,
+      44,
+      0.1
+    );
+
+  user-select: none;
+
+  touch-action: pan-y;
+
+  transform-origin:
+    center bottom;
+
+  transition:
+    box-shadow 0.2s ease;
+}
+
+.revisao-card.arrastando {
+  cursor: grabbing;
+
+  box-shadow:
+    0
+    18px
+    45px
+    rgba(
+      31,
+      59,
+      44,
+      0.24
+    );
+}
+
+
+/* =========================================
+   IMAGEM
+   ========================================= */
+
+.revisao-imagem-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio:
+    4 / 5;
+
+  overflow: hidden;
+
+  background:
+    #e8e3d6;
+}
+
+.revisao-imagem {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   OVERLAYS DE SWIPE
+   ========================================= */
+
+.revisao-overlay {
+  position: absolute;
+
+  top: 1.25rem;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 74px;
+  height: 74px;
+
+  border-radius: 50%;
+
+  font-size: 2.7rem;
+
+  opacity: 0;
+
+  transform:
+    scale(0.75)
+    rotate(-10deg);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
+
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
+}
+
+
+/* X vermelho */
+
+.revisao-overlay.rejeitar {
+  left: 1rem;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.9
+    );
+
+  border:
+    3px
+    solid
+    #d3463e;
+
+  color:
+    #d3463e;
+
+  box-shadow:
+    0
+    6px
+    18px
+    rgba(
+      211,
+      70,
+      62,
+      0.2
+    );
+}
+
+
+/* Plantinha */
+
+.revisao-overlay.aprovar {
+  right: 1rem;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.9
+    );
+
+  border:
+    3px
+    solid
+    #287344;
+
+  color:
+    #287344;
+
+  box-shadow:
+    0
+    6px
+    18px
+    rgba(
+      40,
+      115,
+      68,
+      0.2
+    );
+}
+
+
+/* Quando o JS ativar */
+
+.revisao-overlay.ativo {
+  opacity: 1;
+
+  transform:
+    scale(1)
+    rotate(0deg);
+}
+
+
+/* =========================================
+   INFORMAÇÕES DO CARD
+   ========================================= */
+
+.revisao-card-info {
+  padding:
+    1rem
+    1.1rem
+    1.2rem;
+}
+
+.revisao-card-info h2 {
+  margin: 0;
+
+  font-size: 1.35rem;
+
+  color:
+    #1f3b2c;
+}
+
+.revisao-ia {
+  margin-top:
+    0.25rem;
+
+  font-size:
+    0.85rem;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.68
+    );
+}
+
+.revisao-ia strong {
+  color:
+    #1f3b2c;
+}
+
+
+/* =========================================
+   CONFIABILIDADE
+   ========================================= */
+
+.revisao-confianca {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  margin-top:
+    0.9rem;
+
+  margin-bottom:
+    0.35rem;
+
+  font-size:
+    0.8rem;
+
+  color:
+    #1f3b2c;
+}
+
+.revisao-confianca strong {
+  font-size:
+    0.9rem;
+}
+
+.revisao-confianca-barra {
+  width: 100%;
+
+  height: 9px;
+
+  overflow: hidden;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      31,
+      59,
+      44,
+      0.12
+    );
+}
+
+.revisao-confianca-barra span {
+  display: block;
+
+  width: 0;
+
+  height: 100%;
+
+  border-radius:
+    inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #4e9163,
+      #1f4a2d
+    );
+
+  transition:
+    width
+    0.5s
+    ease;
+}
+
+
+/* =========================================
+   BOTÕES APROVAR / REJEITAR
+   ========================================= */
+
+.revisao-acoes {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 2.2rem;
+
+  margin-top: 1.1rem;
+}
+
+.revisao-acao {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.35rem;
+
+  min-width: 90px;
+
+  font-size:
+    0.75rem;
+
+  font-weight: 800;
+
+  transition:
+    transform
+    0.15s
+    ease;
+}
+
+.revisao-acao:active {
+  transform:
+    scale(0.92);
+}
+
+.revisao-acao-icone {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    #fff;
+
+  font-size:
+    1.8rem;
+
+  box-shadow:
+    0
+    7px
+    20px
+    rgba(
+      31,
+      59,
+      44,
+      0.12
+    );
+}
+
+
+/* Botão rejeitar */
+
+.revisao-acao.rejeitar {
+  color:
+    #b53b35;
+}
+
+.revisao-acao.rejeitar
+.revisao-acao-icone {
+  border:
+    2px
+    solid
+    rgba(
+      181,
+      59,
+      53,
+      0.35
+    );
+}
+
+
+/* Botão aprovar */
+
+.revisao-acao.aprovar {
+  color:
+    #287344;
+}
+
+.revisao-acao.aprovar
+.revisao-acao-icone {
+  border:
+    2px
+    solid
+    rgba(
+      40,
+      115,
+      68,
+      0.35
+    );
+}
+
+
+/* =========================================
+   CORRIGIR ESPÉCIE
+   ========================================= */
+
+.revisao-corrigir {
+  display: block;
+
+  width: 100%;
+
+  margin-top:
+    1.1rem;
+
+  padding:
+    0.8rem
+    1rem;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.85
+    );
+
+  border:
+    1px
+    solid
+    rgba(
+      31,
+      59,
+      44,
+      0.18
+    );
+
+  color:
+    #1f3b2c;
+
+  font-size:
+    0.85rem;
+
+  font-weight:
+    800;
+
+  transition:
+    transform
+    0.15s
+    ease,
+    background
+    0.15s
+    ease;
+}
+
+.revisao-corrigir:hover {
+  background:
+    #fff;
+}
+
+.revisao-corrigir:active {
+  transform:
+    scale(0.98);
+}
+
+
+/* =========================================
+   DESFAZER
+   ========================================= */
+
+.revisao-desfazer {
+  display: block;
+
+  margin:
+    0.8rem
+    auto
+    0;
+
+  padding:
+    0.5rem
+    0.9rem;
+
+  border-radius:
+    999px;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.72
+    );
+
+  font-size:
+    0.8rem;
+
+  font-weight:
+    700;
+}
+
+.revisao-desfazer:hover {
+  background:
+    rgba(
+      31,
+      59,
+      44,
+      0.06
+    );
+}
+
+
+/* =========================================
+   CARREGANDO
+   ========================================= */
+
+.revisao-carregando {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 1rem;
+
+  min-height:
+    350px;
+
+  text-align: center;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.75
+    );
+}
+
+.revisao-carregando p {
+  font-size:
+    0.85rem;
+}
+
+
+/* =========================================
+   TUDO REVISADO
+   ========================================= */
+
+.revisao-vazio,
+.revisao-negado {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height:
+    380px;
+
+  text-align: center;
+
+  padding:
+    2rem
+    1.5rem;
+}
+
+.revisao-vazio-icone,
+.revisao-negado-icone {
+  font-size:
+    3rem;
+
+  margin-bottom:
+    0.8rem;
+}
+
+.revisao-vazio h2,
+.revisao-negado h2 {
+  font-size:
+    1.4rem;
+
+  color:
+    #1f3b2c;
+}
+
+.revisao-vazio p,
+.revisao-negado p {
+  max-width:
+    290px;
+
+  margin-top:
+    0.4rem;
+
+  font-size:
+    0.85rem;
+
+  line-height:
+    1.45;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.7
+    );
+}
+
+.revisao-negado
+.pill-btn {
+  margin-top:
+    1.2rem;
+}
+
+
+/* =========================================
+   MODAL DE CORREÇÃO
+   ========================================= */
+
+.revisao-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    center;
+}
+
+.revisao-modal-backdrop {
+  position:
+    absolute;
+
+  inset: 0;
+
+  background:
+    rgba(
+      20,
+      35,
+      27,
+      0.46
+    );
+
+  backdrop-filter:
+    blur(3px);
+
+  -webkit-backdrop-filter:
+    blur(3px);
+}
+
+.revisao-modal-card {
+  position:
+    relative;
+
+  z-index: 2;
+
+  width:
+    min(
+      100%,
+      30rem
+    );
+
+  padding:
+    1.4rem;
+
+  background:
+    #fbf5dc;
+
+  border-radius:
+    1.6rem
+    1.6rem
+    0
+    0;
+
+  box-shadow:
+    0
+    -10px
+    35px
+    rgba(
+      0,
+      0,
+      0,
+      0.15
+    );
+
+  animation:
+    revisao-modal-entrar
+    0.22s
+    ease;
+}
+
+@keyframes
+revisao-modal-entrar {
+
+  from {
+    transform:
+      translateY(
+        30px
+      );
+
+    opacity:
+      0;
+  }
+
+  to {
+    transform:
+      translateY(
+        0
+      );
+
+    opacity:
+      1;
+  }
+}
+
+.revisao-modal-card h2 {
+  margin:
+    0
+    0
+    0.45rem;
+
+  color:
+    #1f3b2c;
+
+  font-size:
+    1.3rem;
+}
+
+.revisao-modal-card p {
+  margin-bottom:
+    1rem;
+
+  font-size:
+    0.85rem;
+
+  line-height:
+    1.45;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.72
+    );
+}
+
+.revisao-modal-fechar {
+  position:
+    absolute;
+
+  top:
+    0.9rem;
+
+  right:
+    1rem;
+
+  width:
+    36px;
+
+  height:
+    36px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      31,
+      59,
+      44,
+      0.08
+    );
+
+  font-size:
+    1.35rem;
+}
+
+.revisao-modal-label {
+  display:
+    block;
+
+  margin-bottom:
+    0.4rem;
+
+  font-size:
+    0.8rem;
+
+  font-weight:
+    800;
+
+  color:
+    #1f3b2c;
+}
+
+.revisao-select {
+  width:
+    100%;
+
+  padding:
+    0.8rem
+    1rem;
+
+  margin-bottom:
+    1rem;
+
+  border:
+    1px
+    solid
+    rgba(
+      31,
+      59,
+      44,
+      0.25
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    #fff;
+
+  color:
+    #1f3b2c;
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.9rem;
+
+  outline:
+    none;
+}
+
+.revisao-select:focus {
+  border-color:
+    #1f3b2c;
+
+  box-shadow:
+    0
+    0
+    0
+    3px
+    rgba(
+      31,
+      59,
+      44,
+      0.1
+    );
+}
+
+.revisao-modal-card
+.pill-btn {
+  width:
+    100%;
+}
+
+
+/* =========================================
+   ANIMAÇÕES DOS CARDS
+   ========================================= */
+
+.revisao-card.saindo-direita {
+  animation:
+    revisao-sair-direita
+    0.35s
+    ease
+    forwards;
+}
+
+.revisao-card.saindo-esquerda {
+  animation:
+    revisao-sair-esquerda
+    0.35s
+    ease
+    forwards;
+}
+
+@keyframes
+revisao-sair-direita {
+
+  to {
+    transform:
+      translateX(
+        130%
+      )
+      rotate(
+        18deg
+      );
+
+    opacity:
+      0;
+  }
+}
+
+@keyframes
+revisao-sair-esquerda {
+
+  to {
+    transform:
+      translateX(
+        -130%
+      )
+      rotate(
+        -18deg
+      );
+
+    opacity:
+      0;
+  }
+}
+
+
+/* =========================================
+   DESKTOP
+   ========================================= */
+
+@media
+(min-width: 700px) {
+
+  .revisao-main {
+    max-width:
+      30rem;
+  }
+
+  .revisao-card-area {
+    min-height:
+      520px;
+  }
+
+  .revisao-imagem-wrapper {
+    aspect-ratio:
+      1 / 1;
+  }
+
+  .revisao-modal {
+    align-items:
+      center;
+  }
+
+  .revisao-modal-card {
+    border-radius:
+      1.5rem;
+  }
+}
+
+/* =========================================
+   ÁREA DA EQUIPE - CONFIGURAÇÕES
+   ========================================= */
+
+.area-equipe {
+  margin-top: 1.8rem;
+}
+
+.area-equipe h2 {
+  margin: 0 0 0.7rem;
+
+  font-family:
+    "Gill Sans",
+    "Gill Sans MT",
+    Calibri,
+    "Trebuchet MS",
+    sans-serif;
+
+  font-size: 1.05rem;
+
+  color: #1f3b2c;
+}
+
+.area-equipe-card {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding: 1rem 1.1rem;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.92
+    );
+
+  border:
+    1px solid
+    rgba(
+      31,
+      59,
+      44,
+      0.12
+    );
+
+  border-radius: 1rem;
+
+  box-shadow:
+    0
+    4px
+    14px
+    rgba(
+      31,
+      59,
+      44,
+      0.08
+    );
+
+  text-decoration: none;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.area-equipe-card:hover {
+  background: #fff;
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0
+    6px
+    18px
+    rgba(
+      31,
+      59,
+      44,
+      0.12
+    );
+}
+
+.area-equipe-card:active {
+  transform:
+    scale(0.985);
+}
+
+.area-equipe-conteudo {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.2rem;
+
+  min-width: 0;
+}
+
+.area-equipe-conteudo strong {
+  color: #1f3b2c;
+
+  font-size: 0.95rem;
+
+  font-weight: 800;
+}
+
+.area-equipe-conteudo span {
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.65
+    );
+
+  font-size: 0.78rem;
+}
+
+.area-equipe-seta {
+  flex-shrink: 0;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.55
+    );
+
+  font-size: 1.8rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+}

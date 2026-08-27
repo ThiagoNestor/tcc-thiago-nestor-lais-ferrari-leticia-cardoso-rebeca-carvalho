@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Revisão de Imagens — Growly</title>
+
+  <meta
+    name="description"
+    content="Área administrativa para revisão das imagens utilizadas no treinamento da IA do Growly."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <div class="screen revisao-screen">
+
+    <!-- Folhas decorativas do Growly -->
+    <img data-leaf="top-left" />
+    <img data-leaf="top-right" />
+
+
+    <!-- =========================================
+         CABEÇALHO
+         ========================================= -->
+
+    <header class="revisao-header">
+
+      <a
+        href="home.html"
+        class="back-btn"
+        aria-label="Voltar"
+      >
+        <img
+          src="assets/icon-voltar.png"
+          alt=""
+        />
+      </a>
+
+
+      <div class="revisao-header-texto">
+
+        <h1>
+          Revisão de imagens
+        </h1>
+
+        <p>
+          Ajude a preparar novas imagens para o treinamento da IA.
+        </p>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+         ========================================= -->
+
+    <main class="revisao-main">
+
+
+      <!-- CONTADOR -->
+
+      <div class="revisao-progresso">
+
+        <span id="contador-revisao">
+          0 de 0
+        </span>
+
+        <span
+          id="pendentes-revisao"
+          class="revisao-pendentes"
+        >
+          0 pendentes
+        </span>
+
+      </div>
+
+
+      <!-- =========================================
+           ÁREA DOS CARDS
+           ========================================= -->
+
+      <section
+        class="revisao-card-area"
+        id="revisao-card-area"
+      >
+
+
+        <!-- =====================================
+             CARD ATUAL
+             ===================================== -->
+
+        <article
+          class="revisao-card"
+          id="revisao-card"
+          hidden
+        >
+
+
+          <!-- INDICADOR DE REJEIÇÃO -->
+
+          <div
+            class="revisao-overlay rejeitar"
+            id="overlay-rejeitar"
+            aria-hidden="true"
+          >
+            ❌
+          </div>
+
+
+          <!-- INDICADOR DE APROVAÇÃO -->
+
+          <div
+            class="revisao-overlay aprovar"
+            id="overlay-aprovar"
+            aria-hidden="true"
+          >
+            🌱
+          </div>
+
+
+          <!-- FOTO -->
+
+          <div class="revisao-imagem-wrapper">
+
+            <img
+              id="revisao-imagem"
+              class="revisao-imagem"
+              src=""
+              alt="Imagem enviada para revisão"
+            />
+
+          </div>
+
+
+          <!-- INFORMAÇÕES -->
+
+          <div class="revisao-card-info">
+
+            <h2 id="revisao-especie">
+              Espécie
+            </h2>
+
+
+            <p class="revisao-ia">
+
+              IA identificou:
+
+              <strong id="revisao-rotulo">
+                —
+              </strong>
+
+            </p>
+
+
+            <div class="revisao-confianca">
+
+              <span>
+                Confiabilidade
+              </span>
+
+              <strong id="revisao-confianca">
+                0%
+              </strong>
+
+            </div>
+
+
+            <div class="revisao-confianca-barra">
+
+              <span
+                id="revisao-confianca-preenchimento"
+              ></span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- =====================================
+             ESTADO DE CARREGAMENTO
+             ===================================== -->
+
+        <div
+          class="revisao-carregando"
+          id="revisao-carregando"
+        >
+
+          <div class="spinner"></div>
+
+          <p>
+            Carregando imagens pendentes...
+          </p>
+
+        </div>
+
+
+        <!-- =====================================
+             SEM IMAGENS PENDENTES
+             ===================================== -->
+
+        <div
+          class="revisao-vazio"
+          id="revisao-vazio"
+          hidden
+        >
+
+          <div class="revisao-vazio-icone">
+            🌱
+          </div>
+
+          <h2>
+            Tudo revisado!
+          </h2>
+
+          <p>
+            Não existem novas imagens pendentes no momento.
+          </p>
+
+        </div>
+
+
+        <!-- =====================================
+             ACESSO NEGADO
+             ===================================== -->
+
+        <div
+          class="revisao-negado"
+          id="revisao-negado"
+          hidden
+        >
+
+          <div class="revisao-negado-icone">
+            🔒
+          </div>
+
+          <h2>
+            Acesso restrito
+          </h2>
+
+          <p>
+            Esta área é exclusiva para a equipe administrativa do Growly.
+          </p>
+
+          <a
+            href="home.html"
+            class="pill-btn primary"
+          >
+            Voltar para o Growly
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================================
+           AÇÕES PRINCIPAIS
+           ========================================= -->
+
+      <section
+        class="revisao-acoes"
+        id="revisao-acoes"
+        hidden
+      >
+
+
+        <!-- REJEITAR -->
+
+        <button
+          type="button"
+          id="btn-rejeitar"
+          class="revisao-acao rejeitar"
+          aria-label="Rejeitar imagem"
+        >
+
+          <span class="revisao-acao-icone">
+            ❌
+          </span>
+
+          <span>
+            Rejeitar
+          </span>
+
+        </button>
+
+
+        <!-- APROVAR -->
+
+        <button
+          type="button"
+          id="btn-aprovar"
+          class="revisao-acao aprovar"
+          aria-label="Aprovar imagem"
+        >
+
+          <span class="revisao-acao-icone">
+            🌱
+          </span>
+
+          <span>
+            Aprovar
+          </span>
+
+        </button>
+
+      </section>
+
+
+      <!-- =========================================
+           CORRIGIR ESPÉCIE
+           ========================================= -->
+
+      <button
+        type="button"
+        id="btn-corrigir-especie"
+        class="revisao-corrigir"
+        hidden
+      >
+        ✏️ Corrigir espécie
+      </button>
+
+
+      <!-- =========================================
+           DESFAZER
+           ========================================= -->
+
+      <button
+        type="button"
+        id="btn-desfazer-revisao"
+        class="revisao-desfazer"
+        hidden
+      >
+        ↶ Desfazer última ação
+      </button>
+
+
+    </main>
+
+
+    <!-- =========================================
+         MODAL DE CORREÇÃO DA ESPÉCIE
+         ========================================= -->
+
+    <div
+      class="revisao-modal"
+      id="modal-corrigir-especie"
+      hidden
+    >
+
+      <div class="revisao-modal-backdrop"></div>
+
+
+      <div class="revisao-modal-card">
+
+        <button
+          type="button"
+          class="revisao-modal-fechar"
+          id="btn-fechar-correcao"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+
+
+        <h2>
+          Corrigir espécie
+        </h2>
+
+
+        <p>
+          Se a imagem estiver boa, mas a IA tiver identificado a planta incorretamente, escolha a espécie correta.
+        </p>
+
+
+        <label
+          for="select-especie-correta"
+          class="revisao-modal-label"
+        >
+          Espécie correta
+        </label>
+
+
+        <select
+          id="select-especie-correta"
+          class="revisao-select"
+        >
+
+          <option value="">
+            Selecione uma espécie
+          </option>
+
+        </select>
+
+
+        <button
+          type="button"
+          id="btn-confirmar-correcao"
+          class="pill-btn primary"
+        >
+          Confirmar e aprovar
+        </button>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =========================================
+       SUPABASE + GROWLY
+       ========================================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+  <script src="js/app.js"></script>
+
+  <script src="js/revisao.js"></script>
+
+</body>
+</html>
