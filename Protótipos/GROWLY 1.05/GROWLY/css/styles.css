@@ -3077,3 +3077,233 @@ revisao-sair-esquerda {
 .revisao-card.saindo-esquerda {
   will-change: transform, opacity;
 }
+
+
+/* =========================================
+   REVISÃO - LAYOUT COMPACTO NO CELULAR
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  /* Tela */
+  .revisao-screen {
+    padding-bottom: 1rem;
+  }
+
+
+  /* Cabeçalho menor */
+  .revisao-header {
+    gap: 0.7rem;
+
+    padding:
+      1.15rem
+      1rem
+      0.55rem;
+  }
+
+  .revisao-header h1 {
+    font-size: 1.35rem;
+    line-height: 1.1;
+  }
+
+  .revisao-header p {
+    margin-top: 0.15rem;
+
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+
+
+  /* Botão voltar um pouco menor */
+  .revisao-header .back-btn {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .revisao-header .back-btn img {
+    width: 21px !important;
+    height: 21px !important;
+  }
+
+
+  /* Conteúdo principal */
+  .revisao-main {
+    max-width: 100%;
+
+    padding:
+      0
+      0.85rem
+      1.25rem;
+  }
+
+
+  /* Contador */
+  .revisao-progresso {
+    margin:
+      0.2rem
+      0
+      0.55rem;
+
+    padding:
+      0
+      0.1rem;
+
+    font-size: 0.75rem;
+  }
+
+  .revisao-pendentes {
+    padding:
+      0.25rem
+      0.55rem;
+  }
+
+
+  /* Não força uma altura gigante */
+  .revisao-card-area {
+    min-height: 0;
+  }
+
+
+  /* Card */
+  .revisao-card {
+    width: 100%;
+
+    border-radius: 1.25rem;
+  }
+
+
+  /* =====================================
+     FOTO
+     ===================================== */
+
+  .revisao-imagem-wrapper {
+    aspect-ratio: auto;
+
+    height: clamp(
+      260px,
+      42dvh,
+      370px
+    );
+  }
+
+  .revisao-imagem {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+  }
+
+
+  /* =====================================
+     INFORMAÇÕES
+     ===================================== */
+
+  .revisao-card-info {
+    padding:
+      0.75rem
+      0.95rem
+      0.85rem;
+  }
+
+  .revisao-card-info h2 {
+    font-size: 1.2rem;
+    line-height: 1.15;
+  }
+
+  .revisao-ia {
+    margin-top: 0.15rem;
+
+    font-size: 0.78rem;
+  }
+
+
+  /* Confiabilidade */
+  .revisao-confianca {
+    margin-top: 0.55rem;
+    margin-bottom: 0.25rem;
+
+    font-size: 0.75rem;
+  }
+
+  .revisao-confianca strong {
+    font-size: 0.8rem;
+  }
+
+  .revisao-confianca-barra {
+    height: 7px;
+  }
+
+
+  /* =====================================
+     BOTÕES
+     ===================================== */
+
+  .revisao-acoes {
+    margin-top: 0.75rem;
+
+    gap: 2.6rem;
+  }
+
+  .revisao-acao {
+    min-width: 72px;
+
+    gap: 0.2rem;
+
+    font-size: 0.7rem;
+  }
+
+  .revisao-acao-icone {
+    width: 50px;
+    height: 50px;
+
+    font-size: 1.5rem;
+  }
+
+
+  /* Corrigir espécie */
+  .revisao-corrigir {
+    margin-top: 0.7rem;
+
+    padding:
+      0.65rem
+      0.9rem;
+
+    font-size: 0.78rem;
+  }
+
+
+  /* Desfazer */
+  .revisao-desfazer {
+    margin-top: 0.45rem;
+
+    padding:
+      0.4rem
+      0.8rem;
+
+    font-size: 0.72rem;
+  }
+
+
+  /* =====================================
+     EMOJIS DO SWIPE
+     ===================================== */
+
+  .revisao-overlay {
+    top: 0.8rem;
+
+    width: 58px;
+    height: 58px;
+
+    font-size: 2rem;
+  }
+
+  .revisao-overlay.rejeitar {
+    left: 0.7rem;
+  }
+
+  .revisao-overlay.aprovar {
+    right: 0.7rem;
+  }
+
+}
