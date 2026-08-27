@@ -1688,3 +1688,46 @@ form.stack {
     translateY(-50%)
     scale(0.92);
 }
+
+/* =========================================
+   AJUSTE DA BARRA DE TEXTO DA EDEN
+   ========================================= */
+
+/* Remove o espaço que a .screen normal reserva
+   para uma navegação fixa */
+.eden-screen {
+  padding-bottom: 0 !important;
+}
+
+
+/* Barra de digitação mais baixa e próxima do menu */
+.eden-form {
+  margin: 0 1rem 0.35rem !important;
+  padding: 0.3rem 0.4rem !important;
+
+  min-height: 0 !important;
+
+  border-radius: 999px;
+}
+
+
+/* Campo de texto mais compacto */
+.eden-form input {
+  padding: 0.35rem 0.7rem !important;
+  min-height: 0 !important;
+}
+
+
+/* Botão de enviar um pouco menor */
+.eden-form > button[type="submit"] {
+  width: 2.15rem !important;
+  height: 2.15rem !important;
+
+  flex-shrink: 0;
+}
+
+
+/* Evita espaço extra acima do menu da Eden */
+.eden-screen .bottom-nav {
+  margin-top: 0 !important;
+}
