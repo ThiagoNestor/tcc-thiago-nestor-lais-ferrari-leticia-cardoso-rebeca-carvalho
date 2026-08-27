@@ -8,17 +8,15 @@
 // CONFIGURAÇÕES
 // ==========================================
 
-const BUCKET_TREINAMENTO =
-  "imagens-treinamento";
+const BUCKET_TREINAMENTO = "imagens-treinamento";
 
-const LIMITE_SWIPE =
-  110;
+const LIMITE_SWIPE = 110;
 
-const TEMPO_URL_ASSINADA =
-  60 * 60;
+const TEMPO_URL_ASSINADA = 60 * 60;
 
-const QUANTIDADE_PRELOAD =
-  3;
+const QUANTIDADE_PRELOAD = 3;
+
+const TEMPO_ANIMACAO = 230;
 
 
 // ==========================================
@@ -46,11 +44,9 @@ let historicoRevisao = [];
 // CACHE / PRELOAD
 // ==========================================
 
-const cacheImagens =
-  new Map();
+const cacheImagens = new Map();
 
-const preloadEmAndamento =
-  new Map();
+const preloadEmAndamento = new Map();
 
 
 // ==========================================
@@ -58,34 +54,19 @@ const preloadEmAndamento =
 // ==========================================
 
 const card =
-  document.getElementById(
-    "revisao-card"
-  );
-
-const cardArea =
-  document.getElementById(
-    "revisao-card-area"
-  );
+  document.getElementById("revisao-card");
 
 const imagem =
-  document.getElementById(
-    "revisao-imagem"
-  );
+  document.getElementById("revisao-imagem");
 
 const especie =
-  document.getElementById(
-    "revisao-especie"
-  );
+  document.getElementById("revisao-especie");
 
 const rotulo =
-  document.getElementById(
-    "revisao-rotulo"
-  );
+  document.getElementById("revisao-rotulo");
 
 const confianca =
-  document.getElementById(
-    "revisao-confianca"
-  );
+  document.getElementById("revisao-confianca");
 
 const barraConfianca =
   document.getElementById(
@@ -93,44 +74,28 @@ const barraConfianca =
   );
 
 const contador =
-  document.getElementById(
-    "contador-revisao"
-  );
+  document.getElementById("contador-revisao");
 
 const pendentes =
-  document.getElementById(
-    "pendentes-revisao"
-  );
+  document.getElementById("pendentes-revisao");
 
 const carregando =
-  document.getElementById(
-    "revisao-carregando"
-  );
+  document.getElementById("revisao-carregando");
 
 const vazio =
-  document.getElementById(
-    "revisao-vazio"
-  );
+  document.getElementById("revisao-vazio");
 
 const negado =
-  document.getElementById(
-    "revisao-negado"
-  );
+  document.getElementById("revisao-negado");
 
 const acoes =
-  document.getElementById(
-    "revisao-acoes"
-  );
+  document.getElementById("revisao-acoes");
 
 const btnAprovar =
-  document.getElementById(
-    "btn-aprovar"
-  );
+  document.getElementById("btn-aprovar");
 
 const btnRejeitar =
-  document.getElementById(
-    "btn-rejeitar"
-  );
+  document.getElementById("btn-rejeitar");
 
 const btnCorrigir =
   document.getElementById(
@@ -143,14 +108,10 @@ const btnDesfazer =
   );
 
 const overlayAprovar =
-  document.getElementById(
-    "overlay-aprovar"
-  );
+  document.getElementById("overlay-aprovar");
 
 const overlayRejeitar =
-  document.getElementById(
-    "overlay-rejeitar"
-  );
+  document.getElementById("overlay-rejeitar");
 
 
 // ==========================================
@@ -187,53 +148,68 @@ const modalBackdrop =
 // SWIPE
 // ==========================================
 
-let arrastando =
-  false;
+let arrastando = false;
 
-let pointerIdAtual =
-  null;
+let pointerIdAtual = null;
 
-let inicioX =
-  0;
+let inicioX = 0;
 
-let inicioY =
-  0;
+let inicioY = 0;
 
-let deslocamentoX =
-  0;
+let deslocamentoX = 0;
 
-let deslocamentoY =
-  0;
+let deslocamentoY = 0;
 
 
 // ==========================================
 // AUXILIARES
 // ==========================================
 
-function encontrarPancRevisao(
-  pancId
-) {
+function esperar(ms) {
+
+  return new Promise(
+    (resolve) =>
+      setTimeout(resolve, ms)
+  );
+}
+
+
+function esperarPintura() {
+
+  return new Promise(
+    (resolve) => {
+
+      requestAnimationFrame(
+        () => {
+
+          requestAnimationFrame(
+            resolve
+          );
+
+        }
+      );
+
+    }
+  );
+}
+
+
+function encontrarPancRevisao(pancId) {
 
   return (
     pancsRevisao.find(
       (panc) =>
         String(panc.id) ===
         String(pancId)
-    ) ||
-    null
+    ) || null
   );
 }
 
 
-function nomePanc(
-  pancId
-) {
+function nomePanc(pancId) {
 
   const panc =
-    encontrarPancRevisao(
-      pancId
-    );
-
+    encontrarPancRevisao(pancId);
 
   return panc
     ? panc.nome
@@ -247,23 +223,17 @@ function nomePanc(
 
 function esconderTudo() {
 
-  card.hidden =
-    true;
+  card.hidden = true;
 
-  carregando.hidden =
-    true;
+  carregando.hidden = true;
 
-  vazio.hidden =
-    true;
+  vazio.hidden = true;
 
-  negado.hidden =
-    true;
+  negado.hidden = true;
 
-  acoes.hidden =
-    true;
+  acoes.hidden = true;
 
-  btnCorrigir.hidden =
-    true;
+  btnCorrigir.hidden = true;
 }
 
 
@@ -271,8 +241,7 @@ function mostrarCarregando() {
 
   esconderTudo();
 
-  carregando.hidden =
-    false;
+  carregando.hidden = false;
 }
 
 
@@ -280,8 +249,7 @@ function mostrarNegado() {
 
   esconderTudo();
 
-  negado.hidden =
-    false;
+  negado.hidden = false;
 }
 
 
@@ -289,8 +257,7 @@ function mostrarVazio() {
 
   esconderTudo();
 
-  vazio.hidden =
-    false;
+  vazio.hidden = false;
 
   atualizarContadores();
 }
@@ -315,9 +282,7 @@ function atualizarContadores() {
     }`;
 
 
-  if (
-    totalInicial === 0
-  ) {
+  if (totalInicial === 0) {
 
     contador.textContent =
       "0 de 0";
@@ -341,12 +306,10 @@ function atualizarContadores() {
 
 
 // ==========================================
-// VERIFICAR ADMIN
+// ADMIN
 // ==========================================
 
-async function verificarAdmin(
-  userId
-) {
+async function verificarAdmin(userId) {
 
   const {
     data,
@@ -378,7 +341,7 @@ async function verificarAdmin(
 
 
 // ==========================================
-// CARREGAR PANCS
+// PANCS
 // ==========================================
 
 async function carregarPancsRevisao() {
@@ -401,7 +364,6 @@ async function carregarPancsRevisao() {
 
 
   if (error) {
-
     throw error;
   }
 
@@ -450,7 +412,7 @@ function preencherSelectPancs() {
 
 
 // ==========================================
-// CARREGAR IMAGENS PENDENTES
+// IMAGENS PENDENTES
 // ==========================================
 
 async function carregarPendentes() {
@@ -492,7 +454,6 @@ async function carregarPendentes() {
 
 
   if (error) {
-
     throw error;
   }
 
@@ -505,8 +466,7 @@ async function carregarPendentes() {
     imagensPendentes.length;
 
 
-  totalRevisado =
-    0;
+  totalRevisado = 0;
 
 
   atualizarContadores();
@@ -514,17 +474,45 @@ async function carregarPendentes() {
 
 
 // ==========================================
-// URL TEMPORÁRIA DA FOTO
+// PRELOAD DA IMAGEM
 // ==========================================
 
-async function obterUrlImagem(
-  caminho
-) {
+function preloadImagemNavegador(url) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const img = new Image();
+
+
+      img.onload =
+        () => resolve();
+
+
+      img.onerror =
+        () =>
+          reject(
+            new Error(
+              "Falha no preload da imagem."
+            )
+          );
+
+
+      img.src = url;
+
+    }
+  );
+}
+
+
+// ==========================================
+// URL TEMPORÁRIA
+// ==========================================
+
+async function obterUrlImagem(caminho) {
 
   if (
-    cacheImagens.has(
-      caminho
-    )
+    cacheImagens.has(caminho)
   ) {
 
     return cacheImagens.get(
@@ -534,9 +522,7 @@ async function obterUrlImagem(
 
 
   if (
-    preloadEmAndamento.has(
-      caminho
-    )
+    preloadEmAndamento.has(caminho)
   ) {
 
     return preloadEmAndamento.get(
@@ -563,12 +549,6 @@ async function obterUrlImagem(
 
 
       if (error) {
-
-        console.error(
-          "Erro ao gerar URL da imagem:",
-          error
-        );
-
         throw error;
       }
 
@@ -594,6 +574,7 @@ async function obterUrlImagem(
 
 
       return url;
+
     })();
 
 
@@ -619,42 +600,7 @@ async function obterUrlImagem(
 
 
 // ==========================================
-// PRELOAD REAL DOS PIXELS
-// ==========================================
-
-function preloadImagemNavegador(
-  url
-) {
-
-  return new Promise(
-    (resolve, reject) => {
-
-      const img =
-        new Image();
-
-
-      img.onload =
-        () => resolve();
-
-
-      img.onerror =
-        () =>
-          reject(
-            new Error(
-              "Falha no preload da imagem."
-            )
-          );
-
-
-      img.src =
-        url;
-    }
-  );
-}
-
-
-// ==========================================
-// PREPARAR PRÓXIMAS 3
+// PRÓXIMAS 3 IMAGENS
 // ==========================================
 
 function prepararProximasImagens() {
@@ -674,192 +620,38 @@ function prepararProximasImagens() {
 
 
       if (
-        cacheImagens.has(
-          caminho
-        ) ||
-        preloadEmAndamento.has(
-          caminho
-        )
+        cacheImagens.has(caminho) ||
+        preloadEmAndamento.has(caminho)
       ) {
 
         return;
       }
 
 
-      obterUrlImagem(
-        caminho
-      )
-        .then(() => {
+      obterUrlImagem(caminho)
+        .then(
+          () => {
 
-          console.log(
-            "Imagem pré-carregada:",
-            item.id
-          );
+            console.log(
+              "Imagem pré-carregada:",
+              item.id
+            );
 
-        })
+          }
+        )
         .catch(
           (error) => {
 
             console.warn(
-              "Não foi possível pré-carregar a imagem:",
+              "Falha no preload:",
               item.id,
               error
             );
+
           }
         );
+
     }
-  );
-}
-
-
-// ==========================================
-// PRÓXIMA IMAGEM
-// ==========================================
-
-async function mostrarProximaImagem() {
-
-  resetarCard();
-
-
-  if (
-    imagensPendentes.length ===
-    0
-  ) {
-
-    imagemAtual =
-      null;
-
-    mostrarVazio();
-
-    return;
-  }
-
-
-  imagemAtual =
-    imagensPendentes.shift();
-
-
-  atualizarContadores();
-
-
-  try {
-
-    const url =
-      await obterUrlImagem(
-        imagemAtual
-          .caminho_storage
-      );
-
-
-    imagem.src =
-      url;
-
-
-    especie.textContent =
-      nomePanc(
-        imagemAtual.panc_id
-      );
-
-
-    rotulo.textContent =
-      imagemAtual.rotulo_ia ||
-      "Sem rótulo";
-
-
-    const valorConfianca =
-      Number(
-        imagemAtual
-          .confiabilidade
-      ) || 0;
-
-
-    confianca.textContent =
-      `${valorConfianca.toFixed(1)}%`;
-
-
-    barraConfianca.style.width =
-      `${Math.min(
-        Math.max(
-          valorConfianca,
-          0
-        ),
-        100
-      )}%`;
-
-
-    carregando.hidden =
-      true;
-
-    vazio.hidden =
-      true;
-
-    negado.hidden =
-      true;
-
-    card.hidden =
-      false;
-
-    acoes.hidden =
-      false;
-
-    btnCorrigir.hidden =
-      false;
-
-
-    prepararProximasImagens();
-
-
-  } catch (error) {
-
-    console.error(
-      "Erro ao abrir imagem:",
-      error
-    );
-
-
-    imagensPendentes.push(
-      imagemAtual
-    );
-
-
-    imagemAtual =
-      null;
-
-
-    alert(
-      "Não foi possível abrir uma das imagens."
-    );
-
-
-    mostrarProximaImagem();
-  }
-}
-
-
-// ==========================================
-// LIMPAR CACHE
-// ==========================================
-
-function removerImagemDoCache(
-  item
-) {
-
-  if (
-    !item ||
-    !item.caminho_storage
-  ) {
-
-    return;
-  }
-
-
-  cacheImagens.delete(
-    item.caminho_storage
-  );
-
-
-  preloadEmAndamento.delete(
-    item.caminho_storage
   );
 }
 
@@ -882,48 +674,174 @@ function resetarCard() {
   );
 
 
-  card.style.transition =
-    "";
+  card.style.transition = "";
+
+  card.style.transform = "";
+
+  card.style.opacity = "";
 
 
-  card.style.transform =
-    "";
+  overlayAprovar
+    .classList
+    .remove("ativo");
+
+  overlayRejeitar
+    .classList
+    .remove("ativo");
 
 
-  card.style.opacity =
-    "";
+  overlayAprovar.style.opacity = "";
 
+  overlayRejeitar.style.opacity = "";
 
-  overlayAprovar.classList.remove(
-    "ativo"
-  );
+  overlayAprovar.style.transform = "";
 
-  overlayRejeitar.classList.remove(
-    "ativo"
-  );
-
-
-  overlayAprovar.style.opacity =
-    "";
-
-  overlayRejeitar.style.opacity =
-    "";
-
-  overlayAprovar.style.transform =
-    "";
-
-  overlayRejeitar.style.transform =
-    "";
+  overlayRejeitar.style.transform = "";
 }
 
 
 // ==========================================
-// ORGANIZAÇÃO DO STORAGE
+// MOSTRAR PRÓXIMA
 // ==========================================
 
-function nomeArquivoStorage(
-  caminho
-) {
+async function mostrarProximaImagem() {
+
+  resetarCard();
+
+
+  if (
+    imagensPendentes.length === 0
+  ) {
+
+    imagemAtual = null;
+
+    mostrarVazio();
+
+    return;
+  }
+
+
+  imagemAtual =
+    imagensPendentes.shift();
+
+
+  atualizarContadores();
+
+
+  try {
+
+    const url =
+      await obterUrlImagem(
+        imagemAtual.caminho_storage
+      );
+
+
+    imagem.src = url;
+
+
+    especie.textContent =
+      nomePanc(
+        imagemAtual.panc_id
+      );
+
+
+    rotulo.textContent =
+      imagemAtual.rotulo_ia ||
+      "Sem rótulo";
+
+
+    const valorConfianca =
+      Number(
+        imagemAtual.confiabilidade
+      ) || 0;
+
+
+    confianca.textContent =
+      `${valorConfianca.toFixed(1)}%`;
+
+
+    barraConfianca.style.width =
+      `${Math.min(
+        Math.max(
+          valorConfianca,
+          0
+        ),
+        100
+      )}%`;
+
+
+    carregando.hidden = true;
+
+    vazio.hidden = true;
+
+    negado.hidden = true;
+
+    card.hidden = false;
+
+    acoes.hidden = false;
+
+    btnCorrigir.hidden = false;
+
+
+    prepararProximasImagens();
+
+
+  } catch (error) {
+
+    console.error(
+      "Erro ao abrir imagem:",
+      error
+    );
+
+
+    imagensPendentes.push(
+      imagemAtual
+    );
+
+
+    imagemAtual = null;
+
+
+    alert(
+      "Não foi possível abrir uma das imagens."
+    );
+
+
+    mostrarProximaImagem();
+  }
+}
+
+
+// ==========================================
+// CACHE
+// ==========================================
+
+function removerImagemDoCache(item) {
+
+  if (
+    !item ||
+    !item.caminho_storage
+  ) {
+    return;
+  }
+
+
+  cacheImagens.delete(
+    item.caminho_storage
+  );
+
+
+  preloadEmAndamento.delete(
+    item.caminho_storage
+  );
+}
+
+
+// ==========================================
+// STORAGE - NOMES E SLUGS
+// ==========================================
+
+function nomeArquivoStorage(caminho) {
 
   return caminho
     .split("/")
@@ -931,9 +849,7 @@ function nomeArquivoStorage(
 }
 
 
-function slugSeguro(
-  valor
-) {
+function slugSeguro(valor) {
 
   return String(
     valor || "sem-especie"
@@ -966,8 +882,7 @@ function gerarNomeUnico(
 
 
   const ponto =
-    nomeOriginal
-      .lastIndexOf(".");
+    nomeOriginal.lastIndexOf(".");
 
 
   const extensao =
@@ -979,8 +894,7 @@ function gerarNomeUnico(
 
 
   const identificador =
-    typeof crypto !==
-      "undefined" &&
+    typeof crypto !== "undefined" &&
     typeof crypto.randomUUID ===
       "function"
 
@@ -991,13 +905,13 @@ function gerarNomeUnico(
           .slice(2)}`;
 
 
-  return `${identificador}${extensao}`;
+  return (
+    `${identificador}${extensao}`
+  );
 }
 
 
-function obterSlugPanc(
-  pancId
-) {
+function obterSlugPanc(pancId) {
 
   const panc =
     encontrarPancRevisao(
@@ -1019,50 +933,7 @@ function obterSlugPanc(
 
 
 // ==========================================
-// MOVER ARQUIVO
-// ==========================================
-
-async function moverArquivoStorage(
-  caminhoAtual,
-  caminhoNovo
-) {
-
-  if (
-    caminhoAtual ===
-    caminhoNovo
-  ) {
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await db.storage
-      .from(
-        BUCKET_TREINAMENTO
-      )
-      .move(
-        caminhoAtual,
-        caminhoNovo
-      );
-
-
-  if (error) {
-
-    console.error(
-      "Erro ao mover imagem no Storage:",
-      error
-    );
-
-    throw error;
-  }
-}
-
-
-// ==========================================
-// CAMINHOS FINAIS
+// CAMINHOS
 // ==========================================
 
 function caminhoImagemAprovada(
@@ -1088,9 +959,7 @@ function caminhoImagemAprovada(
 }
 
 
-function caminhoImagemRejeitada(
-  item
-) {
+function caminhoImagemRejeitada(item) {
 
   const nome =
     gerarNomeUnico(
@@ -1105,7 +974,48 @@ function caminhoImagemRejeitada(
 
 
 // ==========================================
-// SALVAR STATUS
+// MOVER STORAGE
+// ==========================================
+
+async function moverArquivoStorage(
+  caminhoAtual,
+  caminhoNovo
+) {
+
+  if (
+    caminhoAtual === caminhoNovo
+  ) {
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await db.storage
+      .from(
+        BUCKET_TREINAMENTO
+      )
+      .move(
+        caminhoAtual,
+        caminhoNovo
+      );
+
+
+  if (error) {
+
+    console.error(
+      "Erro ao mover arquivo:",
+      error
+    );
+
+    throw error;
+  }
+}
+
+
+// ==========================================
+// ATUALIZAR BANCO
 // ==========================================
 
 async function atualizarImagem(
@@ -1130,14 +1040,13 @@ async function atualizarImagem(
 
 
   if (error) {
-
     throw error;
   }
 }
 
 
 // ==========================================
-// REVISAR + ORGANIZAR STORAGE
+// STORAGE + BANCO
 // ==========================================
 
 async function salvarRevisaoComStorage(
@@ -1150,29 +1059,20 @@ async function salvarRevisaoComStorage(
     item.caminho_storage;
 
 
-  let caminhoNovo;
+  const caminhoNovo =
+    novoStatus === "aprovada"
+
+      ? caminhoImagemAprovada(
+          item,
+          pancIdFinal
+        )
+
+      : caminhoImagemRejeitada(
+          item
+        );
 
 
-  if (
-    novoStatus ===
-    "aprovada"
-  ) {
-
-    caminhoNovo =
-      caminhoImagemAprovada(
-        item,
-        pancIdFinal
-      );
-
-  } else {
-
-    caminhoNovo =
-      caminhoImagemRejeitada(
-        item
-      );
-  }
-
-
+  // Primeiro move fisicamente.
   await moverArquivoStorage(
     caminhoOriginal,
     caminhoNovo
@@ -1181,6 +1081,7 @@ async function salvarRevisaoComStorage(
 
   try {
 
+    // Depois atualiza o registro.
     await atualizarImagem(
       item.id,
       {
@@ -1201,7 +1102,7 @@ async function salvarRevisaoComStorage(
   } catch (error) {
 
     console.error(
-      "Banco falhou após mover a imagem. Tentando reverter...",
+      "Banco falhou após mover. Revertendo Storage...",
       error
     );
 
@@ -1213,12 +1114,10 @@ async function salvarRevisaoComStorage(
         caminhoOriginal
       );
 
-    } catch (
-      erroRollback
-    ) {
+    } catch (erroRollback) {
 
       console.error(
-        "ERRO CRÍTICO AO RESTAURAR STORAGE:",
+        "ERRO CRÍTICO NO ROLLBACK:",
         erroRollback
       );
     }
@@ -1229,11 +1128,73 @@ async function salvarRevisaoComStorage(
 
 
   return {
-
     caminhoOriginal,
     caminhoNovo
-
   };
+}
+
+
+// ==========================================
+// ANIMAÇÃO DE DECISÃO
+// ==========================================
+
+async function animarDecisao(
+  novoStatus
+) {
+
+  const aprovando =
+    novoStatus === "aprovada";
+
+
+  card.style.transition =
+    `transform ${TEMPO_ANIMACAO}ms cubic-bezier(.22,.8,.3,1), opacity ${TEMPO_ANIMACAO}ms ease`;
+
+
+  if (aprovando) {
+
+    overlayAprovar
+      .classList
+      .add("ativo");
+
+    overlayRejeitar
+      .classList
+      .remove("ativo");
+
+
+    overlayAprovar.style.opacity =
+      "1";
+
+
+    card.style.transform =
+      "translate3d(130%, 0, 0) rotate(18deg)";
+
+
+  } else {
+
+    overlayRejeitar
+      .classList
+      .add("ativo");
+
+    overlayAprovar
+      .classList
+      .remove("ativo");
+
+
+    overlayRejeitar.style.opacity =
+      "1";
+
+
+    card.style.transform =
+      "translate3d(-130%, 0, 0) rotate(-18deg)";
+  }
+
+
+  /*
+    Dá oportunidade para o navegador
+    desenhar emoji/card ANTES da rede.
+  */
+
+  await esperarPintura();
 }
 
 
@@ -1249,13 +1210,11 @@ async function revisarImagem(
     !imagemAtual ||
     processandoRevisao
   ) {
-
     return;
   }
 
 
-  processandoRevisao =
-    true;
+  processandoRevisao = true;
 
 
   const item =
@@ -1264,12 +1223,36 @@ async function revisarImagem(
 
   try {
 
-    const movimentacao =
-      await salvarRevisaoComStorage(
-        item,
-        novoStatus,
-        item.panc_id
-      );
+    /*
+      Começa visualmente na hora.
+    */
+
+    await animarDecisao(
+      novoStatus
+    );
+
+
+    /*
+      Storage/banco acontecem enquanto
+      a animação termina.
+    */
+
+    const [
+      movimentacao
+    ] =
+      await Promise.all([
+
+        salvarRevisaoComStorage(
+          item,
+          novoStatus,
+          item.panc_id
+        ),
+
+        esperar(
+          TEMPO_ANIMACAO
+        )
+
+      ]);
 
 
     historicoRevisao.push({
@@ -1298,34 +1281,10 @@ async function revisarImagem(
     });
 
 
-    btnDesfazer.hidden =
-      false;
+    btnDesfazer.hidden = false;
 
 
     totalRevisado++;
-
-
-    const classeSaida =
-      novoStatus ===
-      "aprovada"
-
-        ? "saindo-direita"
-
-        : "saindo-esquerda";
-
-
-    card.classList.add(
-      classeSaida
-    );
-
-
-    await new Promise(
-      (resolve) =>
-        setTimeout(
-          resolve,
-          330
-        )
-    );
 
 
     removerImagemDoCache(
@@ -1333,8 +1292,7 @@ async function revisarImagem(
     );
 
 
-    imagemAtual =
-      null;
+    imagemAtual = null;
 
 
     await mostrarProximaImagem();
@@ -1348,18 +1306,45 @@ async function revisarImagem(
     );
 
 
+    /*
+      Se o servidor falhar,
+      devolve visualmente o card.
+    */
+
+    card.style.transition =
+      "transform 180ms ease";
+
+
+    card.style.transform =
+      "translate3d(0,0,0) rotate(0deg)";
+
+
+    overlayAprovar
+      .classList
+      .remove("ativo");
+
+
+    overlayRejeitar
+      .classList
+      .remove("ativo");
+
+
+    overlayAprovar.style.opacity =
+      "";
+
+
+    overlayRejeitar.style.opacity =
+      "";
+
+
     alert(
-      "Não foi possível organizar e salvar esta imagem. Ela continuará pendente."
+      "Não foi possível salvar esta revisão. A imagem continuará pendente."
     );
-
-
-    resetarCard();
 
 
   } finally {
 
-    processandoRevisao =
-      false;
+    processandoRevisao = false;
   }
 }
 
@@ -1410,15 +1395,13 @@ function abrirModalCorrecao() {
     );
 
 
-  modal.hidden =
-    false;
+  modal.hidden = false;
 }
 
 
 function fecharModalCorrecao() {
 
-  modal.hidden =
-    true;
+  modal.hidden = true;
 }
 
 
@@ -1455,7 +1438,6 @@ btnConfirmarCorrecao
         !imagemAtual ||
         processandoRevisao
       ) {
-
         return;
       }
 
@@ -1476,8 +1458,7 @@ btnConfirmarCorrecao
       }
 
 
-      processandoRevisao =
-        true;
+      processandoRevisao = true;
 
 
       const item =
@@ -1486,12 +1467,35 @@ btnConfirmarCorrecao
 
       try {
 
-        const movimentacao =
-          await salvarRevisaoComStorage(
-            item,
-            "aprovada",
-            pancIdCorreta
-          );
+        fecharModalCorrecao();
+
+
+        /*
+          Correção sempre resulta
+          em uma imagem aprovada.
+        */
+
+        await animarDecisao(
+          "aprovada"
+        );
+
+
+        const [
+          movimentacao
+        ] =
+          await Promise.all([
+
+            salvarRevisaoComStorage(
+              item,
+              "aprovada",
+              pancIdCorreta
+            ),
+
+            esperar(
+              TEMPO_ANIMACAO
+            )
+
+          ]);
 
 
         historicoRevisao.push({
@@ -1530,30 +1534,12 @@ btnConfirmarCorrecao
         totalRevisado++;
 
 
-        fecharModalCorrecao();
-
-
-        card.classList.add(
-          "saindo-direita"
-        );
-
-
-        await new Promise(
-          (resolve) =>
-            setTimeout(
-              resolve,
-              330
-            )
-        );
-
-
         removerImagemDoCache(
           item
         );
 
 
-        imagemAtual =
-          null;
+        imagemAtual = null;
 
 
         await mostrarProximaImagem();
@@ -1567,18 +1553,31 @@ btnConfirmarCorrecao
         );
 
 
+        card.style.transition =
+          "transform 180ms ease";
+
+
+        card.style.transform =
+          "translate3d(0,0,0) rotate(0deg)";
+
+
+        overlayAprovar
+          .classList
+          .remove("ativo");
+
+
+        overlayAprovar.style.opacity =
+          "";
+
+
         alert(
           "Não foi possível corrigir esta imagem."
         );
 
 
-        resetarCard();
-
-
       } finally {
 
-        processandoRevisao =
-          false;
+        processandoRevisao = false;
       }
     }
   );
@@ -1595,16 +1594,13 @@ btnDesfazer
 
       if (
         processandoRevisao ||
-        historicoRevisao.length ===
-          0
+        historicoRevisao.length === 0
       ) {
-
         return;
       }
 
 
-      processandoRevisao =
-        true;
+      processandoRevisao = true;
 
 
       const ultimaAcao =
@@ -1613,10 +1609,7 @@ btnDesfazer
 
       try {
 
-        // ====================================
-        // 1. MOVE DE VOLTA NO STORAGE
-        // ====================================
-
+        // Move de volta.
         await moverArquivoStorage(
           ultimaAcao.caminhoNovo,
           ultimaAcao.caminhoAnterior
@@ -1625,10 +1618,7 @@ btnDesfazer
 
         try {
 
-          // ==================================
-          // 2. RESTAURA O BANCO
-          // ==================================
-
+          // Restaura banco.
           await atualizarImagem(
             ultimaAcao.imagem.id,
             {
@@ -1651,16 +1641,10 @@ btnDesfazer
         } catch (erroBanco) {
 
           /*
-            Se o banco falhar,
-            tenta colocar a imagem de volta
-            no caminho revisado.
+            Banco falhou:
+            devolve novamente o arquivo
+            para o local revisado.
           */
-
-          console.error(
-            "Erro ao restaurar banco. Revertendo Storage...",
-            erroBanco
-          );
-
 
           try {
 
@@ -1672,12 +1656,10 @@ btnDesfazer
                 .caminhoNovo
             );
 
-          } catch (
-            erroRollback
-          ) {
+          } catch (erroRollback) {
 
             console.error(
-              "ERRO CRÍTICO AO REVERTER DESFAZER:",
+              "Erro crítico ao reverter desfazer:",
               erroRollback
             );
           }
@@ -1687,9 +1669,10 @@ btnDesfazer
         }
 
 
-        // ====================================
-        // 3. DEVOLVE CARD ATUAL PARA FILA
-        // ====================================
+        /*
+          O card atual volta para o
+          começo da fila.
+        */
 
         if (imagemAtual) {
 
@@ -1699,13 +1682,13 @@ btnDesfazer
         }
 
 
-        imagemAtual =
-          null;
+        imagemAtual = null;
 
 
-        // ====================================
-        // 4. COLOCA A DESFEITA NO TOPO
-        // ====================================
+        /*
+          A foto desfeita passa a ser
+          a próxima novamente.
+        */
 
         imagensPendentes.unshift(
           {
@@ -1735,12 +1718,10 @@ btnDesfazer
 
 
         if (
-          historicoRevisao.length ===
-          0
+          historicoRevisao.length === 0
         ) {
 
-          btnDesfazer.hidden =
-            true;
+          btnDesfazer.hidden = true;
         }
 
 
@@ -1750,7 +1731,7 @@ btnDesfazer
       } catch (error) {
 
         console.error(
-          "Erro ao desfazer revisão:",
+          "Erro ao desfazer:",
           error
         );
 
@@ -1767,8 +1748,7 @@ btnDesfazer
 
       } finally {
 
-        processandoRevisao =
-          false;
+        processandoRevisao = false;
       }
     }
   );
@@ -1778,41 +1758,30 @@ btnDesfazer
 // SWIPE
 // ==========================================
 
-function iniciarArraste(
-  event
-) {
+function iniciarArraste(event) {
 
   if (
     processandoRevisao ||
     !imagemAtual
   ) {
-
     return;
   }
 
 
-  arrastando =
-    true;
-
+  arrastando = true;
 
   pointerIdAtual =
     event.pointerId;
 
-
   inicioX =
     event.clientX;
-
 
   inicioY =
     event.clientY;
 
+  deslocamentoX = 0;
 
-  deslocamentoX =
-    0;
-
-
-  deslocamentoY =
-    0;
+  deslocamentoY = 0;
 
 
   card.classList.add(
@@ -1831,21 +1800,18 @@ function iniciarArraste(
     );
 
   } catch (_) {
-    // Alguns navegadores podem ignorar.
+    // Alguns navegadores ignoram.
   }
 }
 
 
-function moverArraste(
-  event
-) {
+function moverArraste(event) {
 
   if (
     !arrastando ||
     event.pointerId !==
       pointerIdAtual
   ) {
-
     return;
   }
 
@@ -1861,12 +1827,16 @@ function moverArraste(
 
 
   const rotacao =
-    deslocamentoX /
-    18;
+    deslocamentoX / 18;
 
+
+  /*
+    translate3d costuma ter desempenho
+    melhor no celular.
+  */
 
   card.style.transform =
-    `translate(${deslocamentoX}px, ${deslocamentoY * 0.12}px) rotate(${rotacao}deg)`;
+    `translate3d(${deslocamentoX}px, ${deslocamentoY * 0.12}px, 0) rotate(${rotacao}deg)`;
 
 
   const intensidade =
@@ -1879,78 +1849,69 @@ function moverArraste(
     );
 
 
-  if (
-    deslocamentoX >
-    0
-  ) {
+  if (deslocamentoX > 0) {
 
     overlayAprovar
       .classList
-      .add(
-        "ativo"
-      );
+      .add("ativo");
 
 
     overlayRejeitar
       .classList
-      .remove(
-        "ativo"
-      );
+      .remove("ativo");
 
+
+    /*
+      O emoji reage diretamente
+      à posição do dedo.
+    */
 
     overlayAprovar.style.opacity =
-      String(
-        intensidade
-      );
+      String(intensidade);
+
+
+    overlayAprovar.style.transform =
+      `scale(${0.78 + intensidade * 0.22}) translateZ(0)`;
 
 
   } else if (
-    deslocamentoX <
-    0
+    deslocamentoX < 0
   ) {
 
     overlayRejeitar
       .classList
-      .add(
-        "ativo"
-      );
+      .add("ativo");
 
 
     overlayAprovar
       .classList
-      .remove(
-        "ativo"
-      );
+      .remove("ativo");
 
 
     overlayRejeitar.style.opacity =
-      String(
-        intensidade
-      );
+      String(intensidade);
+
+
+    overlayRejeitar.style.transform =
+      `scale(${0.78 + intensidade * 0.22}) translateZ(0)`;
   }
 }
 
 
-async function terminarArraste(
-  event
-) {
+async function terminarArraste(event) {
 
   if (
     !arrastando ||
     event.pointerId !==
       pointerIdAtual
   ) {
-
     return;
   }
 
 
-  arrastando =
-    false;
+  arrastando = false;
 
-
-  pointerIdAtual =
-    null;
+  pointerIdAtual = null;
 
 
   card.classList.remove(
@@ -1958,12 +1919,8 @@ async function terminarArraste(
   );
 
 
-  card.style.transition =
-    "transform 0.22s ease, opacity 0.22s ease";
-
-
   // ========================================
-  // DIREITA = APROVAR
+  // DIREITA
   // ========================================
 
   if (
@@ -1971,28 +1928,16 @@ async function terminarArraste(
     LIMITE_SWIPE
   ) {
 
-    card.style.transform =
-      "translateX(130%) rotate(18deg)";
-
-
-    overlayAprovar
-      .classList
-      .add(
-        "ativo"
-      );
-
-
     await revisarImagem(
       "aprovada"
     );
-
 
     return;
   }
 
 
   // ========================================
-  // ESQUERDA = REJEITAR
+  // ESQUERDA
   // ========================================
 
   if (
@@ -2000,54 +1945,43 @@ async function terminarArraste(
     -LIMITE_SWIPE
   ) {
 
-    card.style.transform =
-      "translateX(-130%) rotate(-18deg)";
-
-
-    overlayRejeitar
-      .classList
-      .add(
-        "ativo"
-      );
-
-
     await revisarImagem(
       "rejeitada"
     );
-
 
     return;
   }
 
 
   // ========================================
-  // VOLTA PARA O CENTRO
+  // VOLTA
   // ========================================
 
+  card.style.transition =
+    "transform 160ms ease-out";
+
+
   card.style.transform =
-    "translate(0,0) rotate(0deg)";
+    "translate3d(0,0,0) rotate(0deg)";
 
 
   overlayAprovar
     .classList
-    .remove(
-      "ativo"
-    );
+    .remove("ativo");
 
 
   overlayRejeitar
     .classList
-    .remove(
-      "ativo"
-    );
+    .remove("ativo");
 
 
-  overlayAprovar.style.opacity =
-    "";
+  overlayAprovar.style.opacity = "";
 
+  overlayRejeitar.style.opacity = "";
 
-  overlayRejeitar.style.opacity =
-    "";
+  overlayAprovar.style.transform = "";
+
+  overlayRejeitar.style.transform = "";
 }
 
 
@@ -2057,13 +1991,19 @@ async function terminarArraste(
 
 card?.addEventListener(
   "pointerdown",
-  iniciarArraste
+  iniciarArraste,
+  {
+    passive: true
+  }
 );
 
 
 card?.addEventListener(
   "pointermove",
-  moverArraste
+  moverArraste,
+  {
+    passive: true
+  }
 );
 
 
@@ -2093,8 +2033,7 @@ document.addEventListener(
     ) {
 
       if (
-        event.key ===
-        "Escape"
+        event.key === "Escape"
       ) {
 
         fecharModalCorrecao();
@@ -2108,14 +2047,12 @@ document.addEventListener(
       processandoRevisao ||
       !imagemAtual
     ) {
-
       return;
     }
 
 
     if (
-      event.key ===
-      "ArrowLeft"
+      event.key === "ArrowLeft"
     ) {
 
       revisarImagem(
@@ -2125,8 +2062,7 @@ document.addEventListener(
 
 
     if (
-      event.key ===
-      "ArrowRight"
+      event.key === "ArrowRight"
     ) {
 
       revisarImagem(
@@ -2189,8 +2125,7 @@ document.addEventListener(
 
 
     if (
-      imagensPendentes.length ===
-      0
+      imagensPendentes.length === 0
     ) {
 
       mostrarVazio();
@@ -2198,6 +2133,11 @@ document.addEventListener(
       return;
     }
 
+
+    /*
+      Já começa preparando as primeiras
+      imagens antes da revisão.
+    */
 
     prepararProximasImagens();
 
@@ -2213,8 +2153,7 @@ document.addEventListener(
     );
 
 
-    carregando.hidden =
-      true;
+    carregando.hidden = true;
 
 
     alert(
