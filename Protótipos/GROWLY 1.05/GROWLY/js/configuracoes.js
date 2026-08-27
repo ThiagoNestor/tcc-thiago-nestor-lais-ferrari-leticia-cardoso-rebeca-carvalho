@@ -351,6 +351,174 @@ btnSair.addEventListener(
   }
 );
 
+// ==========================================
+// ÁREA DA EQUIPE - ADMIN
+// ==========================================
+
+async function verificarAdminConfiguracoes(userId) {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("admins")
+      .select("user_id")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+
+  if (error) {
+
+    console.error(
+      "Erro ao verificar administrador:",
+      error
+    );
+
+    return false;
+  }
+
+
+  return Boolean(data);
+}
+
+
+// ==========================================
+// CONTAR IMAGENS PENDENTES
+// ==========================================
+
+async function contarImagensPendentes() {
+
+  const {
+    count,
+    error
+  } =
+    await db
+      .from("imagens_treinamento")
+      .select(
+        "id",
+        {
+          count: "exact",
+          head: true
+        }
+      )
+      .eq(
+        "status",
+        "pendente"
+      )
+      .eq(
+        "autorizado",
+        true
+      );
+
+
+  if (error) {
+
+    console.error(
+      "Erro ao contar imagens pendentes:",
+      error
+    );
+
+    return null;
+  }
+
+
+  return count || 0;
+}
+
+
+// ==========================================
+// CARREGAR ÁREA ADMINISTRATIVA
+// ==========================================
+
+async function carregarAreaEquipe(user) {
+
+  const areaEquipe =
+    document.getElementById(
+      "area-equipe"
+    );
+
+  const statusEquipe =
+    document.getElementById(
+      "area-equipe-status"
+    );
+
+
+  if (
+    !areaEquipe ||
+    !statusEquipe ||
+    !user
+  ) {
+
+    return;
+  }
+
+
+  // Por segurança começa escondida.
+  areaEquipe.hidden =
+    true;
+
+
+  const admin =
+    await verificarAdminConfiguracoes(
+      user.id
+    );
+
+
+  // Usuário comum não vê absolutamente nada.
+  if (!admin) {
+
+    console.log(
+      "Usuário comum: área da equipe oculta."
+    );
+
+    return;
+  }
+
+
+  // É uma das contas administrativas.
+  areaEquipe.hidden =
+    false;
+
+
+  statusEquipe.textContent =
+    "Verificando imagens pendentes...";
+
+
+  const quantidade =
+    await contarImagensPendentes();
+
+
+  if (quantidade === null) {
+
+    statusEquipe.textContent =
+      "Abrir revisão de imagens";
+
+    return;
+  }
+
+
+  if (quantidade === 0) {
+
+    statusEquipe.textContent =
+      "Tudo revisado ✓";
+
+    return;
+  }
+
+
+  if (quantidade === 1) {
+
+    statusEquipe.textContent =
+      "1 imagem pendente";
+
+    return;
+  }
+
+
+  statusEquipe.textContent =
+    `${quantidade} imagens pendentes`;
+}
 
 // ==========================================
 // INICIALIZAÇÃO
@@ -365,6 +533,15 @@ btnSair.addEventListener(
   if (!usuario) {
     return;
   }
+
+
+  // ========================================
+  // ÁREA ADMINISTRATIVA
+  // ========================================
+
+  await carregarAreaEquipe(
+    usuario
+  );
 
 
   /*
