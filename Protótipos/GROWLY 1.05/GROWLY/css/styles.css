@@ -3307,3 +3307,264 @@ revisao-sair-esquerda {
   }
 
 }
+
+/* =========================================
+   CORREÇÃO DOS EMOJIS DURANTE O SWIPE
+   ========================================= */
+
+.revisao-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.revisao-overlay {
+  position: absolute !important;
+
+  top: 1rem !important;
+
+  z-index: 999 !important;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px !important;
+  height: 64px !important;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform: scale(0.8) translateZ(0);
+
+  will-change:
+    opacity,
+    transform;
+
+  box-shadow:
+    0 4px 18px
+    rgba(0, 0, 0, 0.18);
+
+  font-size: 2.2rem !important;
+
+  line-height: 1;
+
+  transition:
+    opacity 0.05s linear,
+    transform 0.05s linear;
+}
+
+
+/* ❌ ESQUERDA */
+
+.revisao-overlay.rejeitar {
+  left: 1rem !important;
+  right: auto !important;
+}
+
+
+/* 🌱 DIREITA */
+
+.revisao-overlay.aprovar {
+  right: 1rem !important;
+  left: auto !important;
+}
+
+
+/* Quando o JS ativa */
+
+.revisao-overlay.ativo {
+  visibility: visible !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .revisao-overlay {
+    top: 0.8rem !important;
+
+    width: 58px !important;
+    height: 58px !important;
+
+    font-size: 2rem !important;
+  }
+
+  .revisao-overlay.rejeitar {
+    left: 0.8rem !important;
+  }
+
+  .revisao-overlay.aprovar {
+    right: 0.8rem !important;
+  }
+
+}
+
+/* =========================================
+   EMOJIS DO SWIPE FORA DO CARD
+   ========================================= */
+
+.revisao-card-area {
+  position: relative !important;
+}
+
+
+/* =========================================
+   OVERLAY
+   ========================================= */
+
+.revisao-card-area > .revisao-overlay {
+
+  position: absolute !important;
+
+  top: 1rem !important;
+
+  z-index: 9999 !important;
+
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+
+  width: 64px !important;
+
+  height: 64px !important;
+
+
+  border-radius: 50% !important;
+
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.97
+    ) !important;
+
+
+  box-shadow:
+    0 5px 20px
+    rgba(
+      0,
+      0,
+      0,
+      0.22
+    ) !important;
+
+
+  opacity: 0;
+
+
+  visibility: visible !important;
+
+
+  pointer-events: none !important;
+
+
+  font-size: 2.25rem !important;
+
+  line-height: 1 !important;
+
+
+  transform:
+    scale(0.8) !important;
+
+
+  will-change:
+    opacity,
+    transform;
+
+
+  transition:
+    opacity 0.05s linear,
+    transform 0.05s linear !important;
+
+}
+
+
+/* =========================================
+   ❌ REJEITAR
+   ========================================= */
+
+.revisao-card-area >
+.revisao-overlay.rejeitar {
+
+  left: 1rem !important;
+
+  right: auto !important;
+
+}
+
+
+/* =========================================
+   🌱 APROVAR
+   ========================================= */
+
+.revisao-card-area >
+.revisao-overlay.aprovar {
+
+  right: 1rem !important;
+
+  left: auto !important;
+
+}
+
+
+/* =========================================
+   ATIVO
+   ========================================= */
+
+.revisao-card-area >
+.revisao-overlay.ativo {
+
+  transform:
+    scale(1) !important;
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  .revisao-card-area >
+  .revisao-overlay {
+
+    top: 0.75rem !important;
+
+    width: 58px !important;
+
+    height: 58px !important;
+
+    font-size: 2rem !important;
+
+  }
+
+
+  .revisao-card-area >
+  .revisao-overlay.rejeitar {
+
+    left: 0.75rem !important;
+
+  }
+
+
+  .revisao-card-area >
+  .revisao-overlay.aprovar {
+
+    right: 0.75rem !important;
+
+  }
+
+}
