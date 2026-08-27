@@ -1484,21 +1484,16 @@ function renderResultado() {
 
     `;
 
-
   // =============================
-  // SALVAR NO JARDIM
+  // JARDIM + ENVIO PARA TREINAMENTO
   // =============================
 
-  btnSalvar.disabled =
-    !panc ||
-    jaNoJardim;
+  btnSalvar.disabled = !panc;
 
 
   btnSalvar.textContent =
     jaNoJardim
-
-      ? "✓ No meu jardim"
-
+      ? "🌱 Enviar novas fotos"
       : "Salvar no jardim";
 
 
@@ -1508,13 +1503,103 @@ function renderResultado() {
       if (!panc) {
 
         console.error(
-          "Não foi possível salvar: a PANC não foi encontrada no banco.",
+          "Não foi possível continuar: a PANC não foi encontrada no banco.",
           topo
         );
 
         return;
       }
 
+
+      // =====================================
+      // CASO 1:
+      // A PANC JÁ ESTÁ NO JARDIM
+      // =====================================
+
+      if (jaNoJardim) {
+
+        const autorizaTreinamento =
+          window.confirm(
+            "Esta PANC já está no seu jardim 🌱\n\n" +
+            "Você autoriza o envio destas 4 novas fotos para ajudar a melhorar o modelo de reconhecimento do Growly?\n\n" +
+            "OK = enviar as fotos\n" +
+            "Cancelar = não enviar"
+          );
+
+
+        if (!autorizaTreinamento) {
+          return;
+        }
+
+
+        btnSalvar.disabled = true;
+
+        btnSalvar.textContent =
+          "Enviando fotos...";
+
+
+        try {
+
+          console.log(
+            "Enviando novo lote de fotos para treinamento:",
+            {
+              user_id: usuario.id,
+              panc_id: panc.id,
+              identificacao_id:
+                ultimaIdentificacaoId
+            }
+          );
+
+
+          await enviarFotosParaTreinamento(
+            panc,
+            topo
+          );
+
+
+          btnSalvar.textContent =
+            "✓ Fotos enviadas";
+
+
+          console.log(
+            "Novo lote de fotos enviado com sucesso."
+          );
+
+
+          alert(
+            "Obrigado! 🌱\n\n" +
+            "As 4 novas fotos foram enviadas para ajudar a melhorar a IA do Growly."
+          );
+
+
+        } catch (erroTreinamento) {
+
+          console.error(
+            "Erro ao enviar novas fotos para treinamento:",
+            erroTreinamento
+          );
+
+
+          alert(
+            "Não foi possível enviar as fotos agora. Tente novamente."
+          );
+
+
+          btnSalvar.disabled = false;
+
+          btnSalvar.textContent =
+            "🌱 Enviar novas fotos";
+        }
+
+
+        return;
+      }
+
+
+      // =====================================
+      // CASO 2:
+      // A PANC AINDA NÃO ESTÁ NO JARDIM
+      // =====================================
 
       const autorizaTreinamento =
         window.confirm(
@@ -1525,8 +1610,7 @@ function renderResultado() {
         );
 
 
-      btnSalvar.disabled =
-        true;
+      btnSalvar.disabled = true;
 
 
       try {
@@ -1541,7 +1625,7 @@ function renderResultado() {
               panc.id,
 
             slug:
-              panc.slug,
+              panc.slug
           }
         );
 
@@ -1557,22 +1641,16 @@ function renderResultado() {
           await carregarJardim();
 
 
-        btnSalvar.textContent =
-          "✓ No meu jardim";
-
-
-        btnSalvar.disabled =
-          true;
-
-
         console.log(
           "PANC salva no jardim com sucesso."
         );
 
 
-        if (
-          autorizaTreinamento
-        ) {
+        // ===================================
+        // ENVIA AS FOTOS SE AUTORIZADO
+        // ===================================
+
+        if (autorizaTreinamento) {
 
           try {
 
@@ -1582,14 +1660,16 @@ function renderResultado() {
             );
 
 
+            btnSalvar.textContent =
+              "✓ Fotos enviadas";
+
+
             alert(
               "PANC salva no jardim e fotos enviadas para ajudar a melhorar a IA do Growly. 🌱"
             );
 
 
-          } catch (
-            erroTreinamento
-          ) {
+          } catch (erroTreinamento) {
 
             console.error(
               "A PANC foi salva no jardim, mas houve erro ao enviar as fotos para treinamento:",
@@ -1597,11 +1677,104 @@ function renderResultado() {
             );
 
 
+            btnSalvar.textContent =
+              "🌱 Enviar novas fotos";
+
+
+            btnSalvar.disabled =
+              false;
+
+
             alert(
               "A PANC foi salva no jardim, mas não foi possível enviar as fotos para melhorar a IA. O jardim não foi afetado."
             );
+
+
+            return;
           }
+
+
+        } else {
+
+          // Salvou no jardim,
+          // mas não autorizou as fotos.
+
+          btnSalvar.textContent =
+            "🌱 Enviar estas fotos";
+
+
+          btnSalvar.disabled =
+            false;
         }
+
+
+        // ===================================
+        // ATUALIZA O BOTÃO PARA NOVOS ENVIOS
+        // ===================================
+
+        btnSalvar.onclick =
+          async () => {
+
+            const autorizaNovasFotos =
+              window.confirm(
+                "Esta PANC já está no seu jardim 🌱\n\n" +
+                "Você autoriza o envio destas 4 fotos para ajudar a melhorar o modelo de reconhecimento do Growly?\n\n" +
+                "OK = enviar as fotos\n" +
+                "Cancelar = não enviar"
+              );
+
+
+            if (!autorizaNovasFotos) {
+              return;
+            }
+
+
+            btnSalvar.disabled =
+              true;
+
+
+            btnSalvar.textContent =
+              "Enviando fotos...";
+
+
+            try {
+
+              await enviarFotosParaTreinamento(
+                panc,
+                topo
+              );
+
+
+              btnSalvar.textContent =
+                "✓ Fotos enviadas";
+
+
+              alert(
+                "Obrigado! As fotos foram enviadas para ajudar a melhorar a IA do Growly. 🌱"
+              );
+
+
+            } catch (erroTreinamento) {
+
+              console.error(
+                "Erro ao enviar fotos:",
+                erroTreinamento
+              );
+
+
+              btnSalvar.disabled =
+                false;
+
+
+              btnSalvar.textContent =
+                "🌱 Enviar novas fotos";
+
+
+              alert(
+                "Não foi possível enviar as fotos agora. Tente novamente."
+              );
+            }
+          };
 
 
       } catch (e) {
@@ -1620,6 +1793,10 @@ function renderResultado() {
 
         btnSalvar.disabled =
           false;
+
+
+        btnSalvar.textContent =
+          "Salvar no jardim";
       }
     };
 }
