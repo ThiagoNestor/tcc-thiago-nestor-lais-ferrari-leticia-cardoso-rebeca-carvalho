@@ -3047,3 +3047,33 @@ revisao-sair-esquerda {
 
   line-height: 1;
 }
+
+/* =========================================
+   SWIPE MAIS FLUIDO NO CELULAR
+   ========================================= */
+
+.revisao-card {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.revisao-overlay {
+  will-change: opacity, transform;
+
+  transition:
+    opacity 0.06s linear,
+    transform 0.08s ease-out !important;
+}
+
+.revisao-overlay.ativo {
+  transform: scale(1) translateZ(0);
+}
+
+.revisao-card.saindo-direita,
+.revisao-card.saindo-esquerda {
+  will-change: transform, opacity;
+}
