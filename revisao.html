@@ -1,33 +1,59 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Revisão de Imagens — Growly</title>
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
+  <title>
+    Revisão de Imagens — Growly
+  </title>
 
   <meta
     name="description"
     content="Área administrativa para revisão das imagens utilizadas no treinamento da IA do Growly."
   />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
 
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="css/styles.css" />
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  />
+
 </head>
+
 
 <body>
 
   <div class="screen revisao-screen">
 
-    <!-- Folhas decorativas do Growly -->
+
+    <!-- =========================================
+         FOLHAS DECORATIVAS
+         ========================================= -->
+
     <img data-leaf="top-left" />
+
     <img data-leaf="top-right" />
 
 
@@ -37,15 +63,18 @@
 
     <header class="revisao-header">
 
+
       <a
         href="home.html"
         class="back-btn"
         aria-label="Voltar"
       >
+
         <img
           src="assets/icon-voltar.png"
           alt=""
         />
+
       </a>
 
 
@@ -61,6 +90,7 @@
 
       </div>
 
+
     </header>
 
 
@@ -71,13 +101,17 @@
     <main class="revisao-main">
 
 
-      <!-- CONTADOR -->
+      <!-- =========================================
+           CONTADOR
+           ========================================= -->
 
       <div class="revisao-progresso">
+
 
         <span id="contador-revisao">
           0 de 0
         </span>
+
 
         <span
           id="pendentes-revisao"
@@ -85,6 +119,7 @@
         >
           0 pendentes
         </span>
+
 
       </div>
 
@@ -100,6 +135,36 @@
 
 
         <!-- =====================================
+             EMOJIS DO SWIPE
+
+             IMPORTANTE:
+             agora ficam FORA do card que gira
+             ===================================== -->
+
+
+        <!-- REJEITAR -->
+
+        <div
+          class="revisao-overlay rejeitar"
+          id="overlay-rejeitar"
+          aria-hidden="true"
+        >
+          ❌
+        </div>
+
+
+        <!-- APROVAR -->
+
+        <div
+          class="revisao-overlay aprovar"
+          id="overlay-aprovar"
+          aria-hidden="true"
+        >
+          🌱
+        </div>
+
+
+        <!-- =====================================
              CARD ATUAL
              ===================================== -->
 
@@ -108,28 +173,6 @@
           id="revisao-card"
           hidden
         >
-
-
-          <!-- INDICADOR DE REJEIÇÃO -->
-
-          <div
-            class="revisao-overlay rejeitar"
-            id="overlay-rejeitar"
-            aria-hidden="true"
-          >
-            ❌
-          </div>
-
-
-          <!-- INDICADOR DE APROVAÇÃO -->
-
-          <div
-            class="revisao-overlay aprovar"
-            id="overlay-aprovar"
-            aria-hidden="true"
-          >
-            🌱
-          </div>
 
 
           <!-- FOTO -->
@@ -150,6 +193,7 @@
 
           <div class="revisao-card-info">
 
+
             <h2 id="revisao-especie">
               Espécie
             </h2>
@@ -166,6 +210,8 @@
             </p>
 
 
+            <!-- CONFIABILIDADE -->
+
             <div class="revisao-confianca">
 
               <span>
@@ -179,6 +225,8 @@
             </div>
 
 
+            <!-- BARRA -->
+
             <div class="revisao-confianca-barra">
 
               <span
@@ -187,13 +235,15 @@
 
             </div>
 
+
           </div>
+
 
         </article>
 
 
         <!-- =====================================
-             ESTADO DE CARREGAMENTO
+             CARREGANDO
              ===================================== -->
 
         <div
@@ -211,7 +261,7 @@
 
 
         <!-- =====================================
-             SEM IMAGENS PENDENTES
+             SEM IMAGENS
              ===================================== -->
 
         <div
@@ -266,11 +316,12 @@
 
         </div>
 
+
       </section>
 
 
       <!-- =========================================
-           AÇÕES PRINCIPAIS
+           AÇÕES
            ========================================= -->
 
       <section
@@ -319,6 +370,7 @@
 
         </button>
 
+
       </section>
 
 
@@ -354,7 +406,7 @@
 
 
     <!-- =========================================
-         MODAL DE CORREÇÃO DA ESPÉCIE
+         MODAL DE CORREÇÃO
          ========================================= -->
 
     <div
@@ -363,10 +415,12 @@
       hidden
     >
 
+
       <div class="revisao-modal-backdrop"></div>
 
 
       <div class="revisao-modal-card">
+
 
         <button
           type="button"
@@ -384,7 +438,8 @@
 
 
         <p>
-          Se a imagem estiver boa, mas a IA tiver identificado a planta incorretamente, escolha a espécie correta.
+          Se a imagem estiver boa, mas a IA tiver identificado
+          a planta incorretamente, escolha a espécie correta.
         </p>
 
 
@@ -416,7 +471,9 @@
           Confirmar e aprovar
         </button>
 
+
       </div>
+
 
     </div>
 
@@ -425,14 +482,23 @@
 
 
   <!-- =========================================
-       SUPABASE + GROWLY
+       SUPABASE
        ========================================= -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+
+  <!-- =========================================
+       GROWLY
+       ========================================= -->
 
   <script src="js/app.js"></script>
 
   <script src="js/revisao.js"></script>
 
+
 </body>
+
 </html>
