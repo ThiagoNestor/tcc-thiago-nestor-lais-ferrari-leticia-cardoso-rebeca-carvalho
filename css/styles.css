@@ -3568,3 +3568,140 @@ revisao-sair-esquerda {
   }
 
 }
+
+/* ===== Sobre ===== */
+.sobre-main {
+  padding-bottom: 2rem;
+}
+
+.sobre-intro {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.sobre-subtitle {
+  margin-top: 0.35rem;
+  color: rgba(31, 59, 44, 0.72);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.sobre-card {
+  margin-top: 0.85rem;
+  padding: 1.15rem 1.1rem;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.sobre-card h2 {
+  font-size: 1.05rem;
+  color: #1f3b2c;
+  margin-bottom: 0.8rem;
+}
+
+.sobre-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.sobre-card li {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: rgba(31, 59, 44, 0.9);
+}
+
+.sobre-card li span {
+  color: rgba(31, 59, 44, 0.55);
+  font-weight: 700;
+}
+
+.sobre-projeto p,
+.sobre-documentacao p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(31, 59, 44, 0.82);
+}
+
+.sobre-projeto p + p {
+  margin-top: 0.75rem;
+}
+
+.sobre-documentacao {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sobre-versao {
+  margin: 1.2rem 0 0.5rem;
+  text-align: center;
+  color: rgba(31, 59, 44, 0.58);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+}
+
+.sobre-versao strong {
+  display: block;
+  margin-top: 0.15rem;
+  color: #1f3b2c;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 600px) {
+  .sobre-card {
+    padding: 1rem;
+  }
+
+  .sobre-card h2 {
+    font-size: 1rem;
+  }
+}
+
+.sobre-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.1rem;
+  margin: 1.25rem 0;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(31, 59, 44, 0.08);
+  border-radius: 1rem;
+  color: var(--fg);
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.sobre-link:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.sobre-link-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sobre-link-conteudo strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+
+.sobre-link-conteudo span {
+  font-size: 0.82rem;
+  color: rgba(31, 59, 44, 0.68);
+}
+
+.sobre-link-seta {
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--fg);
+}
