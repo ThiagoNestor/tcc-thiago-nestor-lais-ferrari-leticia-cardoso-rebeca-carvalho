@@ -3705,3 +3705,24 @@ revisao-sair-esquerda {
   line-height: 1;
   color: var(--fg);
 }
+
+.doacao {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.doacao img {
+  display: block;
+  width: min(100%, 18rem);
+  height: auto;
+  margin: 0 auto 1rem;
+  border-radius: 1rem;
+}
+
+.doacao p {
+  margin: 0 auto;
+  max-width: 24rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--fg);
+}
