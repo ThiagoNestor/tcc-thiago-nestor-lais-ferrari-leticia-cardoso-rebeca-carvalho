@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sobre — Growly</title>
+
+    <meta
+      name="description"
+      content="Informações sobre o projeto Growly, sua equipe, orientadores, instituições e documentação."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/sobre.css" />
+  </head>
+
+  <body>
+    <div class="screen">
+      <!-- Folhas decorativas do Growly -->
+      <img data-leaf="top-left" />
+      <img data-leaf="top-right" />
+
+      <main class="page-main sobre-main">
+
+        <!-- Cabeçalho padrão do Growly -->
+        <div data-header="Sobre"></div>
+
+        <!-- Introdução -->
+        <section class="sobre-intro">
+          <h1 class="page-title">Sobre o Growly</h1>
+
+          <p class="sobre-subtitle">
+            Projeto Growly, alunos de DS (tarde)
+          </p>
+        </section>
+
+        <!-- Integrantes -->
+        <section class="sobre-card">
+          <h2>Integrantes e desenvolvedores</h2>
+
+          <ul>
+            <li>
+              Thiago Nestor Afonso Dos Santos
+              <span>3DB</span>
+            </li>
+
+            <li>
+              Leticia Rodrigues Cardoso
+              <span>3DB</span>
+            </li>
+
+            <li>
+              Rebeca Carvalho Trindade
+              <span>3DB</span>
+            </li>
+
+            <li>
+              Laís Silva Ferrari
+              <span>3DB</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Professores e referências -->
+        <section class="sobre-card">
+          <h2>Professores, orientadores e referências</h2>
+
+          <ul>
+            <li>Davi Vilar</li>
+            <li>Ricardo Faria Palhares</li>
+            <li>Dr. Luiz Lima</li>
+            <li>Bruno Cano</li>
+          </ul>
+        </section>
+
+        <!-- Instituições -->
+        <section class="sobre-card">
+          <h2>Instituições</h2>
+
+          <ul>
+            <li>ETEC Professor Camargo Aranha</li>
+            <li>Restituição Horta Das Flores</li>
+            <li>Ven Superação ONG</li>
+          </ul>
+        </section>
+
+        <!-- Sobre o projeto -->
+        <section class="sobre-card sobre-projeto">
+          <h2>O projeto</h2>
+
+          <p>
+            O Growly é um aplicativo baseado em inteligência artificial
+            desenvolvido para auxiliar na identificação de Plantas
+            Alimentícias Não Convencionais (PANCs) por meio da análise
+            de imagens.
+          </p>
+
+          <p>
+            A documentação do projeto apresenta o desenvolvimento da
+            solução, sua fundamentação teórica, metodologia, tecnologias
+            utilizadas, etapas de desenvolvimento e referências.
+          </p>
+        </section>
+
+        <!-- Documentação -->
+        <section class="sobre-card sobre-documentacao">
+          <div>
+            <h2>Documentação</h2>
+
+            <p>
+              Documento Final do Trabalho de Conclusão de Curso.
+            </p>
+          </div>
+
+          <a
+            class="btn btn-primary btn-block"
+            href="docs/Documento%20Final.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir documentação
+          </a>
+        </section>
+
+        <!-- Versão -->
+        <section class="sobre-versao">
+          <span>Versão</span>
+          <strong>1.05.6</strong>
+        </section>
+
+      </main>
+
+      <!-- Navegação padrão gerada pelo app.js -->
+      <nav class="bottom-nav" data-nav></nav>
+    </div>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+    <!-- Núcleo do Growly -->
+    <script src="js/app.js"></script>
+
+    <!-- Autenticação -->
+    <script>
+      requireAuth();
+    </script>
+  </body>
+</html>
