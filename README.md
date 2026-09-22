@@ -1343,30 +1343,442 @@ O README tem uma finalidade diferente da monografia: apresentar o projeto e docu
 
 # Equipe
 
-O Growly é desenvolvido por estudantes do curso Técnico em Desenvolvimento de Sistemas da **ETEC Professor Camargo Aranha**.
+O Growly é desenvolvido por estudantes do **3º ano do curso Técnico em Desenvolvimento de Sistemas — período da tarde — da ETEC Professor Camargo Aranha**, como Trabalho de Conclusão de Curso.
 
-| Integrante |
-|---|
-| **Laís Silva Ferrari** |
-| **Letícia Rodrigues Cardoso** |
-| **Rebeca Carvalho Trindade** |
-| **Thiago Nestor Afonso dos Santos** |
+| Integrante | Atuação no projeto |
+|---|---|
+| **Thiago Nestor Afonso dos Santos** | Desenvolvimento do Growly |
+| **Laís Silva Ferrari** | Desenvolvimento do Growly |
+| **Letícia Rodrigues Cardoso** | Desenvolvimento do Growly |
+| **Rebeca Carvalho Trindade** | Desenvolvimento do Growly |
 
-### Orientação
-
-**Prof. Ricardo Faria Palhares** — orientador do Trabalho de Conclusão de Curso.
-
-O desenvolvimento também contou com apoio, colaboração e referências de professores e profissionais ao longo do projeto.
+O projeto é resultado do trabalho conjunto da equipe nas etapas de pesquisa, levantamento de requisitos, documentação, modelagem, desenvolvimento da aplicação, construção do banco de dados, integração dos recursos de Inteligência Artificial, produção e organização do dataset, testes e evolução das versões.
 
 ---
 
-# Parceria e coleta de imagens
+# Orientação, professores e colaboradores
 
-Durante o desenvolvimento foi estabelecida uma parceria com a **Horta das Flores**, localizada na região da Mooca, em São Paulo.
+O desenvolvimento do Growly contou com orientação acadêmica e com o apoio de professores, profissionais e instituições que contribuíram em diferentes momentos da trajetória do projeto.
 
-A parceria possibilitou acesso às espécies selecionadas e a produção de registros fotográficos próprios utilizados na construção do dataset.
+### Ricardo Faria Palhares
 
-O Growly não é uma aplicação exclusiva da instituição: a plataforma foi desenvolvida para o público interessado em conhecer e identificar PANCs.
+Professor orientador do Trabalho de Conclusão de Curso, acompanhando o desenvolvimento acadêmico e técnico do projeto.
+
+### Dr. Luiz Antonio de Lima
+
+Apoio e colaboração durante o desenvolvimento e a evolução do Growly.
+
+### Davi Vilar
+
+Professor e referência durante a trajetória acadêmica e de desenvolvimento da equipe.
+
+### Bruno Cano
+
+Colaborador e referência reconhecida pela equipe durante o desenvolvimento do projeto.
+
+As participações citadas nesta seção representam diferentes formas de orientação, apoio e colaboração e não significam, necessariamente, responsabilidade direta pelo desenvolvimento do código-fonte.
+
+---
+
+# Instituição de ensino
+
+## ETEC Professor Camargo Aranha
+
+O Growly é desenvolvido no contexto do curso **Técnico em Desenvolvimento de Sistemas** da **ETEC Professor Camargo Aranha**, em São Paulo.
+
+O TCC permitiu integrar conhecimentos trabalhados ao longo da formação técnica, incluindo:
+
+- desenvolvimento web;
+- lógica de programação;
+- banco de dados;
+- modelagem de sistemas;
+- desenvolvimento de interfaces;
+- integração entre sistemas;
+- versionamento;
+- testes;
+- segurança;
+- Inteligência Artificial;
+- documentação técnica;
+- organização e desenvolvimento de projetos.
+
+A aplicação representa, portanto, não apenas a entrega de um software, mas a integração prática de diferentes competências desenvolvidas durante o curso.
+
+---
+
+# Pesquisa de campo e construção do dataset
+
+A construção do classificador exigiu uma etapa que ultrapassou o desenvolvimento de software: a obtenção de material visual adequado para treinamento e testes.
+
+## Horta das Flores
+
+A **Horta das Flores**, localizada na região da Mooca, em São Paulo, tornou-se uma importante parceira durante o desenvolvimento do Growly.
+
+A equipe realizou visitas ao local para conhecer as plantas, observar as espécies utilizadas no projeto e produzir registros fotográficos próprios.
+
+Esse material contribuiu para a construção do dataset utilizado durante o desenvolvimento do classificador.
+
+A coleta buscou registrar variações como:
+
+```text
+espécie
+  │
+  ├── diferentes ângulos
+  ├── diferentes distâncias
+  ├── diferentes fundos
+  ├── diferentes condições de iluminação
+  └── diferentes enquadramentos
+```
+
+A diversidade visual é relevante porque um classificador não deve aprender apenas a reconhecer uma fotografia específica. O objetivo é aumentar sua capacidade de lidar com variações encontradas durante o uso real.
+
+A parceria também aproximou o desenvolvimento técnico do contexto prático das PANCs, permitindo que a equipe trabalhasse com exemplares reais e não apenas com imagens encontradas digitalmente.
+
+> As fotografias utilizadas para treinamento e validação precisam ser tratadas de maneira criteriosa. Quantidade de imagens, diversidade, balanceamento das classes e separação entre dados de treino e validação afetam diretamente a avaliação do modelo.
+
+---
+
+# Ciclo de evolução do dataset
+
+Com a implementação da contribuição voluntária de imagens, o Growly passou a possuir uma base técnica para que o conjunto de dados continue crescendo.
+
+O processo planejado é:
+
+```text
+Uso real do scanner
+        │
+        ▼
+4 fotografias fornecidas
+        │
+        ▼
+Usuário autoriza contribuição
+        │
+        ▼
+Storage privado
+        │
+        ▼
+Registro dos metadados
+        │
+        ▼
+Revisão administrativa
+        │
+   ┌────┴─────┐
+   │          │
+rejeitar   aprovar/corrigir
+              │
+              ▼
+      conjunto revisado
+              │
+              ▼
+   preparação de novo dataset
+              │
+              ▼
+       novo treinamento
+              │
+              ▼
+      testes e comparação
+```
+
+Esse fluxo não significa que uma fotografia enviada pelo usuário seja automaticamente utilizada para treinar o modelo.
+
+A etapa de revisão existe para reduzir a possibilidade de inserir imagens incorretamente classificadas no conjunto de treinamento.
+
+---
+
+# Instituições e apoios
+
+Ao longo de sua trajetória, o projeto esteve relacionado a instituições que contribuíram para sua formação acadêmica, pesquisa, desenvolvimento ou aproximação com o tema.
+
+### ETEC Professor Camargo Aranha
+
+Instituição de ensino responsável pelo contexto acadêmico em que o Trabalho de Conclusão de Curso é desenvolvido.
+
+### Horta das Flores
+
+Parceira na aproximação da equipe com as PANCs e na obtenção de registros fotográficos utilizados durante a construção do dataset.
+
+### Ven Superação ONG
+
+Instituição reconhecida pela equipe entre os apoios e referências relacionados à trajetória do projeto.
+
+---
+
+# Status atual
+
+**Versão atual:** `1.05.6`  
+**Plataforma:** aplicação web responsiva  
+**Estado:** desenvolvimento, testes e aprimoramento contínuo
+
+| Componente | Situação |
+|---|---|
+| Interface web responsiva | Implementado |
+| Cadastro e autenticação | Implementado |
+| Confirmação e gerenciamento de sessão | Implementado |
+| Catálogo de PANCs | Implementado |
+| Jardim Virtual | Implementado |
+| Scanner com quatro imagens | Implementado |
+| Classificador com TensorFlow.js | Implementado / em aprimoramento |
+| Integração do resultado com o catálogo | Implementado |
+| Eden IA | Implementado |
+| Supabase / PostgreSQL | Implementado |
+| Supabase Storage | Implementado |
+| Row Level Security | Implementado |
+| Edge Function da Eden | Implementado |
+| Contribuição voluntária de imagens | Implementado |
+| Revisão administrativa das imagens | Implementado |
+| Ampliação e balanceamento do dataset | Em andamento |
+| Novos treinamentos do classificador | Em andamento |
+| Inclusão de novas espécies | Planejado |
+
+O status "implementado" indica que o recurso já faz parte da versão atual do sistema. Isso não significa que a funcionalidade esteja encerrada ou que não possa receber correções e melhorias.
+
+---
+
+# Escopo atual
+
+A versão 1.05.6 concentra-se nas cinco espécies utilizadas pelo classificador:
+
+```text
+Peixinho-da-horta
+Tanchagem
+Ora-pro-nóbis
+Vinagreira
+Taioba
+```
+
+O escopo foi mantido limitado durante esta etapa para permitir que a equipe trabalhasse não apenas na quantidade de classes, mas também no funcionamento completo do sistema ao redor do modelo.
+
+Isso inclui autenticação, catálogo, Jardim, integração com o banco, scanner, contribuição de imagens, revisão administrativa, Eden e experiência responsiva.
+
+A expansão para novas espécies faz parte da continuidade possível do projeto, mas exige novas imagens, organização do dataset, treinamento, testes e validação.
+
+---
+
+# Impacto educacional e tecnológico
+
+O Growly conecta três áreas centrais:
+
+```text
+DESENVOLVIMENTO DE SISTEMAS
+            +
+ INTELIGÊNCIA ARTIFICIAL
+            +
+   EDUCAÇÃO SOBRE PANCs
+```
+
+Do ponto de vista técnico, o projeto permite aplicar conceitos de desenvolvimento web, banco de dados, autenticação, segurança, APIs, machine learning, arquitetura de software e testes.
+
+Do ponto de vista educacional, a aplicação procura facilitar o contato do usuário com informações sobre PANCs e transformar a identificação em uma porta de entrada para conhecer melhor as espécies.
+
+A tecnologia, portanto, não é tratada como finalidade isolada. Ela funciona como meio para organizar e disponibilizar conhecimento de maneira mais acessível.
+
+---
+
+# Sustentabilidade
+
+A escolha das PANCs também relaciona o Growly a discussões sobre:
+
+- biodiversidade;
+- diversificação alimentar;
+- agricultura urbana;
+- valorização de espécies locais;
+- educação ambiental;
+- aproveitamento responsável de recursos vegetais;
+- sustentabilidade dos sistemas alimentares.
+
+O projeto evita tratar todas as PANCs como equivalentes. Cada espécie possui características próprias, e qualquer utilização alimentar exige identificação e orientação adequadas.
+
+---
+
+# Objetivos de Desenvolvimento Sustentável
+
+A pesquisa desenvolvida durante o TCC relaciona a proposta do Growly a temas presentes nos **Objetivos de Desenvolvimento Sustentável (ODS)**.
+
+Entre as relações trabalhadas ao longo do projeto estão:
+
+### ODS 2 — Fome Zero e Agricultura Sustentável
+
+O estudo das PANCs se relaciona à discussão sobre diversificação alimentar, agricultura e aproveitamento de espécies com potencial alimentício.
+
+### ODS 3 — Saúde e Bem-Estar
+
+O acesso responsável a informações sobre alimentação e espécies vegetais dialoga com temas de saúde e qualidade de vida, sem transformar o Growly em uma ferramenta de orientação médica ou nutricional.
+
+### ODS 4 — Educação de Qualidade
+
+O projeto utiliza tecnologia para ampliar o acesso a conhecimento sobre PANCs e aproximar conteúdos de biodiversidade, alimentação e sustentabilidade do usuário.
+
+O Growly não afirma resolver isoladamente esses objetivos. A relação com os ODS representa o contexto educacional e socioambiental no qual a proposta está inserida.
+
+---
+
+# Demonstrações e eventos
+
+O Growly também foi desenvolvido para ser apresentado e utilizado fora do ambiente de desenvolvimento.
+
+Demonstrações presenciais permitem observar aspectos que não aparecem somente nos testes de código, como:
+
+- facilidade de uso;
+- compreensão das instruções;
+- comportamento do scanner com plantas reais;
+- dúvidas frequentes dos usuários;
+- funcionamento em dispositivos diferentes;
+- interesse do público pelas informações das espécies.
+
+## EXPOCUCA 2026
+
+O projeto integra as apresentações de TCC do curso de Desenvolvimento de Sistemas da ETEC Professor Camargo Aranha durante a **EXPOCUCA 2026**.
+
+## Primavera na Horta das Flores
+
+O Growly também participa como expositor do evento **Primavera na Horta das Flores**, levando a plataforma e PANCs para demonstrações práticas do processo de identificação.
+
+A participação em ambientes ligados ao próprio tema do projeto permite aproximar desenvolvimento tecnológico, público e contexto real de utilização.
+
+---
+
+# Materiais do projeto
+
+O Growly possui diferentes materiais que registram seu desenvolvimento:
+
+### Aplicação
+
+**https://growly.com.br/**
+
+Versão web pública do projeto.
+
+### Código-fonte
+
+**https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho**
+
+Repositório utilizado para versionamento e preservação do histórico do desenvolvimento.
+
+### Documento acadêmico
+
+A documentação final do TCC apresenta em maior profundidade:
+
+- fundamentação teórica;
+- pesquisa sobre PANCs;
+- problema e hipótese;
+- metodologia;
+- histórico de desenvolvimento;
+- arquitetura;
+- implementação;
+- testes;
+- referências acadêmicas.
+
+O README e a documentação possuem funções complementares: o README prioriza a compreensão do software e de sua arquitetura, enquanto o documento acadêmico registra a pesquisa e o processo do TCC de maneira formal.
+
+---
+
+# Contribuições
+
+O Growly é atualmente um projeto acadêmico desenvolvido pela equipe responsável pelo TCC.
+
+O repositório público permite acompanhar a evolução do código e da documentação, mas alterações externas não devem ser consideradas automaticamente parte oficial do projeto.
+
+Sugestões técnicas, relatos de problemas e feedbacks podem contribuir para a evolução do sistema.
+
+Antes de incorporar qualquer contribuição, a equipe deve avaliar sua compatibilidade com:
+
+- arquitetura atual;
+- segurança;
+- banco de dados;
+- interface;
+- escopo acadêmico;
+- qualidade do código;
+- proposta do projeto.
+
+---
+
+# Licença
+
+Até que uma licença de software seja formalmente definida pela equipe, a disponibilidade pública do código-fonte **não deve ser interpretada automaticamente como autorização irrestrita para copiar, modificar, redistribuir ou reutilizar o projeto**.
+
+Caso uma licença seja adotada posteriormente, esta seção deverá ser atualizada e o arquivo de licença correspondente deverá ser incluído no repositório.
+
+---
+
+# Uso responsável
+
+O Growly possui finalidade **educacional, informativa e assistiva**.
+
+O sistema de identificação utiliza um modelo de classificação e, portanto, está sujeito a erros.
+
+Fatores como iluminação, enquadramento, qualidade da imagem, fundo, ângulo, estado da planta e semelhança entre espécies podem alterar o resultado.
+
+O percentual de confiança apresentado pelo sistema representa a distribuição calculada pelo modelo entre as classes conhecidas e **não representa confirmação botânica da espécie**.
+
+> **Nunca consuma uma planta exclusivamente com base no resultado fornecido pelo Growly.**
+
+Antes de qualquer decisão relacionada ao consumo, confirme a identificação utilizando fontes confiáveis e, quando necessário, orientação de profissionais adequados.
+
+A mesma lógica se aplica à Eden IA. Como as respostas são produzidas por um modelo generativo, elas podem apresentar erros ou imprecisões.
+
+---
+
+# Privacidade e dados
+
+O Growly utiliza autenticação e recursos de armazenamento para funcionalidades personalizadas.
+
+As imagens destinadas à melhoria futura do modelo somente entram no fluxo de contribuição quando o usuário realiza a autorização prevista pela aplicação.
+
+O projeto procura separar:
+
+```text
+dados estruturados
+      │
+      └── PostgreSQL
+
+arquivos privados
+      │
+      └── Supabase Storage
+
+controle de acesso
+      │
+      ├── autenticação
+      ├── RLS
+      └── Storage Policies
+
+serviços protegidos
+      │
+      └── Edge Functions
+```
+
+As políticas e implementações relacionadas a dados devem continuar sendo revisadas conforme o projeto evolui.
+
+---
+
+# Referências principais
+
+A pesquisa acadêmica que fundamenta o Growly utiliza bibliografia especializada sobre PANCs, alimentação, sustentabilidade e tecnologia.
+
+Entre as referências centrais utilizadas no trabalho estão:
+
+**KINUPP, Valdely Ferreira; LORENZI, Harri.** *Plantas alimentícias não convencionais (PANC) no Brasil: guia de identificação, aspectos nutricionais e receitas ilustradas.* Nova Odessa: Instituto Plantarum de Estudos da Flora, 2014.
+
+**SOBREIRA, Marina; SAMPAIO, Valéria Silva; SOUZA, Elnatan Bezerra.** Plantas Alimentícias Não Convencionais (PANC) e o desafio de valorizar a riqueza desconhecida: estudo de caso no município de Itaiçaba, Ceará. *Revista Brasileira de Geografia Física*, v. 15, n. 5, p. 2164–2177, 2022.
+
+A relação completa de referências deve ser consultada na documentação acadêmica do projeto.
+
+---
+
+# Agradecimentos
+
+A equipe agradece à **ETEC Professor Camargo Aranha**, aos professores e orientadores que acompanharam o desenvolvimento, à **Horta das Flores** pela parceria e pelo contato prático com as espécies, às instituições que apoiaram a trajetória do projeto e às pessoas que participaram de testes, avaliações, apresentações e discussões ao longo do TCC.
+
+O Growly foi construído de forma incremental. Cada coleta de imagens, teste, erro encontrado, correção, mudança de arquitetura e nova versão contribuiu para chegar ao sistema atual.
+
+---
+
+# Continuidade do Growly
+
+A versão 1.05.6 representa o estado atual do projeto, mas não necessariamente seu estado final.
+
+A arquitetura foi organizada para permitir a evolução independente de diferentes componentes. Novos modelos podem substituir versões anteriores do classificador; novas espécies podem ser adicionadas ao catálogo; regras de segurança podem ser fortalecidas; a Eden pode evoluir; e novas interfaces podem ser desenvolvidas sem exigir que todo o sistema seja reconstruído.
+
+Os principais desafios para essa continuidade estão relacionados à qualidade dos dados, validação do modelo, segurança, manutenção das integrações e expansão responsável do conteúdo.
+
+O crescimento do projeto deve priorizar **qualidade e confiabilidade**, e não apenas quantidade de funcionalidades.
 
 ---
 
@@ -1378,6 +1790,8 @@ O Growly não é uma aplicação exclusiva da instituição: a plataforma foi de
 
 *Onde cada planta encontra seu caminho para florescer.*
 
-São Paulo — 2026
+**Versão 1.05.6 · São Paulo · 2026**
+
+[Aplicação](https://growly.com.br/) · [Repositório](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho)
 
 </div>
