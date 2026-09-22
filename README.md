@@ -1,119 +1,246 @@
 <div align="center">
 
-# 🌱 Growly
+# 🌱 Growly — Site
 
-### Onde cada planta encontra seu caminho para florescer.
+### Branch de publicação da aplicação web
 
-**Aplicação web responsiva para identificação e conhecimento sobre Plantas Alimentícias Não Convencionais (PANCs)**
+**Versão atual: 1.05.6**
 
+[![Produção](https://img.shields.io/badge/produção-growly.com.br-315b45?style=flat-square)](https://growly.com.br/)
 [![Versão](https://img.shields.io/badge/versão-1.05.6-315b45?style=flat-square)](https://growly.com.br/)
-[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-6f8f72?style=flat-square)](https://growly.com.br/)
-[![Front-end](https://img.shields.io/badge/front--end-HTML%20%7C%20CSS%20%7C%20JavaScript-315b45?style=flat-square)](#stack-tecnológica)
-[![Backend](https://img.shields.io/badge/backend-Supabase-315b45?style=flat-square)](#backend-e-persistência)
-[![IA](https://img.shields.io/badge/IA-TensorFlow.js%20%7C%20Gemini-315b45?style=flat-square)](#inteligência-artificial)
+[![Branch](https://img.shields.io/badge/branch-site-6f8f72?style=flat-square)](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/site)
 
-**[Acessar a aplicação](https://growly.com.br/) · [Repositório](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho)**
+**[Acessar o Growly](https://growly.com.br/) · [Documentação completa na main](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/main)**
 
 </div>
 
 ---
 
-## Sobre o projeto
+## Sobre esta branch
 
-O **Growly** é uma aplicação web responsiva desenvolvida como Trabalho de Conclusão de Curso do Técnico em Desenvolvimento de Sistemas da **ETEC Professor Camargo Aranha**.
+A branch `site` contém a estrutura utilizada pela versão web publicada do **Growly**.
 
-O projeto utiliza Inteligência Artificial para auxiliar na identificação de **Plantas Alimentícias Não Convencionais (PANCs)** a partir de imagens e reúne, em uma mesma plataforma, recursos de consulta, organização e interação relacionados às espécies cadastradas.
+Enquanto a branch `main` preserva o histórico de desenvolvimento, as versões do TCC e a documentação técnica completa do projeto, a `site` é voltada à **aplicação em produção**.
 
-A proposta surgiu a partir de um problema observado durante a pesquisa: apesar de apresentarem potencial alimentício, nutricional, cultural e ambiental, diversas PANCs ainda são pouco conhecidas ou utilizadas. A dificuldade de reconhecer essas espécies e o acesso limitado a informações contribuem para sua subutilização.
+Este README, portanto, possui uma finalidade mais prática. Ele explica:
 
-O Growly procura aproximar tecnologia e conhecimento sobre PANCs por meio de uma experiência acessível em navegadores desktop e mobile. Atualmente, o sistema integra:
+- como utilizar as principais funcionalidades do Growly;
+- como executar o site localmente;
+- como funciona o scanner;
+- quais serviços são necessários;
+- como a estrutura publicada se relaciona com a `main`;
+- cuidados ao atualizar a versão em produção;
+- problemas comuns durante desenvolvimento e testes.
 
-- classificação de imagens com **TensorFlow.js**;
-- modelo treinado e exportado pelo **Teachable Machine**;
-- catálogo de espécies;
-- Jardim Virtual por usuário;
-- autenticação com **Supabase Auth**;
-- persistência em **PostgreSQL**;
-- armazenamento privado de imagens com **Supabase Storage**;
-- políticas de acesso com **Row Level Security (RLS)**;
-- backend serverless por **Supabase Edge Functions**;
-- assistente conversacional **Eden IA**, integrada à **Gemini API**;
-- coleta consentida de imagens para aprimoramentos futuros;
-- fluxo administrativo de revisão das contribuições.
-
-> O Growly não é apenas um classificador de imagens. A identificação é uma das partes de uma plataforma voltada ao acesso, organização e ampliação do conhecimento sobre PANCs.
+> Para arquitetura detalhada, banco de dados, Inteligência Artificial, metodologia, segurança, histórico completo e documentação acadêmica, consulte o README da branch `main`.
 
 ---
 
 ## Sumário
 
-1. [Problema e objetivo](#problema-e-objetivo)
-2. [PANCs](#pancs)
-3. [Funcionalidades](#funcionalidades)
-4. [Arquitetura do sistema](#arquitetura-do-sistema)
-5. [Stack tecnológica](#stack-tecnológica)
-6. [Sistema de identificação](#sistema-de-identificação)
-7. [Modelo de Inteligência Artificial](#modelo-de-inteligência-artificial)
-8. [Catálogo e Jardim Virtual](#catálogo-e-jardim-virtual)
-9. [Eden IA](#eden-ia)
-10. [Backend e persistência](#backend-e-persistência)
-11. [Banco de dados](#banco-de-dados)
-12. [Autenticação e autorização](#autenticação-e-autorização)
-13. [Storage e contribuição de imagens](#storage-e-contribuição-de-imagens)
-14. [Revisão administrativa](#revisão-administrativa)
-15. [Interface e responsividade](#interface-e-responsividade)
-16. [Segurança](#segurança)
-17. [Testes](#testes)
-18. [Decisões técnicas](#decisões-técnicas)
-19. [Limitações conhecidas](#limitações-conhecidas)
-20. [Evolução do projeto](#evolução-do-projeto)
-21. [Execução local](#execução-local)
-22. [Versionamento e deploy](#versionamento-e-deploy)
-23. [Roadmap](#roadmap)
-24. [Documentação acadêmica](#documentação-acadêmica)
-25. [Equipe](#equipe)
+1. [Acessando o Growly](#acessando-o-growly)
+2. [Como utilizar](#como-utilizar)
+3. [Identificando uma planta](#identificando-uma-planta)
+4. [Entendendo o resultado](#entendendo-o-resultado)
+5. [Explorar](#explorar)
+6. [Meu Jardim](#meu-jardim)
+7. [Eden IA](#eden-ia)
+8. [Contribuição de imagens](#contribuição-de-imagens)
+9. [Aviso sobre identificação](#aviso-sobre-identificação)
+10. [Funcionamento técnico resumido](#funcionamento-técnico-resumido)
+11. [Executando localmente](#executando-localmente)
+12. [Serviços utilizados](#serviços-utilizados)
+13. [Estrutura da aplicação](#estrutura-da-aplicação)
+14. [Branches](#branches)
+15. [Atualizando a versão publicada](#atualizando-a-versão-publicada)
+16. [Testando antes de publicar](#testando-antes-de-publicar)
+17. [Problemas comuns](#problemas-comuns)
+18. [Segurança](#segurança)
+19. [Status atual](#status-atual)
+20. [Documentação](#documentação)
+21. [Equipe](#equipe)
 
 ---
 
-## Problema e objetivo
+# Acessando o Growly
 
-### Problema de pesquisa
+A versão pública está disponível em:
 
-O projeto parte da seguinte questão:
+## https://growly.com.br/
 
-> Como uma aplicação baseada em Inteligência Artificial, capaz de identificar PANCs por meio da análise de imagens, pode auxiliar no reconhecimento dessas plantas e ampliar o acesso da população às informações sobre elas?
+O Growly é uma **aplicação web responsiva**, portanto não é necessário instalar um aplicativo para utilizar a versão publicada.
 
-### Objetivo geral
+O acesso pode ser realizado por navegadores modernos em:
 
-Desenvolver uma **aplicação web responsiva baseada em Inteligência Artificial** capaz de identificar PANCs por meio da análise de imagens e disponibilizar informações sobre as espécies identificadas.
+- smartphones;
+- tablets;
+- notebooks;
+- computadores.
 
-### Objetivos técnicos e funcionais
-
-O desenvolvimento envolve:
-
-- estudar técnicas de Inteligência Artificial e visão computacional;
-- produzir e organizar um dataset de imagens;
-- treinar um modelo de classificação;
-- executar o modelo diretamente no navegador;
-- desenvolver uma interface responsiva;
-- integrar autenticação, banco de dados e armazenamento;
-- estruturar informações das espécies em uma base centralizada;
-- implementar recursos personalizados por usuário;
-- integrar uma assistente conversacional;
-- testar o sistema em diferentes dispositivos e condições;
-- criar um processo de coleta e curadoria de novas imagens.
+Algumas funcionalidades dependem de permissões do navegador, principalmente o acesso à câmera.
 
 ---
 
-## PANCs
+# Como utilizar
 
-PANC é a sigla para **Planta Alimentícia Não Convencional**.
+O Growly reúne diferentes funcionalidades relacionadas às Plantas Alimentícias Não Convencionais.
 
-O conceito abrange plantas que possuem uma ou mais partes com potencial alimentício, mas não fazem parte da alimentação cotidiana da maior parte da população em determinado contexto. O caráter "não convencional" depende também de fatores regionais e culturais.
+O fluxo básico de utilização pode ser representado por:
 
-O Growly trabalha atualmente com cinco espécies principais:
+```text
+Acessar o Growly
+       │
+       ├── Explorar espécies
+       │
+       ├── Criar conta / Entrar
+       │
+       ├── Identificar uma planta
+       │       │
+       │       ├── selecionar 4 fotos
+       │       ├── executar análise
+       │       ├── consultar resultado
+       │       └── contribuir com imagens
+       │
+       ├── Organizar Meu Jardim
+       │
+       └── Conversar com a Eden IA
+```
 
-| Espécie | Classe utilizada pelo modelo |
+---
+
+# Criando uma conta
+
+Algumas funcionalidades dependem de autenticação.
+
+Na área de cadastro, informe os dados solicitados e crie uma senha válida.
+
+A senha deve possuir:
+
+```text
+mínimo de 6 caracteres
++ uma letra maiúscula
++ um número
++ um caractere especial
+```
+
+A interface informa quais requisitos já foram cumpridos.
+
+Também é necessário confirmar a senha antes de finalizar o cadastro.
+
+Dependendo da configuração de autenticação ativa, poderá ser necessário confirmar o endereço de e-mail.
+
+Após a autenticação, o Growly mantém uma sessão para relacionar a conta às funcionalidades personalizadas.
+
+---
+
+# Identificando uma planta
+
+A identificação é uma das principais funcionalidades da aplicação.
+
+## 1. Abra o scanner
+
+Acesse a área de identificação do Growly.
+
+## 2. Forneça quatro imagens
+
+O sistema utiliza **quatro fotografias da mesma planta**.
+
+As imagens podem ser:
+
+- capturadas pela câmera;
+- selecionadas da galeria do dispositivo.
+
+Para obter entradas melhores para o classificador, procure utilizar fotografias nítidas, com a planta visível e sem obstruções desnecessárias.
+
+As quatro fotografias devem representar **a mesma planta**.
+
+## 3. Confira a pré-visualização
+
+Antes de iniciar a análise, o Growly apresenta as imagens selecionadas.
+
+Verifique se:
+
+```text
+[1] todas pertencem à mesma planta
+[2] a planta está visível
+[3] não há imagem selecionada por engano
+[4] as quatro posições foram preenchidas
+```
+
+Se necessário, remova uma imagem e selecione outra.
+
+## 4. Inicie a análise
+
+Depois que as quatro imagens estiverem prontas, inicie a identificação.
+
+O modelo processa cada fotografia individualmente.
+
+## 5. Aguarde o resultado
+
+O Growly combina as previsões das quatro análises e apresenta a espécie com maior pontuação média.
+
+---
+
+# Entendendo o resultado
+
+O resultado pode apresentar:
+
+- espécie sugerida;
+- nível de confiança;
+- imagens utilizadas;
+- outras previsões relevantes;
+- ações relacionadas à espécie;
+- opção de contribuição das fotografias.
+
+## O que significa a confiança?
+
+A confiança representa a pontuação calculada pelo modelo para aquela classe.
+
+Ela **não representa uma confirmação botânica**.
+
+Por exemplo, um resultado com confiança elevada significa que, entre as classes conhecidas pelo modelo, aquela recebeu a maior probabilidade de acordo com as imagens analisadas.
+
+Isso não garante que a planta realmente pertença à espécie indicada.
+
+---
+
+# Como o scanner chega ao resultado
+
+Cada uma das quatro fotografias produz probabilidades para as classes conhecidas.
+
+De forma simplificada:
+
+```text
+Foto 1 ──> previsões
+Foto 2 ──> previsões
+Foto 3 ──> previsões
+Foto 4 ──> previsões
+              │
+              ▼
+       média por classe
+              │
+              ▼
+        maior resultado
+              │
+              ▼
+       espécie sugerida
+```
+
+Para uma classe `c`:
+
+```text
+P(c) = (p1 + p2 + p3 + p4) / 4
+```
+
+A utilização de quatro fotografias foi adotada depois de testes com uma única imagem apresentarem maior variação nos resultados.
+
+---
+
+# Espécies reconhecidas
+
+A versão atual do modelo trabalha principalmente com cinco PANCs:
+
+| Espécie | Classe interna |
 |---|---|
 | Peixinho-da-horta | `peixinho` |
 | Tanchagem | `tanchagem` |
@@ -121,513 +248,233 @@ O Growly trabalha atualmente com cinco espécies principais:
 | Vinagreira | `vinagreira` |
 | Taioba | `taioba` |
 
-O modelo também utiliza as classes auxiliares:
+Também existem classes auxiliares utilizadas pelo classificador para lidar com entradas diferentes das cinco espécies principais.
 
-| Classe | Finalidade |
-|---|---|
-| `nd` | auxiliar no tratamento de entradas que não correspondem às espécies treinadas |
-| `pessoa` | auxiliar no tratamento de imagens contendo pessoas |
+O escopo do modelo é limitado às classes para as quais ele foi treinado.
 
 ---
 
-# Funcionalidades
+# Explorar
 
-## Identificação por imagens
+A área **Explorar** permite consultar as espécies disponíveis no Growly sem utilizar o scanner.
 
-O usuário fornece **quatro fotografias da mesma planta**, obtidas pela câmera do dispositivo ou selecionadas da galeria.
+Ela funciona como um catálogo conectado ao banco de dados.
 
-Antes da análise, as imagens aparecem em uma grade de pré-visualização e podem ser removidas ou substituídas.
+Esse recurso é útil para quem deseja:
 
-Após a classificação, a interface apresenta:
+- conhecer as PANCs cadastradas;
+- consultar informações de uma espécie;
+- navegar pelo conteúdo sem realizar uma identificação.
 
-- as quatro imagens utilizadas;
-- espécie sugerida;
-- nível de confiança;
-- previsões consideradas relevantes;
-- ações relacionadas ao Jardim;
-- possibilidade de contribuição das fotografias, mediante autorização.
-
-## Explorar
-
-O catálogo permite consultar as PANCs cadastradas sem executar o classificador.
-
-As informações gerais das espécies ficam centralizadas no banco de dados e são reutilizadas por outras funcionalidades.
-
-## Meu Jardim
-
-O Jardim Virtual representa a coleção pessoal do usuário.
-
-Em vez de duplicar os dados completos de uma PANC para cada conta, o sistema registra a relação entre o usuário e o registro da espécie existente no catálogo.
-
-## Eden IA
-
-Interface conversacional integrada à Gemini API por uma Edge Function.
-
-A Eden complementa o conteúdo estruturado do catálogo permitindo perguntas em linguagem natural.
-
-## Contribuição para o dataset
-
-Depois de uma identificação, o usuário pode autorizar o armazenamento privado das fotografias para contribuir com versões futuras do modelo.
-
-A contribuição é opcional e independente do funcionamento normal do scanner.
-
-## Administração
-
-As imagens contribuídas podem passar por revisão da equipe antes de serem consideradas para futuros datasets.
+O catálogo também é utilizado internamente por outras funcionalidades. Quando o scanner identifica uma classe, o resultado é relacionado ao registro correspondente no banco.
 
 ---
 
-# Arquitetura do sistema
+# Meu Jardim
 
-A arquitetura atual pode ser dividida em quatro camadas:
+O **Meu Jardim** funciona como uma coleção pessoal de PANCs.
 
-```text
-┌──────────────────────────────────────────────────────────────┐
-│                         CLIENTE                              │
-│                    Navegador Web                             │
-└─────────────────────────────┬────────────────────────────────┘
-                              │
-                              ▼
-┌──────────────────────────────────────────────────────────────┐
-│                    CAMADA DE APRESENTAÇÃO                    │
-│                                                              │
-│              HTML5 + CSS3 + JavaScript                       │
-│                                                              │
-│  Login | Explorar | Scanner | Jardim | Eden | Configurações │
-└──────────────┬───────────────────────────────┬───────────────┘
-               │                               │
-               │                               │
-      Inferência local                  Serviços remotos
-               │                               │
-               ▼                               ▼
-┌──────────────────────────┐       ┌───────────────────────────┐
-│      TensorFlow.js       │       │         SUPABASE          │
-│                          │       │                           │
-│ model.json               │       │ Auth                      │
-│ metadata.json            │       │ PostgreSQL                │
-│ weights.bin              │       │ Storage                   │
-│                          │       │ Row Level Security        │
-│ Classificação no browser │       │ Edge Functions            │
-└──────────────────────────┘       └─────────────┬─────────────┘
-                                                │
-                                                │ HTTPS
-                                                ▼
-                                    ┌───────────────────────────┐
-                                    │        GEMINI API         │
-                                    │                           │
-                                    │          Eden IA          │
-                                    └───────────────────────────┘
-```
+Depois de autenticado, o usuário pode adicionar espécies ao Jardim e consultar posteriormente os itens salvos.
 
-### 1. Apresentação
+O Jardim não cria uma cópia completa das informações da planta para cada usuário.
 
-O front-end é executado no navegador e utiliza **HTML5, CSS3 e JavaScript**.
-
-Essa camada é responsável por:
-
-- estrutura das páginas;
-- componentes visuais;
-- navegação;
-- validações de interface;
-- interação com câmera/galeria;
-- scanner;
-- apresentação dos resultados;
-- chamadas aos serviços do Supabase;
-- interação com a Eden.
-
-### 2. Serviços
-
-O **Supabase** atua como infraestrutura principal de backend.
-
-Nele são utilizados:
-
-- autenticação;
-- banco de dados;
-- Storage;
-- políticas de acesso;
-- funções server-side.
-
-### 3. Persistência
-
-Os dados estruturados são armazenados em **PostgreSQL**.
-
-Arquivos que precisam permanecer privados, principalmente imagens contribuídas, utilizam **Supabase Storage**.
-
-### 4. Inteligência Artificial
-
-O Growly utiliza duas arquiteturas de IA diferentes:
-
-**Classificação visual:** executada localmente no navegador com TensorFlow.js.
-
-**IA generativa:** executada por um serviço externo, com a comunicação intermediada por uma Edge Function.
-
-Essa separação evita tratar os dois recursos como se fossem um único sistema de IA.
-
----
-
-# Stack tecnológica
-
-| Camada | Tecnologia | Utilização |
-|---|---|---|
-| Estrutura | HTML5 | Estrutura semântica das páginas |
-| Interface | CSS3 | Layout, identidade visual e responsividade |
-| Lógica | JavaScript | Eventos, scanner, integração e manipulação da interface |
-| ML no cliente | TensorFlow.js | Execução do classificador no navegador |
-| Treinamento | Teachable Machine | Treinamento e exportação do modelo |
-| Backend | Supabase | Serviços de backend |
-| Banco | PostgreSQL | Persistência dos dados estruturados |
-| Autenticação | Supabase Auth | Cadastro, login e sessões |
-| Arquivos | Supabase Storage | Armazenamento privado de imagens |
-| Autorização | RLS | Controle de acesso aos registros |
-| Serverless | Edge Functions | Operações protegidas no backend |
-| IA generativa | Gemini API | Geração das respostas da Eden |
-| Versionamento | Git | Histórico e branches |
-| Repositório | GitHub | Código e publicação |
-| Editor principal | Visual Studio Code | Desenvolvimento |
-| Debug | Chrome DevTools | Inspeção e diagnóstico |
-
-Tecnologias utilizadas ou estudadas em outras etapas do projeto incluem MySQL, MySQL Workbench, XAMPP, phpMyAdmin, PHP, PyCharm e React Native.
-
----
-
-# Sistema de identificação
-
-## Pipeline de inferência
-
-O scanner foi projetado para utilizar **quatro imagens** da mesma planta.
-
-O pipeline pode ser representado por:
+De maneira simplificada:
 
 ```text
-1. Aquisição
-      │
-      ├── Câmera
-      └── Galeria
-      │
-      ▼
-2. Validação das 4 imagens
-      │
-      ▼
-3. Pré-visualização
-      │
-      ▼
-4. Processamento individual
-      │
-      ├── imagem_1 → modelo → vetor P1
-      ├── imagem_2 → modelo → vetor P2
-      ├── imagem_3 → modelo → vetor P3
-      └── imagem_4 → modelo → vetor P4
-      │
-      ▼
-5. Agregação por classe
-      │
-      ▼
-6. Ranking das probabilidades médias
-      │
-      ▼
-7. Normalização do label
-      │
-      ▼
-8. Associação ao registro em `pancs`
-      │
-      ▼
-9. Renderização do resultado
-```
-
-## Agregação das previsões
-
-Para cada fotografia, o classificador retorna um conjunto de probabilidades.
-
-Se uma classe `c` possuir as probabilidades:
-
-```text
-p1(c), p2(c), p3(c), p4(c)
-```
-
-a pontuação utilizada pelo Growly é:
-
-```text
-P(c) = [p1(c) + p2(c) + p3(c) + p4(c)] / 4
-```
-
-Em notação matemática:
-
-\[
-P(c)=\frac{1}{4}\sum_{i=1}^{4}p_i(c)
-\]
-
-A classe com maior média é utilizada como a principal sugestão.
-
-### Por que quatro imagens?
-
-As primeiras implementações trabalhavam com uma única imagem. Durante os testes foram observadas variações significativas dependendo de fatores como ângulo, iluminação e enquadramento.
-
-A estratégia de quatro fotografias foi adotada para reduzir a dependência de uma única captura.
-
-Ela **não elimina erros de classificação** e não substitui a necessidade de melhorar o dataset.
-
----
-
-# Modelo de Inteligência Artificial
-
-## Treinamento
-
-O classificador foi desenvolvido utilizando **Teachable Machine** e exportado para TensorFlow.js.
-
-O modelo atual utiliza:
-
-```text
-model/
-├── model.json
-├── metadata.json
-└── weights.bin
-```
-
-### Responsabilidade dos arquivos
-
-`model.json`  
-Define a arquitetura e referencia os pesos utilizados pelo modelo.
-
-`metadata.json`  
-Contém metadados relacionados ao modelo e às classes.
-
-`weights.bin`  
-Contém os pesos aprendidos durante o treinamento.
-
-## Entrada
-
-Os metadados da versão atual indicam uma entrada de:
-
-```text
-224 × 224 px
-```
-
-O TensorFlow.js utiliza essa representação durante o processamento das imagens.
-
-## Dataset
-
-A construção do dataset buscou incluir variação em:
-
-- ângulo;
-- distância;
-- iluminação;
-- fundo;
-- enquadramento;
-- aparência das plantas.
-
-A equipe também produziu registros fotográficos próprios, incluindo imagens obtidas a partir da parceria com a **Horta das Flores**.
-
-## Classes atuais
-
-```text
-vinagreira
-tanchagem
-peixinho
-ora
-taioba
-nd
-pessoa
-```
-
-## Normalização dos labels
-
-A saída do classificador não pode ser utilizada diretamente em todas as operações do sistema.
-
-Depois da inferência, o label precisa ser relacionado ao registro correspondente no catálogo.
-
-O sistema utiliza normalização e informações como:
-
-- nome;
-- slug;
-- nomes alternativos.
-
-Essa etapa desacopla o nome interno da classe do identificador utilizado pelo banco.
-
-## Problema de mapeamento identificado nos testes
-
-Durante o desenvolvimento, algumas classificações aparentemente incorretas não eram causadas pelo modelo.
-
-Foi identificado um problema no mapeamento entre a saída do classificador e os rótulos utilizados pela aplicação. Após a correção, parte das divergências deixou de ocorrer.
-
-Esse caso levou a uma distinção importante durante o diagnóstico:
-
-```text
-erro de classificação ≠ erro de integração
-```
-
-Antes de retreinar o modelo, é necessário verificar se:
-
-1. o modelo retornou a classe correta;
-2. os metadados estão alinhados;
-3. o JavaScript interpreta o índice correto;
-4. a normalização aponta para a espécie correta;
-5. o registro correspondente existe no banco.
-
-## Instabilidade observada
-
-Mesmo após a correção da integração, alguns testes continuaram apresentando inconsistências.
-
-As classes que demonstraram maior instabilidade em determinadas condições foram:
-
-- Tanchagem;
-- Vinagreira.
-
-Isso direcionou a continuidade do trabalho para ampliação e melhor balanceamento do dataset.
-
----
-
-# Catálogo e Jardim Virtual
-
-## Catálogo
-
-A tabela de PANCs funciona como fonte central das informações das espécies.
-
-Isso permite reutilizar o mesmo registro em:
-
-```text
-Explorar
+Usuário
    │
-   ├── Scanner
-   ├── Resultado
-   └── Jardim
+   ▼
+Meu Jardim
+   │
+   ▼
+Referência à PANC
+   │
+   ▼
+Catálogo
 ```
 
-A centralização evita manter cópias independentes da mesma espécie em diferentes funcionalidades.
+Isso permite manter as informações gerais da espécie centralizadas.
 
-## Jardim Virtual
+## Quando a planta já está no Jardim
 
-Conceitualmente, o Jardim representa uma relação muitos-para-muitos entre usuários e PANCs.
+Uma espécie já salva não impede necessariamente uma nova contribuição.
 
-```text
-USUÁRIO
-   │
-   │ 1
-   │
-   ▼ N
-JARDIM
-   │
-   │ N
-   │
-   ▼ 1
-PANC
-```
-
-Assim, o Jardim armazena a relação entre entidades em vez de duplicar todas as informações botânicas.
-
-### Operações
-
-Um usuário autenticado pode:
-
-- consultar seu Jardim;
-- adicionar uma espécie;
-- remover uma espécie;
-- abrir as informações da PANC;
-- continuar contribuindo com imagens de uma espécie já salva.
-
-Quando a espécie já pertence ao Jardim, o fluxo pode oferecer a ação:
+Depois de uma nova identificação, a aplicação pode disponibilizar:
 
 ```text
 Enviar novas fotos
 ```
 
-em vez de impedir completamente uma nova contribuição.
+permitindo contribuir novamente com imagens sem remover a espécie do Jardim.
 
 ---
 
 # Eden IA
 
-A Eden é implementada separadamente do classificador de imagens.
+A **Eden** é a assistente conversacional do Growly.
 
-## Fluxo
+Ela permite fazer perguntas relacionadas às PANCs por meio de uma interface de chat.
 
-```text
-┌────────────┐
-│  Usuário   │
-└─────┬──────┘
-      │ mensagem
-      ▼
-┌────────────┐
-│ Front-end  │
-│ JavaScript │
-└─────┬──────┘
-      │ request
-      ▼
-┌────────────────────┐
-│ Supabase            │
-│ Edge Function       │
-│ `eden`              │
-└─────────┬──────────┘
-          │
-          ├── instruções da assistente
-          ├── mensagem atual
-          └── histórico recente
-          │
-          ▼
-┌────────────────────┐
-│ Gemini API          │
-└─────────┬──────────┘
-          │ resposta
-          ▼
-┌────────────────────┐
-│ Edge Function       │
-└─────────┬──────────┘
-          │
-          ▼
-┌────────────────────┐
-│ Interface do chat  │
-└────────────────────┘
-```
-
-## Por que uma Edge Function?
-
-Fazer a requisição diretamente pelo JavaScript do navegador exigiria expor a credencial da API no cliente.
-
-Por isso:
+## Fluxo simplificado
 
 ```text
-INCORRETO
-
-browser ─── API_KEY ───> Gemini
-
-
-ARQUITETURA UTILIZADA
-
-browser ───> Edge Function ─── segredo no backend ───> Gemini
+Usuário
+   │
+   ▼
+Eden
+   │
+   ▼
+Supabase Edge Function
+   │
+   ▼
+Gemini API
+   │
+   ▼
+Edge Function
+   │
+   ▼
+Resposta no chat
 ```
 
-A chave permanece no ambiente protegido do backend.
+A comunicação com a Gemini API não é realizada diretamente pelo navegador.
 
-## Contexto da conversa
+Uma Edge Function atua como intermediária, mantendo a credencial do serviço fora do código público do front-end.
 
-A requisição inclui:
+Parte do histórico recente da conversa é enviada junto com a mensagem atual para manter contexto entre as interações.
 
-- mensagem atual;
-- parte do histórico recente;
-- instruções responsáveis por orientar o comportamento da Eden.
+## Falhas temporárias
 
-Isso permite manter continuidade limitada entre mensagens sem transformar todo o histórico em uma requisição indefinidamente crescente.
+Serviços externos podem ficar temporariamente indisponíveis.
 
-## Tratamento de HTTP 503
+A integração possui tratamento para determinadas respostas `HTTP 503` e pode realizar novas tentativas antes de informar uma falha ao usuário.
 
-A integração implementa tratamento para indisponibilidade temporária.
+## Importante
 
-Quando o serviço retorna `HTTP 503`, a função pode executar **até três tentativas**, utilizando períodos progressivos de espera.
+A Eden utiliza Inteligência Artificial generativa.
 
-Caso nenhuma tentativa tenha sucesso, um erro é devolvido ao front-end para tratamento pela interface.
-
-## Limitações
-
-A Eden utiliza IA generativa e pode produzir informações imprecisas.
-
-Ela é um recurso complementar e não deve ser utilizada como única fonte para decisões relacionadas à identificação ou consumo de plantas.
+Suas respostas podem conter erros ou imprecisões e não substituem fontes especializadas.
 
 ---
 
-# Backend e persistência
+# Contribuição de imagens
 
-O projeto começou com uma estrutura de banco baseada em **MySQL**, utilizando ferramentas como MySQL Workbench, XAMPP e phpMyAdmin.
+O Growly possui um processo opcional de contribuição de fotografias.
 
-Com a evolução da aplicação, o backend foi reestruturado para:
+Depois de uma identificação, o usuário pode autorizar o envio das imagens utilizadas para uma área privada destinada ao aprimoramento futuro do modelo.
+
+## O que acontece com uma contribuição?
+
+```text
+4 imagens
+   │
+   ▼
+autorização do usuário
+   │
+   ▼
+armazenamento privado
+   │
+   ▼
+registro dos metadados
+   │
+   ▼
+fila de revisão
+   │
+   ▼
+análise pela equipe
+```
+
+As imagens não devem ser tratadas automaticamente como exemplos corretos da espécie prevista pelo modelo.
+
+Antes de serem consideradas para futuros datasets, existe um processo de revisão.
+
+A contribuição é opcional e não é necessária para utilizar normalmente o scanner.
+
+---
+
+# Aviso sobre identificação
+
+> **O Growly é uma ferramenta educacional e assistiva. O resultado do scanner não constitui confirmação botânica absoluta.**
+
+Modelos de classificação podem errar.
+
+O resultado pode ser influenciado por:
+
+- iluminação;
+- foco;
+- enquadramento;
+- distância;
+- fundo;
+- ângulo;
+- qualidade da câmera;
+- aparência da planta;
+- semelhança entre espécies;
+- limitações do dataset.
+
+## Não consuma uma planta exclusivamente com base no resultado do Growly.
+
+Antes de qualquer decisão relacionada ao consumo, confirme a espécie utilizando fontes confiáveis e, quando necessário, profissionais adequados.
+
+---
+
+# Funcionamento técnico resumido
+
+A versão publicada utiliza a seguinte arquitetura:
+
+```text
+┌──────────────────────────────────────────────────┐
+│                    NAVEGADOR                     │
+│              HTML + CSS + JavaScript             │
+└───────────────┬──────────────────┬───────────────┘
+                │                  │
+                ▼                  ▼
+       ┌────────────────┐   ┌─────────────────────┐
+       │ TensorFlow.js  │   │      Supabase       │
+       │                │   │                     │
+       │ modelo local   │   │ Auth                │
+       │ classificação │   │ PostgreSQL          │
+       └────────────────┘   │ Storage             │
+                            │ RLS                 │
+                            │ Edge Functions      │
+                            └──────────┬──────────┘
+                                       │
+                                       ▼
+                               ┌──────────────┐
+                               │ Gemini API   │
+                               │   Eden IA    │
+                               └──────────────┘
+```
+
+A classificação visual e a Eden são recursos de IA diferentes.
+
+### Scanner
+
+```text
+browser → TensorFlow.js → modelo → resultado
+```
+
+### Eden
+
+```text
+browser → Supabase → Edge Function → Gemini
+```
+
+---
+
+# Serviços utilizados
+
+## TensorFlow.js
+
+Executa o modelo de classificação diretamente no navegador.
+
+## Teachable Machine
+
+Foi utilizado para treinamento e exportação do modelo de reconhecimento.
+
+## Supabase
+
+Fornece a infraestrutura de backend da versão atual.
+
+São utilizados:
 
 ```text
 Supabase
@@ -638,1147 +485,674 @@ Supabase
 └── Edge Functions
 ```
 
-A mudança permitiu centralizar serviços que anteriormente precisariam ser implementados ou hospedados separadamente.
+## Gemini API
+
+Utilizada pela Eden para geração das respostas conversacionais.
+
+A credencial é mantida no backend.
 
 ---
 
-# Banco de dados
+# Estrutura da aplicação
 
-Entre as tabelas utilizadas na estrutura atual estão:
+A organização exata pode evoluir entre versões. Conceitualmente, a branch publicada contém:
 
 ```text
-profiles
-pancs
-jardim
-identificacoes
-imagens
-mensagens
-admins
-imagens_treinamento
+/
+├── páginas HTML
+├── css/
+│   └── estilos da aplicação
+├── js/
+│   └── lógica e integrações
+├── assets/
+│   └── recursos visuais
+├── model/
+│   ├── model.json
+│   ├── metadata.json
+│   └── weights.bin
+├── docs/
+│   └── documentação disponibilizada pelo projeto
+└── outros recursos utilizados pela aplicação
 ```
 
-## Responsabilidades conceituais
+> Essa árvore é uma representação funcional e não deve ser interpretada como listagem exata de todos os arquivos existentes na versão atual.
 
-| Tabela | Responsabilidade |
-|---|---|
-| `profiles` | informações complementares relacionadas aos usuários |
-| `pancs` | catálogo central de espécies |
-| `jardim` | relação entre usuários e espécies salvas |
-| `identificacoes` | registros relacionados ao processo de identificação |
-| `imagens` | informações relacionadas às imagens do sistema |
-| `mensagens` | dados relacionados às interações/mensagens previstas pela aplicação |
-| `admins` | controle dos usuários com privilégios administrativos |
-| `imagens_treinamento` | metadados das imagens destinadas ao fluxo de contribuição/revisão |
+---
 
-> Os detalhes exatos de colunas, constraints e políticas devem ser consultados no schema SQL vigente do projeto. Este README descreve as responsabilidades arquiteturais sem inventar campos não documentados.
+# Modelo local
 
-## Modelo lógico simplificado
+O classificador exportado para TensorFlow.js utiliza principalmente:
 
 ```text
-                    ┌──────────────┐
-                    │   profiles   │
-                    │   user_id    │
-                    └──────┬───────┘
-                           │
-              ┌────────────┼─────────────┐
-              │            │             │
-              ▼            ▼             ▼
-       ┌────────────┐ ┌───────────┐ ┌───────────────────┐
-       │   jardim   │ │identific. │ │imagens_treinamento│
-       └─────┬──────┘ └───────────┘ └───────────────────┘
-             │
-             ▼
-       ┌────────────┐
-       │   pancs    │
-       └────────────┘
+model.json
+metadata.json
+weights.bin
 ```
 
-Esse diagrama é propositalmente simplificado: ele representa as relações funcionais descritas no projeto e não substitui o DER/schema SQL.
-
----
-
-# Autenticação e autorização
-
-## Supabase Auth
-
-O Supabase Auth gerencia:
-
-- criação de conta;
-- credenciais;
-- login;
-- sessão;
-- identificação do usuário autenticado.
-
-## Validação de cadastro
-
-A interface exige uma senha com:
-
-- mínimo de 6 caracteres;
-- pelo menos uma letra maiúscula;
-- pelo menos um número;
-- pelo menos um caractere especial.
-
-Também existe confirmação da senha antes do envio.
-
-A interface apresenta dinamicamente quais requisitos foram atendidos.
-
-## Confirmação de e-mail
-
-Dependendo da configuração ativa no Supabase, o usuário precisa confirmar o endereço de e-mail.
-
-O redirecionamento foi configurado para retornar ao domínio do Growly.
-
-## Sessão
-
-Após a autenticação, o Supabase disponibiliza uma sessão que permite identificar o usuário atual.
-
-As áreas protegidas utilizam uma verificação centralizada denominada:
-
-```js
-requireAuth()
-```
-
-A função é utilizada para impedir o carregamento de dados pessoais quando não existe uma sessão válida.
-
-## UUID
-
-Cada usuário é identificado por um UUID.
-
-Esse identificador é utilizado para relacionar a conta a recursos como:
-
-- Jardim;
-- identificações;
-- imagens autorizadas;
-- outros dados pessoais da aplicação.
-
-## Autenticação não é autorização
-
-Uma distinção importante na arquitetura é:
+Os metadados atuais definem uma entrada de imagem de:
 
 ```text
-AUTENTICAÇÃO
-"Quem é o usuário?"
-       │
-       └── Supabase Auth
-
-
-AUTORIZAÇÃO
-"O que esse usuário pode acessar?"
-       │
-       ├── Row Level Security
-       ├── Storage Policies
-       └── regras administrativas
+224 × 224 px
 ```
 
-Ocultar um botão no HTML ou JavaScript não é suficiente para proteger dados.
+O carregamento desses arquivos deve ocorrer por HTTP/HTTPS.
 
 ---
 
-# Storage e contribuição de imagens
+# Executando localmente
 
-As imagens autorizadas para melhoria futura do modelo são armazenadas em uma área privada do Supabase Storage.
-
-## Fluxo de contribuição
-
-```text
-Identificação concluída
-        │
-        ▼
-Usuário autoriza contribuição?
-        │
-   ┌────┴────┐
-   │         │
-  NÃO       SIM
-   │         │
-   ▼         ▼
-encerra   upload privado
-             │
-             ▼
-       grava metadados
-             │
-             ▼
-       fila de revisão
-```
-
-Os metadados podem registrar informações relacionadas a:
-
-- previsão;
-- confiança;
-- espécie;
-- origem;
-- usuário;
-- status de revisão.
-
-A coleta é opcional e não deve ser necessária para utilizar normalmente o scanner.
-
----
-
-# Revisão administrativa
-
-O Growly possui uma etapa de curadoria humana das imagens contribuídas.
-
-A área administrativa permite à equipe:
-
-- visualizar contribuições pendentes;
-- aprovar;
-- rejeitar;
-- corrigir a espécie associada;
-- desfazer a última ação;
-- organizar imagens aprovadas por espécie.
-
-## Pipeline de curadoria
-
-```text
-Storage privado
-      │
-      ▼
-imagem pendente
-      │
-      ▼
-revisão humana
-      │
- ┌────┴─────────────┐
- │                  │
- ▼                  ▼
-rejeitada        aprovada
-                    │
-                    ├── classe confirmada
-                    │
-                    └── classe corrigida
-                    │
-                    ▼
-              conjunto revisado
-                    │
-                    ▼
-           candidato a dataset
-                    │
-                    ▼
-             novo treinamento
-```
-
-A previsão inicial do modelo **não é tratada automaticamente como ground truth**. A revisão existe justamente para evitar retroalimentar erros do classificador.
-
----
-
-# Interface e responsividade
-
-A interface utiliza principalmente tons de verde e creme, componentes arredondados e elementos relacionados à natureza.
-
-A identidade visual busca equilibrar:
-
-```text
-tecnologia + natureza + simplicidade
-```
-
-## Responsividade
-
-O CSS utiliza:
-
-- dimensões flexíveis;
-- media queries;
-- adaptações específicas para telas menores.
-
-Foram realizados testes em computadores e smartphones.
-
-### Scanner
-
-A interface do scanner precisou acomodar:
-
-- quatro imagens;
-- pré-visualização;
-- remoção/substituição;
-- estado de processamento;
-- resultado;
-- confiança;
-- ações posteriores.
-
-### Eden
-
-A interface do chat recebeu ajustes específicos para:
-
-- rolagem;
-- área de digitação;
-- carregamento;
-- navegação pelo histórico;
-- retorno ao final da conversa.
-
-### Feedback de interface
-
-Foram implementados estados visuais para situações como:
-
-- carregamento;
-- sucesso;
-- erro;
-- seleção;
-- indisponibilidade.
-
----
-
-# Segurança
-
-A arquitetura aplica controles em diferentes níveis.
-
-## 1. Credenciais
-
-Segredos de serviços externos não devem permanecer no JavaScript público.
-
-A chave da Gemini API é utilizada no backend por meio da Edge Function.
-
-## 2. Row Level Security
-
-RLS restringe operações no PostgreSQL com base no contexto do usuário autenticado.
-
-Isso permite que dados pessoais sejam protegidos no próprio backend.
-
-Exemplo conceitual:
-
-```text
-Usuário A ─── pode modificar ───> Jardim A
-Usuário A ─── NÃO pode modificar ───> Jardim B
-```
-
-## 3. Storage Policies
-
-Arquivos privados possuem políticas próprias de acesso.
-
-A proteção não depende de a URL estar escondida na interface.
-
-## 4. Administração
-
-Uma interface administrativa não deve ser considerada protegida apenas porque o link não aparece para usuários comuns.
-
-A autorização deve ser validada com base nos privilégios associados à conta.
-
-## 5. Front-end público
-
-Como o código JavaScript enviado ao navegador pode ser inspecionado, nenhuma informação realmente secreta deve depender de ofuscação ou de elementos ocultos no cliente.
-
----
-
-# Testes
-
-O desenvolvimento foi incremental e os testes ocorreram ao longo das versões.
-
-## Áreas verificadas
-
-### Interface
-
-- navegação;
-- responsividade;
-- posicionamento;
-- rolagem;
-- imagens;
-- estados visuais.
-
-### Autenticação
-
-- cadastro;
-- validação da senha;
-- confirmação de e-mail;
-- login;
-- sessão;
-- redirecionamento;
-- páginas protegidas.
-
-### Scanner
-
-- carregamento do modelo;
-- câmera;
-- galeria;
-- quatro imagens;
-- pré-visualização;
-- inferência;
-- agregação;
-- mapeamento de classes;
-- resultado.
-
-### IA
-
-- classificações corretas/incorretas;
-- consistência em diferentes ângulos;
-- fundos;
-- iluminação;
-- entradas inválidas;
-- níveis de confiança.
-
-### Backend
-
-- consultas;
-- relações com usuário;
-- Storage;
-- permissões;
-- integração com Edge Functions.
-
-### Eden
-
-- envio de mensagens;
-- resposta;
-- histórico;
-- indisponibilidade temporária;
-- interface mobile.
-
-### Deploy
-
-Após a publicação, os testes foram repetidos porque determinados problemas aparecem somente no ambiente hospedado, principalmente:
-
-- caminhos de arquivos;
-- carregamento de recursos;
-- permissões do navegador;
-- diferenças entre dispositivos.
-
-## Processo
-
-```text
-implementação
-     │
-     ▼
-teste
-     │
-     ▼
-diagnóstico
-     │
-     ▼
-correção
-     │
-     ▼
-regressão / novo teste
-     │
-     └──────────► próxima iteração
-```
-
----
-
-# Decisões técnicas
-
-## Por que uma aplicação web responsiva?
-
-A versão atual pode ser utilizada diretamente pelo navegador, permitindo acesso em computadores e dispositivos móveis sem exigir uma instalação nativa específica.
-
-## Por que TensorFlow.js?
-
-A execução no navegador permite realizar a inferência do classificador no próprio cliente.
-
-A arquitetura do scanner é, portanto, diferente da Eden: a classificação visual não precisa enviar cada inferência para uma API de IA externa.
-
-## Por que quatro imagens?
-
-Porque os testes com uma única fotografia apresentaram variação relevante. A agregação de quatro previsões reduz a dependência de uma captura isolada.
-
-## Por que Supabase?
-
-A evolução para Supabase/PostgreSQL reuniu recursos de:
-
-- persistência;
-- autenticação;
-- armazenamento;
-- autorização;
-- funções server-side.
-
-## Por que RLS?
-
-Porque verificar o usuário somente no front-end não protege o banco.
-
-As regras de autorização precisam existir também na camada que efetivamente fornece os dados.
-
-## Por que Edge Function na Eden?
-
-Para evitar expor a chave da Gemini API e separar a integração externa do código público executado pelo navegador.
-
-## Por que revisão humana das imagens?
-
-Porque usar automaticamente a própria previsão do modelo como rótulo para novos dados poderia reforçar classificações incorretas.
-
-A curadoria cria uma etapa de validação antes de considerar as imagens para novos treinamentos.
-
----
-
-# Limitações conhecidas
-
-O projeto ainda está em desenvolvimento e possui limitações técnicas conhecidas.
-
-## Classificador restrito
-
-A versão atual trabalha com cinco PANCs principais.
-
-Uma planta fora das classes conhecidas não deve ser interpretada como se estivesse necessariamente representada pelo modelo.
-
-## Dataset limitado
-
-O desempenho depende da quantidade, qualidade e diversidade das imagens utilizadas no treinamento.
-
-Tanchagem e Vinagreira demonstraram maior instabilidade em determinados testes.
-
-## Confiança não é certeza
-
-Uma previsão de alta confiança significa que o modelo atribuiu alta probabilidade àquela classe entre as opções aprendidas.
-
-Não significa confirmação botânica.
-
-## Sensibilidade à captura
-
-A classificação pode variar com:
-
-- iluminação;
-- enquadramento;
-- distância;
-- fundo;
-- foco;
-- ângulo;
-- estado da planta;
-- semelhança visual entre espécies.
-
-## Eden IA
-
-A Eden pode gerar informações incorretas ou incompletas, como qualquer sistema baseado em IA generativa.
-
-## Validação científica
-
-O Growly é uma ferramenta educacional e assistiva. O resultado do scanner não substitui avaliação botânica especializada.
-
-> **Nunca consuma uma planta exclusivamente com base em uma identificação realizada pelo Growly.**
-
----
-
-# Evolução do projeto
-
-O Growly passou por diversas versões:
-
-```text
-1.01
-  │
-  ▼
-1.02
-  │
-  ▼
-1.03 ─── versão preservada como estável em uma etapa do desenvolvimento
-  │
-  ▼
-1.04 ─── testes e alterações no classificador
-  │
-  ▼
-1.05 ─── consolidação da arquitetura atual
-  │
-  ▼
-1.05.6
-```
-
-O controle de versão permitiu preservar versões funcionais enquanto novas implementações eram avaliadas.
-
-A evolução envolveu mudanças em:
-
-- interface;
-- responsividade;
-- scanner;
-- modelo;
-- autenticação;
-- banco;
-- backend;
-- Eden;
-- segurança;
-- contribuição de imagens.
-
----
-
-# Execução local
-
-## Clonando o repositório
+## 1. Clone o repositório
 
 ```bash
 git clone https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho.git
 ```
 
-Entre no diretório:
+## 2. Entre no repositório
 
 ```bash
 cd tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho
 ```
 
-## Branch do site
-
-Para acessar a estrutura correspondente ao site publicado:
+## 3. Acesse a branch do site
 
 ```bash
 git switch site
 ```
 
-## Servidor HTTP
+## 4. Confirme a branch
 
-Durante o desenvolvimento, execute o projeto por meio de um servidor HTTP local.
-
-Uma opção é utilizar **Live Server** no Visual Studio Code.
-
-Não é recomendado depender de:
-
-```text
-file:///
+```bash
+git branch
 ```
 
-Recursos web como requisições, modelos e acesso à câmera podem sofrer restrições quando a aplicação é aberta diretamente pelo sistema de arquivos.
+A saída deve indicar:
 
-## Câmera
+```text
+* site
+  main
+```
 
-O acesso à câmera depende das permissões concedidas pelo usuário e das políticas de segurança do navegador.
+## 5. Inicie um servidor local
 
-Em ambiente publicado, utilize HTTPS.
+Utilize um servidor HTTP local.
+
+No Visual Studio Code, uma alternativa prática é a extensão **Live Server**.
+
+Abra o arquivo inicial da aplicação por meio do endereço fornecido pelo servidor.
+
+Exemplo conceitual:
+
+```text
+http://127.0.0.1:...
+```
+
+ou:
+
+```text
+http://localhost:...
+```
+
+O endereço e a porta dependem da ferramenta utilizada.
 
 ---
 
-# Versionamento e deploy
+# Por que não abrir com file:///
 
-O repositório mantém separação entre o histórico acadêmico do TCC e a versão publicada.
+Abrir diretamente:
 
-## `main`
+```text
+file:///caminho/do/projeto/index.html
+```
 
-Mantém a estrutura e o histórico das versões do projeto.
+pode causar problemas relacionados à política de origem do navegador.
 
-A versão 1.05 está organizada no histórico do TCC em estrutura semelhante a:
+Entre os recursos que podem ser afetados estão:
+
+- carregamento do modelo;
+- requisições;
+- arquivos JSON;
+- câmera;
+- integrações externas.
+
+Durante o desenvolvimento, utilize um servidor HTTP.
+
+---
+
+# Uso no celular durante desenvolvimento
+
+Para testar a interface em um dispositivo móvel, o celular precisa conseguir acessar o servidor utilizado pelo computador.
+
+Dependendo da configuração de rede e do servidor local, pode ser necessário disponibilizar o servidor para outros dispositivos da mesma rede.
+
+Alguns recursos, principalmente câmera e APIs sensíveis do navegador, também podem possuir restrições adicionais fora de um contexto seguro.
+
+Para testes finais, a versão publicada em HTTPS deve ser utilizada sempre que possível.
+
+---
+
+# Branches
+
+O repositório utiliza `main` e `site` com finalidades diferentes.
+
+## main
+
+A `main` preserva o projeto dentro da estrutura histórica do TCC.
+
+Ela contém as versões e a documentação técnica principal.
+
+Exemplo da organização utilizada:
 
 ```text
 Protótipos/
 └── GROWLY 1.05/
     └── GROWLY/
+        └── projeto
 ```
 
-## `site`
+## site
 
-Mantém os arquivos utilizados na raiz da versão publicada.
+A `site` mantém a estrutura necessária para a versão publicada.
+
+Os arquivos ficam organizados a partir da raiz adequada ao deploy.
+
+## Resumo
 
 ```text
+main
+│
+├── documentação
+├── histórico
+└── versões do TCC
+        │
+        │ arquivos selecionados
+        ▼
 site
-├── arquivos HTML
-├── css/
-├── js/
-├── assets/
-├── model/
-└── ...
+│
+└── versão publicada
+        │
+        ▼
+growly.com.br
 ```
 
-Essa separação permite manter a documentação histórica sem exigir que a estrutura de publicação replique toda a árvore acadêmica.
+---
 
-> Ao trabalhar com as branches, evite misturar os históricos por rebase sem necessidade. Alterações destinadas ao site devem ser transferidas conscientemente entre `main` e `site`.
+# Atualizando a versão publicada
+
+A separação entre as branches exige atenção.
+
+Antes de executar comandos, sempre confirme em qual branch você está:
+
+```bash
+git branch
+```
+
+ou:
+
+```bash
+git status
+```
+
+## Transferindo um arquivo da main para a site
+
+Quando um arquivo atualizado está na versão preservada na `main`, ele pode ser obtido sem misturar todo o histórico das branches.
+
+Primeiro:
+
+```bash
+git switch site
+```
+
+Depois:
+
+```bash
+git show main:"Protótipos/GROWLY 1.05/GROWLY/<arquivo>" > <arquivo>
+```
+
+Exemplo conceitual:
+
+```bash
+git show main:"Protótipos/GROWLY 1.05/GROWLY/js/arquivo.js" > js/arquivo.js
+```
+
+Depois confira:
+
+```bash
+git status
+```
+
+Se estiver correto:
+
+```bash
+git add .
+git commit -m "Atualiza versão publicada"
+git push origin site
+```
+
+## Transferindo um arquivo da site para a main
+
+Quando uma correção foi realizada primeiro na `site`:
+
+```bash
+git switch main
+```
+
+Depois:
+
+```bash
+git show site:<arquivo> > "Protótipos/GROWLY 1.05/GROWLY/<arquivo>"
+```
+
+Confira:
+
+```bash
+git diff
+git status
+```
+
+E, após validar:
+
+```bash
+git add .
+git commit -m "Sincroniza correção da versão publicada"
+git push origin main
+```
 
 ---
 
-# Deploy
+# Atenção ao sincronizar branches
 
-A aplicação está disponível em:
+`main` e `site` possuem estruturas diferentes.
 
-**https://growly.com.br/**
+Por isso, não trate as duas branches como se fossem cópias idênticas.
 
-Repositório:
+Evite executar operações de merge ou rebase sem antes entender quais arquivos serão afetados.
 
-**https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho**
+Em especial, não utilize automaticamente:
 
-A versão publicada deve ser testada novamente após alterações, especialmente para verificar caminhos relativos, arquivos estáticos, modelo, autenticação e recursos dependentes do navegador.
+```bash
+git pull --rebase origin main
+```
 
----
+enquanto estiver trabalhando na `site` apenas para "atualizar o projeto".
 
-# Roadmap
+Isso pode tentar reaplicar históricos diferentes e gerar conflitos desnecessários.
 
-A continuidade técnica do Growly inclui:
-
-- ampliar o dataset;
-- melhorar o balanceamento entre classes;
-- criar conjuntos independentes de treino e validação;
-- incorporar imagens autorizadas somente após curadoria;
-- comparar versões do modelo com métricas consistentes;
-- melhorar o desempenho das classes instáveis;
-- adicionar novas espécies;
-- ampliar o catálogo;
-- aprimorar acessibilidade;
-- aprofundar testes em diferentes dispositivos;
-- melhorar observabilidade e tratamento de erros;
-- continuar fortalecendo políticas de segurança;
-- evoluir a Eden;
-- avaliar novas experiências mobile;
-- documentar de forma cada vez mais detalhada o schema e as APIs internas.
+Quando o objetivo é copiar arquivos específicos entre as estruturas, prefira operações explícitas e revise o `git diff` antes do commit.
 
 ---
 
-# Sustentabilidade e impacto
+# Checklist antes de publicar
 
-O Growly relaciona tecnologia a temas como:
+Antes de enviar uma alteração para a `site`, verifique:
 
-- biodiversidade;
-- diversificação alimentar;
-- educação;
-- valorização de espécies locais;
-- sustentabilidade;
-- agricultura urbana;
-- acesso ao conhecimento.
+```text
+[ ] Estou na branch site?
+[ ] O site abre normalmente?
+[ ] Não existem erros inesperados no console?
+[ ] Login funciona?
+[ ] Sessão permanece corretamente?
+[ ] Explorar carrega as PANCs?
+[ ] Meu Jardim funciona?
+[ ] Scanner carrega o modelo?
+[ ] As 4 imagens são aceitas?
+[ ] O resultado corresponde ao label correto?
+[ ] Eden responde?
+[ ] Layout funciona no desktop?
+[ ] Layout funciona no celular?
+[ ] Links e caminhos relativos estão corretos?
+[ ] Nenhuma chave privada foi adicionada ao código?
+[ ] git diff contém apenas alterações esperadas?
+```
 
-A pesquisa acadêmica do projeto relaciona as PANCs a diferentes Objetivos de Desenvolvimento Sustentável, especialmente em temas ligados à alimentação, saúde, cidades sustentáveis, consumo responsável e resiliência dos sistemas alimentares.
+Depois da publicação, realize pelo menos um teste rápido diretamente em:
 
-A aplicação não pressupõe que todas as PANCs possuam os mesmos benefícios ou formas de utilização. Cada espécie precisa ser compreendida individualmente.
+```text
+https://growly.com.br/
+```
 
 ---
 
-# Documentação acadêmica
+# Testando antes de publicar
 
-O projeto possui uma documentação completa de TCC que registra:
+## Console
 
-- contextualização;
-- problema de pesquisa;
-- justificativa;
-- objetivos;
-- hipótese;
-- referencial teórico;
-- metodologia;
-- evolução das versões;
-- arquitetura;
-- tecnologias;
-- banco de dados;
-- interface;
+Abra as ferramentas de desenvolvimento do navegador e verifique o Console.
+
+Erros JavaScript podem impedir funcionalidades mesmo quando a página aparentemente carregou corretamente.
+
+## Network
+
+A aba Network é útil para verificar:
+
+- arquivos não encontrados;
+- `model.json`;
+- `metadata.json`;
+- `weights.bin`;
+- requisições ao Supabase;
+- Edge Functions;
+- respostas HTTP.
+
+## Responsividade
+
+Teste pelo menos:
+
+```text
+desktop
+   +
+viewport mobile no DevTools
+   +
+dispositivo móvel real
+```
+
+A simulação do navegador ajuda, mas não substitui completamente um dispositivo real.
+
+## Scanner
+
+Não valide o scanner apenas verificando se a tela abre.
+
+Faça o fluxo completo:
+
+```text
+selecionar 4 imagens
+        ↓
+processar
+        ↓
+observar probabilidades
+        ↓
+verificar label
+        ↓
+abrir resultado
+        ↓
+testar Jardim/contribuição
+```
+
+---
+
+# Problemas comuns
+
+## CORS ao abrir localmente
+
+### Sintoma
+
+Erros semelhantes a:
+
+```text
+Cross origin requests are only supported...
+```
+
+### Causa provável
+
+O projeto foi aberto diretamente com `file:///`.
+
+### Solução
+
+Execute a aplicação por um servidor HTTP local.
+
+---
+
+## Modelo não carrega
+
+Verifique:
+
+```text
+model/model.json
+model/metadata.json
+model/weights.bin
+```
+
+Também confirme:
+
+- caminhos relativos;
+- erros `404`;
+- erros no console;
+- se os três arquivos pertencem à mesma versão do modelo.
+
+---
+
+## Resultado parece pertencer à espécie errada
+
+Antes de concluir que o modelo precisa ser treinado novamente, verifique:
+
+1. ordem das classes;
+2. `metadata.json`;
+3. mapeamento utilizado pelo JavaScript;
+4. normalização do label;
+5. registro encontrado no banco.
+
+O projeto já apresentou anteriormente um problema em que a classificação estava correta, mas o mapeamento dos rótulos na aplicação estava incorreto.
+
+---
+
+## Câmera não abre
+
+Verifique:
+
+- permissão do navegador;
+- permissão do sistema operacional;
+- HTTPS no ambiente publicado;
+- disponibilidade de câmera no dispositivo;
+- console do navegador.
+
+O usuário também pode utilizar a seleção de imagens da galeria quando disponível.
+
+---
+
+## Eden não responde
+
+Verifique:
+
+- conexão com a internet;
+- requisição para a Edge Function;
+- status HTTP;
+- logs da função;
+- disponibilidade do serviço externo.
+
+Respostas `503` podem representar indisponibilidade temporária.
+
+---
+
+## Dados do usuário não carregam
+
+Verifique:
+
+- sessão atual;
 - autenticação;
-- catálogo;
-- Jardim;
-- scanner;
-- treinamento;
-- testes;
-- Eden IA.
+- UUID;
+- políticas RLS;
+- consulta ao banco;
+- console/network.
 
-O README tem uma finalidade diferente da monografia: apresentar o projeto e documentar tecnicamente sua arquitetura de maneira adequada a um repositório de software.
+Não desative RLS apenas para contornar um erro sem antes identificar a causa.
 
 ---
 
-# Equipe
+## Alteração aparece localmente, mas não no site
 
-O Growly é desenvolvido por estudantes do **3º ano do curso Técnico em Desenvolvimento de Sistemas — período da tarde — da ETEC Professor Camargo Aranha**, como Trabalho de Conclusão de Curso.
+Verifique:
 
-| Integrante | Atuação no projeto |
-|---|---|
-| **Thiago Nestor Afonso dos Santos** | Desenvolvimento do Growly |
-| **Laís Silva Ferrari** | Desenvolvimento do Growly |
-| **Letícia Rodrigues Cardoso** | Desenvolvimento do Growly |
-| **Rebeca Carvalho Trindade** | Desenvolvimento do Growly |
-
-O projeto é resultado do trabalho conjunto da equipe nas etapas de pesquisa, levantamento de requisitos, documentação, modelagem, desenvolvimento da aplicação, construção do banco de dados, integração dos recursos de Inteligência Artificial, produção e organização do dataset, testes e evolução das versões.
-
----
-
-# Orientação, professores e colaboradores
-
-O desenvolvimento do Growly contou com orientação acadêmica e com o apoio de professores, profissionais e instituições que contribuíram em diferentes momentos da trajetória do projeto.
-
-### Ricardo Faria Palhares
-
-Professor orientador do Trabalho de Conclusão de Curso, acompanhando o desenvolvimento acadêmico e técnico do projeto.
-
-### Dr. Luiz Antonio de Lima
-
-Apoio e colaboração durante o desenvolvimento e a evolução do Growly.
-
-### Davi Vilar
-
-Professor e referência durante a trajetória acadêmica e de desenvolvimento da equipe.
-
-### Bruno Cano
-
-Colaborador e referência reconhecida pela equipe durante o desenvolvimento do projeto.
-
-As participações citadas nesta seção representam diferentes formas de orientação, apoio e colaboração e não significam, necessariamente, responsabilidade direta pelo desenvolvimento do código-fonte.
-
----
-
-# Instituição de ensino
-
-## ETEC Professor Camargo Aranha
-
-O Growly é desenvolvido no contexto do curso **Técnico em Desenvolvimento de Sistemas** da **ETEC Professor Camargo Aranha**, em São Paulo.
-
-O TCC permitiu integrar conhecimentos trabalhados ao longo da formação técnica, incluindo:
-
-- desenvolvimento web;
-- lógica de programação;
-- banco de dados;
-- modelagem de sistemas;
-- desenvolvimento de interfaces;
-- integração entre sistemas;
-- versionamento;
-- testes;
-- segurança;
-- Inteligência Artificial;
-- documentação técnica;
-- organização e desenvolvimento de projetos.
-
-A aplicação representa, portanto, não apenas a entrega de um software, mas a integração prática de diferentes competências desenvolvidas durante o curso.
-
----
-
-# Pesquisa de campo e construção do dataset
-
-A construção do classificador exigiu uma etapa que ultrapassou o desenvolvimento de software: a obtenção de material visual adequado para treinamento e testes.
-
-## Horta das Flores
-
-A **Horta das Flores**, localizada na região da Mooca, em São Paulo, tornou-se uma importante parceira durante o desenvolvimento do Growly.
-
-A equipe realizou visitas ao local para conhecer as plantas, observar as espécies utilizadas no projeto e produzir registros fotográficos próprios.
-
-Esse material contribuiu para a construção do dataset utilizado durante o desenvolvimento do classificador.
-
-A coleta buscou registrar variações como:
-
-```text
-espécie
-  │
-  ├── diferentes ângulos
-  ├── diferentes distâncias
-  ├── diferentes fundos
-  ├── diferentes condições de iluminação
-  └── diferentes enquadramentos
+```bash
+git branch
+git status
+git log -1
 ```
 
-A diversidade visual é relevante porque um classificador não deve aprender apenas a reconhecer uma fotografia específica. O objetivo é aumentar sua capacidade de lidar com variações encontradas durante o uso real.
+Confirme se:
 
-A parceria também aproximou o desenvolvimento técnico do contexto prático das PANCs, permitindo que a equipe trabalhasse com exemplares reais e não apenas com imagens encontradas digitalmente.
-
-> As fotografias utilizadas para treinamento e validação precisam ser tratadas de maneira criteriosa. Quantidade de imagens, diversidade, balanceamento das classes e separação entre dados de treino e validação afetam diretamente a avaliação do modelo.
+- a alteração foi feita na `site`;
+- houve commit;
+- o push foi enviado;
+- o deploy terminou;
+- o navegador não está exibindo conteúdo em cache.
 
 ---
 
-# Ciclo de evolução do dataset
+# Cache
 
-Com a implementação da contribuição voluntária de imagens, o Growly passou a possuir uma base técnica para que o conjunto de dados continue crescendo.
+Depois de atualizar arquivos estáticos, o navegador pode continuar utilizando uma versão anterior em determinadas situações.
 
-O processo planejado é:
+Antes de diagnosticar um problema como erro de código:
+
+- recarregue a página;
+- faça um hard refresh;
+- teste em janela privada;
+- confira no Network qual arquivo foi realmente recebido.
+
+Evite utilizar cache como explicação automática: primeiro confirme a versão carregada.
+
+---
+
+# Segurança
+
+A branch `site` é pública e todo código executado no navegador pode ser inspecionado.
+
+## Nunca coloque no front-end
 
 ```text
-Uso real do scanner
-        │
-        ▼
-4 fotografias fornecidas
-        │
-        ▼
-Usuário autoriza contribuição
-        │
-        ▼
-Storage privado
-        │
-        ▼
-Registro dos metadados
-        │
-        ▼
-Revisão administrativa
-        │
-   ┌────┴─────┐
-   │          │
-rejeitar   aprovar/corrigir
-              │
-              ▼
-      conjunto revisado
-              │
-              ▼
-   preparação de novo dataset
-              │
-              ▼
-       novo treinamento
-              │
-              ▼
-      testes e comparação
+API keys privadas
+service_role keys
+senhas
+tokens administrativos
+credenciais de banco
+segredos de backend
 ```
 
-Esse fluxo não significa que uma fotografia enviada pelo usuário seja automaticamente utilizada para treinar o modelo.
+A chave da Gemini API deve permanecer protegida no backend utilizado pela Edge Function.
 
-A etapa de revisão existe para reduzir a possibilidade de inserir imagens incorretamente classificadas no conjunto de treinamento.
+## Supabase
+
+Uma chave destinada ao uso público do cliente não substitui políticas de autorização.
+
+A proteção efetiva dos registros depende das regras configuradas no backend, incluindo **Row Level Security**.
+
+## Administração
+
+Esconder um link administrativo não é um mecanismo de segurança.
+
+O privilégio deve ser validado pelo sistema antes de permitir operações administrativas.
 
 ---
 
-# Instituições e apoios
+# Arquivos do modelo
 
-Ao longo de sua trajetória, o projeto esteve relacionado a instituições que contribuíram para sua formação acadêmica, pesquisa, desenvolvimento ou aproximação com o tema.
+Ao atualizar o classificador, trate os arquivos exportados como um conjunto:
 
-### ETEC Professor Camargo Aranha
+```text
+model.json
+metadata.json
+weights.bin
+```
 
-Instituição de ensino responsável pelo contexto acadêmico em que o Trabalho de Conclusão de Curso é desenvolvido.
+Misturar arquivos de versões diferentes pode produzir erros ou resultados inconsistentes.
 
-### Horta das Flores
+Depois de substituir o modelo:
 
-Parceira na aproximação da equipe com as PANCs e na obtenção de registros fotográficos utilizados durante a construção do dataset.
-
-### Ven Superação ONG
-
-Instituição reconhecida pela equipe entre os apoios e referências relacionados à trajetória do projeto.
+1. confirme os labels;
+2. confira o tamanho de entrada;
+3. teste todas as classes;
+4. teste entradas inválidas;
+5. verifique o mapeamento para o catálogo;
+6. teste no ambiente publicado.
 
 ---
 
 # Status atual
 
-**Versão atual:** `1.05.6`  
-**Plataforma:** aplicação web responsiva  
-**Estado:** desenvolvimento, testes e aprimoramento contínuo
+**Versão:** `1.05.6`
 
-| Componente | Situação |
+| Recurso | Estado |
 |---|---|
-| Interface web responsiva | Implementado |
-| Cadastro e autenticação | Implementado |
-| Confirmação e gerenciamento de sessão | Implementado |
-| Catálogo de PANCs | Implementado |
+| Aplicação web responsiva | Implementado |
+| Cadastro e login | Implementado |
+| Catálogo | Implementado |
 | Jardim Virtual | Implementado |
-| Scanner com quatro imagens | Implementado |
-| Classificador com TensorFlow.js | Implementado / em aprimoramento |
-| Integração do resultado com o catálogo | Implementado |
+| Scanner de quatro imagens | Implementado |
+| TensorFlow.js | Implementado / em aprimoramento |
 | Eden IA | Implementado |
-| Supabase / PostgreSQL | Implementado |
-| Supabase Storage | Implementado |
-| Row Level Security | Implementado |
-| Edge Function da Eden | Implementado |
-| Contribuição voluntária de imagens | Implementado |
-| Revisão administrativa das imagens | Implementado |
-| Ampliação e balanceamento do dataset | Em andamento |
-| Novos treinamentos do classificador | Em andamento |
-| Inclusão de novas espécies | Planejado |
-
-O status "implementado" indica que o recurso já faz parte da versão atual do sistema. Isso não significa que a funcionalidade esteja encerrada ou que não possa receber correções e melhorias.
+| Supabase | Implementado |
+| PostgreSQL | Implementado |
+| Storage privado | Implementado |
+| RLS | Implementado |
+| Contribuição de imagens | Implementado |
+| Revisão administrativa | Implementado |
+| Ampliação do dataset | Em andamento |
+| Novas espécies | Planejado |
 
 ---
 
-# Escopo atual
+# Limitações da versão atual
 
-A versão 1.05.6 concentra-se nas cinco espécies utilizadas pelo classificador:
+O classificador reconhece um conjunto limitado de espécies.
 
-```text
-Peixinho-da-horta
-Tanchagem
-Ora-pro-nóbis
-Vinagreira
-Taioba
-```
+A qualidade da previsão depende do dataset e das condições da fotografia.
 
-O escopo foi mantido limitado durante esta etapa para permitir que a equipe trabalhasse não apenas na quantidade de classes, mas também no funcionamento completo do sistema ao redor do modelo.
+Durante os testes do projeto, Tanchagem e Vinagreira apresentaram maior instabilidade em determinadas situações.
 
-Isso inclui autenticação, catálogo, Jardim, integração com o banco, scanner, contribuição de imagens, revisão administrativa, Eden e experiência responsiva.
+O modelo continuará sendo aprimorado conforme novas imagens adequadas forem obtidas, revisadas e utilizadas em treinamentos futuros.
 
-A expansão para novas espécies faz parte da continuidade possível do projeto, mas exige novas imagens, organização do dataset, treinamento, testes e validação.
+A aplicação também depende de serviços externos para determinadas funcionalidades, como autenticação, persistência e Eden.
 
 ---
 
-# Impacto educacional e tecnológico
+# Documentação
 
-O Growly conecta três áreas centrais:
+Este README é específico da **branch `site`** e prioriza utilização, execução, manutenção e publicação.
 
-```text
-DESENVOLVIMENTO DE SISTEMAS
-            +
- INTELIGÊNCIA ARTIFICIAL
-            +
-   EDUCAÇÃO SOBRE PANCs
-```
+A documentação técnica completa do Growly está disponível na branch:
 
-Do ponto de vista técnico, o projeto permite aplicar conceitos de desenvolvimento web, banco de dados, autenticação, segurança, APIs, machine learning, arquitetura de software e testes.
+## `main`
 
-Do ponto de vista educacional, a aplicação procura facilitar o contato do usuário com informações sobre PANCs e transformar a identificação em uma porta de entrada para conhecer melhor as espécies.
+Ela contém explicações aprofundadas sobre:
 
-A tecnologia, portanto, não é tratada como finalidade isolada. Ela funciona como meio para organizar e disponibilizar conhecimento de maneira mais acessível.
-
----
-
-# Sustentabilidade
-
-A escolha das PANCs também relaciona o Growly a discussões sobre:
-
-- biodiversidade;
-- diversificação alimentar;
-- agricultura urbana;
-- valorização de espécies locais;
-- educação ambiental;
-- aproveitamento responsável de recursos vegetais;
-- sustentabilidade dos sistemas alimentares.
-
-O projeto evita tratar todas as PANCs como equivalentes. Cada espécie possui características próprias, e qualquer utilização alimentar exige identificação e orientação adequadas.
-
----
-
-# Objetivos de Desenvolvimento Sustentável
-
-A pesquisa desenvolvida durante o TCC relaciona a proposta do Growly a temas presentes nos **Objetivos de Desenvolvimento Sustentável (ODS)**.
-
-Entre as relações trabalhadas ao longo do projeto estão:
-
-### ODS 2 — Fome Zero e Agricultura Sustentável
-
-O estudo das PANCs se relaciona à discussão sobre diversificação alimentar, agricultura e aproveitamento de espécies com potencial alimentício.
-
-### ODS 3 — Saúde e Bem-Estar
-
-O acesso responsável a informações sobre alimentação e espécies vegetais dialoga com temas de saúde e qualidade de vida, sem transformar o Growly em uma ferramenta de orientação médica ou nutricional.
-
-### ODS 4 — Educação de Qualidade
-
-O projeto utiliza tecnologia para ampliar o acesso a conhecimento sobre PANCs e aproximar conteúdos de biodiversidade, alimentação e sustentabilidade do usuário.
-
-O Growly não afirma resolver isoladamente esses objetivos. A relação com os ODS representa o contexto educacional e socioambiental no qual a proposta está inserida.
-
----
-
-# Demonstrações e eventos
-
-O Growly também foi desenvolvido para ser apresentado e utilizado fora do ambiente de desenvolvimento.
-
-Demonstrações presenciais permitem observar aspectos que não aparecem somente nos testes de código, como:
-
-- facilidade de uso;
-- compreensão das instruções;
-- comportamento do scanner com plantas reais;
-- dúvidas frequentes dos usuários;
-- funcionamento em dispositivos diferentes;
-- interesse do público pelas informações das espécies.
-
-## EXPOCUCA 2026
-
-O projeto integra as apresentações de TCC do curso de Desenvolvimento de Sistemas da ETEC Professor Camargo Aranha durante a **EXPOCUCA 2026**.
-
-## Primavera na Horta das Flores
-
-O Growly também participa como expositor do evento **Primavera na Horta das Flores**, levando a plataforma e PANCs para demonstrações práticas do processo de identificação.
-
-A participação em ambientes ligados ao próprio tema do projeto permite aproximar desenvolvimento tecnológico, público e contexto real de utilização.
-
----
-
-# Materiais do projeto
-
-O Growly possui diferentes materiais que registram seu desenvolvimento:
-
-### Aplicação
-
-**https://growly.com.br/**
-
-Versão web pública do projeto.
-
-### Código-fonte
-
-**https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho**
-
-Repositório utilizado para versionamento e preservação do histórico do desenvolvimento.
-
-### Documento acadêmico
-
-A documentação final do TCC apresenta em maior profundidade:
-
-- fundamentação teórica;
-- pesquisa sobre PANCs;
-- problema e hipótese;
-- metodologia;
-- histórico de desenvolvimento;
 - arquitetura;
-- implementação;
-- testes;
-- referências acadêmicas.
-
-O README e a documentação possuem funções complementares: o README prioriza a compreensão do software e de sua arquitetura, enquanto o documento acadêmico registra a pesquisa e o processo do TCC de maneira formal.
-
----
-
-# Contribuições
-
-O Growly é atualmente um projeto acadêmico desenvolvido pela equipe responsável pelo TCC.
-
-O repositório público permite acompanhar a evolução do código e da documentação, mas alterações externas não devem ser consideradas automaticamente parte oficial do projeto.
-
-Sugestões técnicas, relatos de problemas e feedbacks podem contribuir para a evolução do sistema.
-
-Antes de incorporar qualquer contribuição, a equipe deve avaliar sua compatibilidade com:
-
-- arquitetura atual;
-- segurança;
 - banco de dados;
-- interface;
-- escopo acadêmico;
-- qualidade do código;
-- proposta do projeto.
+- Inteligência Artificial;
+- pipeline de inferência;
+- autenticação;
+- autorização;
+- RLS;
+- Storage;
+- Eden;
+- testes;
+- decisões técnicas;
+- metodologia;
+- evolução do projeto;
+- dataset;
+- pesquisa de campo;
+- instituições;
+- documentação acadêmica.
+
+**[Abrir a branch main](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/main)**
 
 ---
 
-# Licença
+# Equipe
 
-Até que uma licença de software seja formalmente definida pela equipe, a disponibilidade pública do código-fonte **não deve ser interpretada automaticamente como autorização irrestrita para copiar, modificar, redistribuir ou reutilizar o projeto**.
+Projeto desenvolvido pelos estudantes do **3º ano do curso Técnico em Desenvolvimento de Sistemas — período da tarde — da ETEC Professor Camargo Aranha**:
 
-Caso uma licença seja adotada posteriormente, esta seção deverá ser atualizada e o arquivo de licença correspondente deverá ser incluído no repositório.
+| Integrante |
+|---|
+| **Thiago Nestor Afonso dos Santos** |
+| **Laís Silva Ferrari** |
+| **Letícia Rodrigues Cardoso** |
+| **Rebeca Carvalho Trindade** |
 
----
-
-# Uso responsável
-
-O Growly possui finalidade **educacional, informativa e assistiva**.
-
-O sistema de identificação utiliza um modelo de classificação e, portanto, está sujeito a erros.
-
-Fatores como iluminação, enquadramento, qualidade da imagem, fundo, ângulo, estado da planta e semelhança entre espécies podem alterar o resultado.
-
-O percentual de confiança apresentado pelo sistema representa a distribuição calculada pelo modelo entre as classes conhecidas e **não representa confirmação botânica da espécie**.
-
-> **Nunca consuma uma planta exclusivamente com base no resultado fornecido pelo Growly.**
-
-Antes de qualquer decisão relacionada ao consumo, confirme a identificação utilizando fontes confiáveis e, quando necessário, orientação de profissionais adequados.
-
-A mesma lógica se aplica à Eden IA. Como as respostas são produzidas por um modelo generativo, elas podem apresentar erros ou imprecisões.
+**Orientação:** Prof. Ricardo Faria Palhares.
 
 ---
 
-# Privacidade e dados
+# Links
 
-O Growly utiliza autenticação e recursos de armazenamento para funcionalidades personalizadas.
+**Aplicação:**  
+https://growly.com.br/
 
-As imagens destinadas à melhoria futura do modelo somente entram no fluxo de contribuição quando o usuário realiza a autorização prevista pela aplicação.
+**Repositório:**  
+https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho
 
-O projeto procura separar:
+**Documentação técnica completa:**  
+branch `main`
 
-```text
-dados estruturados
-      │
-      └── PostgreSQL
-
-arquivos privados
-      │
-      └── Supabase Storage
-
-controle de acesso
-      │
-      ├── autenticação
-      ├── RLS
-      └── Storage Policies
-
-serviços protegidos
-      │
-      └── Edge Functions
-```
-
-As políticas e implementações relacionadas a dados devem continuar sendo revisadas conforme o projeto evolui.
-
----
-
-# Referências principais
-
-A pesquisa acadêmica que fundamenta o Growly utiliza bibliografia especializada sobre PANCs, alimentação, sustentabilidade e tecnologia.
-
-Entre as referências centrais utilizadas no trabalho estão:
-
-**KINUPP, Valdely Ferreira; LORENZI, Harri.** *Plantas alimentícias não convencionais (PANC) no Brasil: guia de identificação, aspectos nutricionais e receitas ilustradas.* Nova Odessa: Instituto Plantarum de Estudos da Flora, 2014.
-
-**SOBREIRA, Marina; SAMPAIO, Valéria Silva; SOUZA, Elnatan Bezerra.** Plantas Alimentícias Não Convencionais (PANC) e o desafio de valorizar a riqueza desconhecida: estudo de caso no município de Itaiçaba, Ceará. *Revista Brasileira de Geografia Física*, v. 15, n. 5, p. 2164–2177, 2022.
-
-A relação completa de referências deve ser consultada na documentação acadêmica do projeto.
-
----
-
-# Agradecimentos
-
-A equipe agradece à **ETEC Professor Camargo Aranha**, aos professores e orientadores que acompanharam o desenvolvimento, à **Horta das Flores** pela parceria e pelo contato prático com as espécies, às instituições que apoiaram a trajetória do projeto e às pessoas que participaram de testes, avaliações, apresentações e discussões ao longo do TCC.
-
-O Growly foi construído de forma incremental. Cada coleta de imagens, teste, erro encontrado, correção, mudança de arquitetura e nova versão contribuiu para chegar ao sistema atual.
-
----
-
-# Continuidade do Growly
-
-A versão 1.05.6 representa o estado atual do projeto, mas não necessariamente seu estado final.
-
-A arquitetura foi organizada para permitir a evolução independente de diferentes componentes. Novos modelos podem substituir versões anteriores do classificador; novas espécies podem ser adicionadas ao catálogo; regras de segurança podem ser fortalecidas; a Eden pode evoluir; e novas interfaces podem ser desenvolvidas sem exigir que todo o sistema seja reconstruído.
-
-Os principais desafios para essa continuidade estão relacionados à qualidade dos dados, validação do modelo, segurança, manutenção das integrações e expansão responsável do conteúdo.
-
-O crescimento do projeto deve priorizar **qualidade e confiabilidade**, e não apenas quantidade de funcionalidades.
+**Versão de produção:**  
+branch `site`
 
 ---
 
@@ -1786,12 +1160,8 @@ O crescimento do projeto deve priorizar **qualidade e confiabilidade**, e não a
 
 ## Growly
 
-**Tecnologia aplicada ao reconhecimento e ao conhecimento sobre PANCs.**
-
 *Onde cada planta encontra seu caminho para florescer.*
 
-**Versão 1.05.6 · São Paulo · 2026**
-
-[Aplicação](https://growly.com.br/) · [Repositório](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho)
+**Branch `site` · versão 1.05.6**
 
 </div>
