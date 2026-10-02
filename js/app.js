@@ -15,6 +15,7 @@ const ASSETS = {
   cardSuporte: "assets/card-suporte.png",
   iconCamera: "assets/icon-camera.png",
   iconConfig: "assets/icon-config.png",
+  iconPerfil: "assets/icon-perfil.png",
   iconEden: "assets/icon-eden.png",
   iconHome: "assets/icon-home.png",
   iconPesquisar: "assets/icon-pesquisar.png",
@@ -55,7 +56,7 @@ const NAV_ITEMS = [
   { href: "explorar.html", label: "Explorar", icon: ASSETS.iconPesquisar },
   { href: "eden.html", label: "Eden IA", icon: ASSETS.iconEden },
   { href: "suporte.html", label: "Suporte", icon: ASSETS.iconSuporte },
-  { href: "configuracoes.html", label: "Config", icon: ASSETS.iconConfig },
+  { href: "perfil.html", label: "Perfil", icon: ASSETS.iconPerfil },
 ];
 
 /** Renderiza a barra inferior dentro de <nav class="bottom-nav" data-nav>. */
