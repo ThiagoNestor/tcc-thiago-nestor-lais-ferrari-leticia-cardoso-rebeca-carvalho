@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
+  <title>Meu Perfil — Growly</title>
+
+  <meta
+    name="description"
+    content="Visualize sua conta e sua jornada no Growly."
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  />
+</head>
+
+
+<body>
+
+  <div class="screen">
+
+    <img data-leaf="top-left" />
+    <img data-leaf="top-right" />
+
+
+    <main class="page-main profile-page">
+
+
+      <!-- ======================================
+           CABEÇALHO
+           ====================================== -->
+
+      <div class="profile-top">
+
+        <div data-header="Meu Perfil"></div>
+
+        <a
+          href="configuracoes.html"
+          class="profile-settings-btn"
+          aria-label="Abrir configurações"
+          title="Configurações"
+        >
+          <img
+            src="assets/icon-config.png"
+            alt=""
+          />
+        </a>
+
+      </div>
+
+
+      <p class="page-sub profile-subtitle">
+        Acompanhe seus dados e sua jornada no Growly.
+      </p>
+
+
+
+      <!-- ======================================
+           CARD PRINCIPAL DO PERFIL
+           ====================================== -->
+
+      <section class="user-profile-card profile-main-card">
+
+
+        <div class="profile-avatar-area">
+
+          <button
+            type="button"
+            class="profile-avatar"
+            id="profile-avatar"
+            aria-label="Alterar foto de perfil"
+            title="Alterar foto de perfil"
+          >
+
+            <span id="profile-avatar-initials">
+              G
+            </span>
+
+            <img
+              id="profile-avatar-image"
+              alt="Foto de perfil"
+              hidden
+            />
+
+            <span
+              class="profile-avatar-edit"
+              aria-hidden="true"
+            >
+              ✎
+            </span>
+
+          </button>
+
+
+          <input
+            type="file"
+            id="profile-avatar-input"
+            accept="image/jpeg,image/png,image/webp"
+            hidden
+          />
+
+        </div>
+
+
+        <div class="profile-info">
+
+          <h1 id="profile-name">
+            Carregando...
+          </h1>
+
+          <p id="profile-email">
+            Carregando...
+          </p>
+
+          <span
+            class="profile-member"
+            id="profile-member"
+          >
+            Membro do Growly
+          </span>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ======================================
+           INFORMAÇÕES DA CONTA
+           ====================================== -->
+
+      <section class="profile-account-card">
+
+        <div class="profile-card-title">
+
+          <div>
+
+            <span class="profile-eyebrow">
+              SUA CONTA
+            </span>
+
+            <h2>
+              Informações da conta
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div class="profile-account-list">
+
+
+          <div class="profile-account-item">
+
+            <span class="profile-account-label">
+              Nome
+            </span>
+
+            <strong
+              class="profile-account-value"
+              id="profile-account-name"
+            >
+              Carregando...
+            </strong>
+
+          </div>
+
+
+          <div class="profile-account-item">
+
+            <span class="profile-account-label">
+              E-mail
+            </span>
+
+            <strong
+              class="profile-account-value"
+              id="profile-account-email"
+            >
+              Carregando...
+            </strong>
+
+          </div>
+
+
+          <div class="profile-account-item">
+
+            <span class="profile-account-label">
+              Tipo de conta
+            </span>
+
+            <strong
+              class="profile-account-value"
+              id="profile-account-type"
+            >
+              Carregando...
+            </strong>
+
+          </div>
+
+
+          <div class="profile-account-item">
+
+            <span class="profile-account-label">
+              No Growly desde
+            </span>
+
+            <strong
+              class="profile-account-value"
+              id="profile-account-created"
+            >
+              Carregando...
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ======================================
+           JORNADA
+           ====================================== -->
+
+      <section class="profile-section">
+
+
+        <div class="profile-section-heading">
+
+          <div>
+
+            <span class="profile-eyebrow">
+              SUA JORNADA
+            </span>
+
+            <h2>
+              Seu crescimento no Growly
+            </h2>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="profile-stats">
+
+
+          <article class="profile-stat">
+
+            <strong
+              class="profile-stat-number"
+              id="stat-jardim"
+            >
+              —
+            </strong>
+
+            <span class="profile-stat-label">
+              Plantas no Jardim
+            </span>
+
+          </article>
+
+
+
+          <article class="profile-stat">
+
+            <strong
+              class="profile-stat-number"
+              id="stat-identificacoes"
+            >
+              —
+            </strong>
+
+            <span class="profile-stat-label">
+              Identificações
+            </span>
+
+          </article>
+
+
+
+          <article class="profile-stat">
+
+            <strong
+              class="profile-stat-number"
+              id="stat-contribuicoes"
+            >
+              —
+            </strong>
+
+            <span class="profile-stat-label">
+              Fotos contribuídas
+            </span>
+
+          </article>
+
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ======================================
+           CONTRIBUIÇÃO
+           ====================================== -->
+
+      <section class="profile-contribution-card">
+
+
+        <span class="profile-contribution-eyebrow">
+          SUA CONTRIBUIÇÃO
+        </span>
+
+
+        <strong
+          class="profile-contribution-number"
+          id="profile-contribution-number"
+        >
+          —
+        </strong>
+
+
+        <span class="profile-contribution-title">
+          fotos compartilhadas
+        </span>
+
+
+        <p>
+          Sua participação ajuda no aprimoramento
+          da identificação de PANCs no Growly.
+        </p>
+
+
+      </section>
+
+
+
+      <!-- ======================================
+           LOGOUT
+           ====================================== -->
+
+      <button
+        type="button"
+        class="profile-logout"
+        id="profile-logout"
+      >
+
+        Sair da conta
+
+      </button>
+
+
+    </main>
+
+
+
+    <!-- ======================================
+         NAVEGAÇÃO
+         ====================================== -->
+
+    <nav
+      class="bottom-nav"
+      data-nav
+    ></nav>
+
+
+  </div>
+
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+  ></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/perfil.js"></script>
+
+
+</body>
+
+</html>
