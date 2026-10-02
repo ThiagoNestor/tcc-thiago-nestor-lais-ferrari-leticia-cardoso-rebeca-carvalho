@@ -3726,3 +3726,44 @@ revisao-sair-esquerda {
   line-height: 1.5;
   color: var(--fg);
 }
+
+.forgot-password {
+  margin: -0.25rem 0 0.25rem;
+  text-align: right;
+}
+
+.forgot-password a {
+  color: var(--green);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.auth-intro {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.auth-intro h1 {
+  margin: 0 0 0.5rem;
+  font-family: "Fraunces", serif;
+  font-size: 1.5rem;
+}
+
+.auth-intro p {
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.form-success {
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}

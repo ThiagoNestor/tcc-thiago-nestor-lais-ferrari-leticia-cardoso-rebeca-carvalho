@@ -27,10 +27,33 @@
               <label for="email">Email</label>
               <input id="email" type="email" autocomplete="email" required />
             </div>
+
             <div class="field">
-              <label for="password">Senha</label>
-              <input id="password" type="password" autocomplete="current-password" required />
-            </div>
+  <label for="password">Senha</label>
+
+  <div class="password-input-wrapper">
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      required
+    />
+
+    <button
+      type="button"
+      class="password-toggle"
+      data-password-toggle="password"
+      aria-label="Mostrar senha"
+    >
+      👁
+    </button>
+  </div>
+</div>
+
+<p class="forgot-password">
+  <a href="recuperar-senha.html">Esqueci minha senha</a>
+</p>
+
             <button class="btn btn-secondary btn-block" type="submit" id="enviar">Login</button>
             <p class="form-footer">
               Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se</a>

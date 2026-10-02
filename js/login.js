@@ -28,3 +28,45 @@ form.addEventListener("submit", async (event) => {
   }
   location.href = "home.html";
 });
+
+/* =========================================
+   MOSTRAR / ESCONDER SENHA
+   ========================================= */
+
+const botaoMostrarSenha =
+  document.querySelector(".password-toggle");
+
+if (botaoMostrarSenha) {
+  botaoMostrarSenha.addEventListener("click", () => {
+    const campoId =
+      botaoMostrarSenha.dataset.passwordToggle;
+
+    const campo =
+      document.getElementById(campoId);
+
+    if (!campo) return;
+
+    const senhaVisivel =
+      campo.type === "text";
+
+    if (senhaVisivel) {
+      campo.type = "password";
+
+      botaoMostrarSenha.textContent = "👁";
+
+      botaoMostrarSenha.setAttribute(
+        "aria-label",
+        "Mostrar senha"
+      );
+    } else {
+      campo.type = "text";
+
+      botaoMostrarSenha.textContent = "◉";
+
+      botaoMostrarSenha.setAttribute(
+        "aria-label",
+        "Ocultar senha"
+      );
+    }
+  });
+}
