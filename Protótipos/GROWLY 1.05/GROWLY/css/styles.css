@@ -4846,3 +4846,11 @@ button.profile-avatar:focus-visible {
   }
 
 }
+
+.profile-stat-species-name {
+  font-size: clamp(1rem, 3.8vw, 1.55rem);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-align: center;
+}

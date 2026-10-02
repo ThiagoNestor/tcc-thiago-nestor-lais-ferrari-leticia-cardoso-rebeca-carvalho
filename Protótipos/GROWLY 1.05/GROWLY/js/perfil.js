@@ -47,8 +47,8 @@ const statJardim =
 const statIdentificacoes =
   document.getElementById("stat-identificacoes");
 
-const statContribuicoes =
-  document.getElementById("stat-contribuicoes");
+const statEspecieFrequente =
+  document.getElementById("stat-especie-frequente");
 
 
 const profileContributionNumber =
@@ -90,18 +90,15 @@ function obterIniciais(nome) {
     return "G";
   }
 
-
   const partes =
     nome
       .trim()
       .split(/\s+/)
       .filter(Boolean);
 
-
   if (!partes.length) {
     return "G";
   }
-
 
   if (partes.length === 1) {
 
@@ -111,11 +108,11 @@ function obterIniciais(nome) {
 
   }
 
-
   return (
     partes[0].charAt(0) +
     partes[partes.length - 1].charAt(0)
   ).toUpperCase();
+
 }
 
 
@@ -130,10 +127,8 @@ function obterDataConta(dataCriacao) {
     return null;
   }
 
-
   const data =
     new Date(dataCriacao);
-
 
   if (
     Number.isNaN(
@@ -142,8 +137,8 @@ function obterDataConta(dataCriacao) {
   ) {
 
     return null;
-  }
 
+  }
 
   return new Intl.DateTimeFormat(
     "pt-BR",
@@ -152,8 +147,8 @@ function obterDataConta(dataCriacao) {
       year: "numeric"
     }
   ).format(data);
-}
 
+}
 
 
 function formatarDataConta(dataCriacao) {
@@ -163,13 +158,12 @@ function formatarDataConta(dataCriacao) {
       dataCriacao
     );
 
-
   if (!data) {
     return "Membro do Growly";
   }
 
-
   return `Membro desde ${data}`;
+
 }
 
 
@@ -185,11 +179,9 @@ function carregarDadosUsuario(usuario) {
     usuario.email?.split("@")[0] ||
     "Usuário Growly";
 
-
   const email =
     usuario.email ||
     "E-mail não disponível";
-
 
   const dataConta =
     obterDataConta(
@@ -230,6 +222,7 @@ function carregarDadosUsuario(usuario) {
   profileAccountCreated.textContent =
     dataConta ||
     "Não disponível";
+
 }
 
 
@@ -255,7 +248,6 @@ async function verificarAdminPerfil(
       )
       .maybeSingle();
 
-
   if (error) {
 
     console.error(
@@ -264,10 +256,11 @@ async function verificarAdminPerfil(
     );
 
     return false;
+
   }
 
-
   return Boolean(data);
+
 }
 
 
@@ -287,7 +280,6 @@ async function carregarTipoConta(
         userId
       );
 
-
     profileAccountType.textContent =
       admin
         ? "Administrador"
@@ -302,7 +294,9 @@ async function carregarTipoConta(
 
     profileAccountType.textContent =
       "Membro";
+
   }
+
 }
 
 
@@ -316,16 +310,14 @@ function mostrarIniciaisAvatar() {
   profileAvatarImage.hidden =
     true;
 
-
   profileAvatarImage.removeAttribute(
     "src"
   );
 
-
   profileAvatarInitials.hidden =
     false;
-}
 
+}
 
 
 function mostrarFotoAvatar(url) {
@@ -333,13 +325,12 @@ function mostrarFotoAvatar(url) {
   profileAvatarImage.src =
     url;
 
-
   profileAvatarImage.hidden =
     false;
 
-
   profileAvatarInitials.hidden =
     true;
+
 }
 
 
@@ -355,14 +346,13 @@ async function carregarFotoPerfil(
   const caminho =
     usuario.user_metadata?.avatar_path;
 
-
   if (!caminho) {
 
     mostrarIniciaisAvatar();
 
     return;
-  }
 
+  }
 
   try {
 
@@ -379,19 +369,17 @@ async function carregarFotoPerfil(
           60 * 60
         );
 
-
     if (error) {
       throw error;
     }
-
 
     if (!data?.signedUrl) {
 
       mostrarIniciaisAvatar();
 
       return;
-    }
 
+    }
 
     mostrarFotoAvatar(
       data.signedUrl
@@ -404,9 +392,10 @@ async function carregarFotoPerfil(
       erro
     );
 
-
     mostrarIniciaisAvatar();
+
   }
+
 }
 
 
@@ -426,8 +415,8 @@ function validarAvatar(arquivo) {
     throw new Error(
       "Escolha uma imagem JPG, PNG ou WEBP."
     );
-  }
 
+  }
 
   if (
     arquivo.size >
@@ -437,7 +426,9 @@ function validarAvatar(arquivo) {
     throw new Error(
       "A imagem deve ter no máximo 5 MB."
     );
+
   }
+
 }
 
 
@@ -454,11 +445,9 @@ async function enviarFotoPerfil(
     return;
   }
 
-
   validarAvatar(
     arquivo
   );
-
 
   const extensoes = {
 
@@ -470,22 +459,18 @@ async function enviarFotoPerfil(
 
   };
 
-
   const extensao =
     extensoes[
       arquivo.type
     ];
 
-
   const caminho =
     `${usuarioPerfil.id}/avatar.${extensao}`;
-
 
   const caminhoAnterior =
     usuarioPerfil
       .user_metadata
       ?.avatar_path;
-
 
 
   // UPLOAD
@@ -508,11 +493,9 @@ async function enviarFotoPerfil(
         }
       );
 
-
   if (uploadError) {
     throw uploadError;
   }
-
 
 
   // SALVAR CAMINHO NO AUTH
@@ -530,7 +513,6 @@ async function enviarFotoPerfil(
 
     });
 
-
   if (updateError) {
 
     await db.storage
@@ -541,14 +523,12 @@ async function enviarFotoPerfil(
         caminho
       ]);
 
-
     throw updateError;
-  }
 
+  }
 
   usuarioPerfil =
     data.user;
-
 
 
   // REMOVER FOTO ANTIGA
@@ -571,21 +551,21 @@ async function enviarFotoPerfil(
           caminhoAnterior
         ]);
 
-
     if (removeError) {
 
       console.warn(
         "Não foi possível remover o avatar anterior:",
         removeError
       );
+
     }
+
   }
-
-
 
   await carregarFotoPerfil(
     usuarioPerfil
   );
+
 }
 
 
@@ -617,15 +597,12 @@ profileAvatarInput.addEventListener(
       profileAvatarInput
         .files?.[0];
 
-
     if (!arquivo) {
       return;
     }
 
-
     profileAvatar.disabled =
       true;
-
 
     try {
 
@@ -640,7 +617,6 @@ profileAvatarInput.addEventListener(
         erro
       );
 
-
       alert(
         erro.message ||
         "Não foi possível alterar sua foto de perfil."
@@ -651,10 +627,11 @@ profileAvatarInput.addEventListener(
       profileAvatar.disabled =
         false;
 
-
       profileAvatarInput.value =
         "";
+
     }
+
   }
 );
 
@@ -689,13 +666,129 @@ async function contarRegistros(
         userId
       );
 
+  if (error) {
+    throw error;
+  }
+
+  return count ?? 0;
+
+}
+
+
+
+// ==========================================
+// ESPÉCIE MAIS ENCONTRADA
+// ==========================================
+
+async function obterEspecieMaisEncontrada(
+  userId
+) {
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("identificacoes")
+      .select(
+        "panc_id, resultado"
+      )
+      .eq(
+        "user_id",
+        userId
+      )
+      .not(
+        "panc_id",
+        "is",
+        null
+      );
 
   if (error) {
     throw error;
   }
 
+  if (!data?.length) {
+    return null;
+  }
 
-  return count ?? 0;
+
+  const especies =
+    new Map();
+
+
+  data.forEach(
+    (identificacao) => {
+
+      if (
+        !identificacao.panc_id ||
+        !identificacao.resultado
+      ) {
+        return;
+      }
+
+
+      const pancId =
+        identificacao.panc_id;
+
+
+      const especieExistente =
+        especies.get(
+          pancId
+        );
+
+
+      if (especieExistente) {
+
+        especieExistente.quantidade += 1;
+
+      } else {
+
+        especies.set(
+          pancId,
+          {
+            nome:
+              identificacao.resultado,
+
+            quantidade:
+              1
+          }
+        );
+
+      }
+
+    }
+  );
+
+
+  if (!especies.size) {
+    return null;
+  }
+
+
+  let especieMaisEncontrada =
+    null;
+
+
+  especies.forEach(
+    (especie) => {
+
+      if (
+        !especieMaisEncontrada ||
+        especie.quantidade >
+          especieMaisEncontrada.quantidade
+      ) {
+
+        especieMaisEncontrada =
+          especie;
+
+      }
+
+    }
+  );
+
+
+  return especieMaisEncontrada;
+
 }
 
 
@@ -724,6 +817,10 @@ async function carregarEstatisticas(
       contarRegistros(
         "imagens_treinamento",
         userId
+      ),
+
+      obterEspecieMaisEncontrada(
+        userId
       )
 
     ]);
@@ -732,7 +829,8 @@ async function carregarEstatisticas(
   const [
     jardim,
     identificacoes,
-    contribuicoes
+    contribuicoes,
+    especieFrequente
   ] = resultados;
 
 
@@ -752,11 +850,11 @@ async function carregarEstatisticas(
     statJardim.textContent =
       "—";
 
-
     console.error(
       "Erro ao carregar plantas do jardim:",
       jardim.reason
     );
+
   }
 
 
@@ -776,11 +874,53 @@ async function carregarEstatisticas(
     statIdentificacoes.textContent =
       "—";
 
-
     console.error(
       "Erro ao carregar identificações:",
       identificacoes.reason
     );
+
+  }
+
+
+
+  // ESPÉCIE MAIS ENCONTRADA
+
+  if (
+    especieFrequente.status ===
+    "fulfilled"
+  ) {
+
+    if (
+      especieFrequente.value
+    ) {
+
+      statEspecieFrequente.textContent =
+        especieFrequente.value.nome;
+
+      statEspecieFrequente.title =
+        `${especieFrequente.value.quantidade} identificações`;
+
+    } else {
+
+      statEspecieFrequente.textContent =
+        "Nenhuma";
+
+      statEspecieFrequente.removeAttribute(
+        "title"
+      );
+
+    }
+
+  } else {
+
+    statEspecieFrequente.textContent =
+      "—";
+
+    console.error(
+      "Erro ao carregar espécie mais encontrada:",
+      especieFrequente.reason
+    );
+
   }
 
 
@@ -792,28 +932,21 @@ async function carregarEstatisticas(
     "fulfilled"
   ) {
 
-    statContribuicoes.textContent =
-      contribuicoes.value;
-
-
     profileContributionNumber.textContent =
       contribuicoes.value;
 
   } else {
 
-    statContribuicoes.textContent =
-      "—";
-
-
     profileContributionNumber.textContent =
       "—";
-
 
     console.error(
       "Erro ao carregar contribuições:",
       contribuicoes.reason
     );
+
   }
+
 }
 
 
@@ -829,14 +962,11 @@ btnLogout.addEventListener(
     btnLogout.disabled =
       true;
 
-
     const textoOriginal =
       btnLogout.innerHTML;
 
-
     btnLogout.textContent =
       "Saindo...";
-
 
     try {
 
@@ -845,11 +975,9 @@ btnLogout.addEventListener(
       } =
         await db.auth.signOut();
 
-
       if (error) {
         throw error;
       }
-
 
       location.replace(
         "login.html"
@@ -862,19 +990,18 @@ btnLogout.addEventListener(
         erro
       );
 
-
       btnLogout.innerHTML =
         textoOriginal;
-
 
       btnLogout.disabled =
         false;
 
-
       alert(
         "Não foi possível sair da conta. Tente novamente."
       );
+
     }
+
   }
 );
 
@@ -891,20 +1018,16 @@ async function iniciarPerfil() {
     const usuario =
       await requireAuth();
 
-
     if (!usuario) {
       return;
     }
 
-
     usuarioPerfil =
       usuario;
-
 
     carregarDadosUsuario(
       usuarioPerfil
     );
-
 
     await Promise.all([
 
@@ -928,7 +1051,9 @@ async function iniciarPerfil() {
       "Erro ao carregar perfil:",
       erro
     );
+
   }
+
 }
 
 
