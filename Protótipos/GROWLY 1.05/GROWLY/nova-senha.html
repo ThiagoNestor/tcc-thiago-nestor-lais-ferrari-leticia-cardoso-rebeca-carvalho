@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Nova senha — Growly</title>
+
+  <meta
+    name="description"
+    content="Crie uma nova senha para sua conta Growly."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <div class="screen no-nav">
+
+    <img data-leaf="top-left" />
+    <img data-leaf="bottom-right" />
+
+    <main class="auth-main">
+
+      <a href="index.html">
+        <img
+          class="auth-logo"
+          src="assets/logo-inicio.png"
+          alt="Growly"
+        />
+      </a>
+
+      <div class="auth-body">
+
+        <form class="stack" id="form-nova-senha">
+
+          <div class="auth-intro">
+            <h1>Crie uma nova senha</h1>
+
+            <p>
+              Escolha uma nova senha para acessar sua conta Growly.
+            </p>
+          </div>
+
+          <p
+            class="form-error"
+            id="erro"
+            hidden
+          ></p>
+
+          <p
+            class="form-success"
+            id="sucesso"
+            hidden
+          ></p>
+
+          <div class="field">
+            <label for="nova-senha">Nova senha</label>
+
+            <div class="password-input-wrapper">
+              <input
+                id="nova-senha"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                required
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                data-password-toggle="nova-senha"
+                aria-label="Mostrar senha"
+              >
+                👁
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="confirmar-senha">
+              Confirmar nova senha
+            </label>
+
+            <div class="password-input-wrapper">
+              <input
+                id="confirmar-senha"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                required
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                data-password-toggle="confirmar-senha"
+                aria-label="Mostrar senha"
+              >
+                👁
+              </button>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-secondary btn-block"
+            type="submit"
+            id="salvar-senha"
+          >
+            Redefinir senha
+          </button>
+
+          <p class="form-footer">
+            <a href="login.html">Voltar ao login</a>
+          </p>
+
+        </form>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/nova-senha.js"></script>
+
+</body>
+</html>
