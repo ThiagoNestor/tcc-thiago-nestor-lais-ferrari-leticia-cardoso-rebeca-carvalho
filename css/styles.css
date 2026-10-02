@@ -3767,3 +3767,1090 @@ revisao-sair-esquerda {
   font-size: 0.9rem;
   line-height: 1.4;
 }
+
+/* ==================================================
+   MEU PERFIL
+   ================================================== */
+
+
+/* --------------------------------------------------
+   PÁGINA
+   -------------------------------------------------- */
+
+.profile-page {
+  width: 100%;
+  max-width: 25rem;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+
+/* --------------------------------------------------
+   CABEÇALHO
+   -------------------------------------------------- */
+
+.profile-top {
+  position: relative;
+  width: 100%;
+}
+
+.profile-top [data-header] {
+  text-align: center;
+}
+
+.profile-subtitle {
+  width: 100%;
+  margin:
+    0.35rem auto
+    1.35rem;
+
+  text-align: center;
+  line-height: 1.45;
+}
+
+
+.profile-settings-btn {
+  position: absolute;
+
+  top: 50%;
+  right: 0;
+
+  width: 2.6rem;
+  height: 2.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform:
+    translateY(-50%);
+
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.profile-settings-btn img {
+  width: 1.7rem;
+  height: 1.7rem;
+
+  object-fit: contain;
+}
+
+
+.profile-settings-btn:hover {
+  background:
+    rgba(31, 59, 44, 0.07);
+
+  transform:
+    translateY(-50%)
+    scale(1.05);
+}
+
+
+.profile-settings-btn:focus-visible {
+  outline:
+    2px solid var(--fg);
+
+  outline-offset: 3px;
+}
+
+
+
+/* ==================================================
+   CARD PRINCIPAL
+   Inspirado na organização do perfil Rubra Guará
+   ================================================== */
+
+.user-profile-card {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 0;
+
+  margin:
+    0 0
+    1rem;
+
+  padding:
+    1.65rem
+    1.25rem
+    1.35rem;
+
+  text-align: center;
+
+  background:
+    rgba(255, 255, 255, 0.9);
+
+  border:
+    1px solid
+    rgba(31, 59, 44, 0.1);
+
+  border-radius: 1.5rem;
+
+  box-shadow:
+    0 10px 30px
+    rgba(31, 59, 44, 0.06);
+
+  overflow: hidden;
+}
+
+
+/*
+  Remove o emoji decorativo
+  que existia no card antigo.
+*/
+
+.user-profile-card::after {
+  display: none;
+}
+
+
+
+/* --------------------------------------------------
+   FOTO
+   -------------------------------------------------- */
+
+.profile-avatar-area {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 0.9rem;
+}
+
+
+button.profile-avatar {
+  position: relative;
+
+width: 6.5rem;
+height: 6.5rem;
+
+min-width: 6.5rem;
+min-height: 6.5rem;
+
+max-width: 6.5rem;
+max-height: 6.5rem;
+
+aspect-ratio: 1 / 1;
+
+flex: none;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+
+  border:
+    1px solid
+    rgba(31, 59, 44, 0.15);
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #315c45,
+      #1f3b2c
+    );
+
+  color: #fff;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    serif;
+
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  letter-spacing: 0.03em;
+
+  box-shadow:
+    0 8px 22px
+    rgba(31, 59, 44, 0.14);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+button.profile-avatar:hover {
+  transform:
+    scale(1.025);
+
+  box-shadow:
+    0 10px 26px
+    rgba(31, 59, 44, 0.19);
+}
+
+
+button.profile-avatar:focus-visible {
+  outline:
+    3px solid
+    rgba(49, 92, 69, 0.28);
+
+  outline-offset: 3px;
+}
+
+
+button.profile-avatar:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+
+
+/* FOTO REAL */
+
+#profile-avatar-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+
+#profile-avatar-image[hidden] {
+  display: none;
+}
+
+
+
+/* INICIAIS */
+
+#profile-avatar-initials {
+  position: relative;
+  z-index: 1;
+}
+
+
+#profile-avatar-initials[hidden] {
+  display: none;
+}
+
+
+
+/* BOTÃO DE EDIÇÃO */
+
+.profile-avatar-edit {
+  position: absolute;
+
+  right: -0.12rem;
+  bottom: 0.15rem;
+
+  z-index: 3;
+
+  width: 1.8rem;
+  height: 1.8rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    3px solid
+    #fff;
+
+  border-radius: 50%;
+
+  background:
+    var(--fg);
+
+  color: #fff;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  box-shadow:
+    0 4px 10px
+    rgba(31, 59, 44, 0.18);
+
+  pointer-events: none;
+}
+
+
+
+/* --------------------------------------------------
+   NOME / E-MAIL
+   -------------------------------------------------- */
+
+.profile-info {
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+  z-index: 1;
+}
+
+
+.profile-info h1 {
+  margin:
+    0 0
+    0.25rem;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    serif;
+
+  font-size: 1.3rem;
+  line-height: 1.2;
+
+  color: var(--fg);
+}
+
+
+.profile-info p {
+  max-width: 100%;
+
+  margin:
+    0 0
+    0.55rem;
+
+  font-size: 0.78rem;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.64
+    );
+
+  overflow-wrap: anywhere;
+}
+
+
+.profile-member {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0.38rem
+    0.75rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(
+      31,
+      59,
+      44,
+      0.06
+    );
+
+  font-size: 0.69rem;
+  font-weight: 700;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.72
+    );
+}
+
+
+
+/* ==================================================
+   CARDS GERAIS
+   ================================================== */
+
+.profile-account-card,
+.profile-section,
+.profile-contribution-card {
+  width: 100%;
+
+  margin:
+    0 0
+    1rem;
+
+  background:
+    rgba(255, 255, 255, 0.9);
+
+  border:
+    1px solid
+    rgba(31, 59, 44, 0.1);
+
+  border-radius: 1.5rem;
+
+  box-shadow:
+    0 8px 24px
+    rgba(31, 59, 44, 0.05);
+}
+
+
+
+/* ==================================================
+   INFORMAÇÕES DA CONTA
+   ================================================== */
+
+.profile-account-card {
+  padding:
+    1.3rem
+    1.25rem
+    0.35rem;
+}
+
+
+.profile-card-title {
+  margin-bottom: 0.7rem;
+}
+
+
+.profile-card-title h2 {
+  margin: 0;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    serif;
+
+  font-size: 1.15rem;
+
+  color: var(--fg);
+}
+
+
+.profile-eyebrow {
+  display: block;
+
+  margin-bottom: 0.2rem;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.53
+    );
+}
+
+
+
+/* LISTA DE DADOS */
+
+.profile-account-list {
+  width: 100%;
+}
+
+
+.profile-account-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.12rem;
+
+  padding:
+    0.72rem 0;
+
+  border-bottom:
+    1px solid
+    rgba(
+      31,
+      59,
+      44,
+      0.1
+    );
+}
+
+
+.profile-account-item:last-child {
+  border-bottom: 0;
+}
+
+
+.profile-account-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.58
+    );
+}
+
+
+.profile-account-value {
+  font-size: 0.84rem;
+  font-weight: 700;
+
+  color: var(--fg);
+
+  overflow-wrap: anywhere;
+}
+
+
+
+/* ==================================================
+   JORNADA
+   ================================================== */
+
+.profile-section {
+  padding:
+    1.3rem
+    1.1rem;
+}
+
+
+.profile-section-heading {
+  display: block;
+
+  margin-bottom: 1rem;
+}
+
+
+.profile-section-heading h2 {
+  margin: 0;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    serif;
+
+  font-size: 1.15rem;
+
+  color: var(--fg);
+}
+
+
+
+/* ESTATÍSTICAS */
+
+.profile-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 0.55rem;
+}
+
+
+.profile-stat {
+  min-width: 0;
+
+  min-height: 5.7rem;
+
+  padding:
+    0.85rem
+    0.35rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    rgba(
+      248,
+      246,
+      232,
+      0.72
+    );
+
+  border:
+    1px solid
+    rgba(
+      31,
+      59,
+      44,
+      0.08
+    );
+
+  border-radius: 1rem;
+}
+
+
+.profile-stat-number {
+  display: block;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    serif;
+
+  font-size: 1.55rem;
+  line-height: 1;
+
+  color: var(--fg);
+}
+
+
+.profile-stat-label {
+  display: block;
+
+  margin-top: 0.45rem;
+
+  font-size: 0.66rem;
+  line-height: 1.25;
+
+  color:
+    rgba(
+      31,
+      59,
+      44,
+      0.64
+    );
+}
+
+
+
+/* ==================================================
+   CONTRIBUIÇÃO
+   ================================================== */
+
+.profile-contribution-card {
+  padding:
+    1.5rem
+    1.3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  background:
+    var(--fg);
+
+  color: #fff;
+}
+
+
+.profile-contribution-eyebrow {
+  margin-bottom: 0.45rem;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    );
+}
+
+
+.profile-contribution-number {
+  display: block;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    serif;
+
+  font-size: 2.7rem;
+  line-height: 1;
+
+  color: #fff;
+}
+
+
+.profile-contribution-title {
+  display: block;
+
+  margin-top: 0.25rem;
+
+  font-size: 0.8rem;
+  font-weight: 800;
+
+  color: #fff;
+}
+
+
+.profile-contribution-card p {
+  max-width: 18rem;
+
+  margin:
+    0.7rem
+    auto 0;
+
+  font-size: 0.73rem;
+  line-height: 1.45;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.76
+    );
+}
+
+
+
+/* ==================================================
+   LOGOUT
+   ================================================== */
+
+.profile-logout {
+  width: 100%;
+
+  min-height: 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin:
+    0.15rem 0
+    0.5rem;
+
+  padding:
+    0.8rem
+    1rem;
+
+  font: inherit;
+
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  color: #7b3838;
+
+  background:
+    transparent;
+
+  border:
+    1px solid
+    rgba(
+      123,
+      56,
+      56,
+      0.38
+    );
+
+  border-radius: 1rem;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.profile-logout:hover {
+  background:
+    rgba(
+      123,
+      56,
+      56,
+      0.06
+    );
+
+  transform:
+    translateY(-1px);
+}
+
+
+.profile-logout:disabled {
+  opacity: 0.6;
+
+  cursor: wait;
+
+  transform: none;
+}
+
+
+
+/* ==================================================
+   RESPONSIVIDADE
+   ================================================== */
+
+@media (max-width: 480px) {
+
+  .profile-page {
+    max-width: 23rem;
+  }
+
+
+  .profile-subtitle {
+    max-width: 19rem;
+
+    font-size: 0.82rem;
+  }
+
+
+  .user-profile-card {
+    padding:
+      1.5rem
+      1rem
+      1.25rem;
+  }
+
+
+button.profile-avatar {
+  width: 6rem;
+  height: 6rem;
+
+  min-width: 6rem;
+  min-height: 6rem;
+
+  max-width: 6rem;
+  max-height: 6rem;
+
+  aspect-ratio: 1 / 1;
+
+  flex: none;
+
+  font-size: 1.6rem;
+}
+
+
+  .profile-info h1 {
+    font-size: 1.22rem;
+  }
+
+
+  .profile-account-card {
+    padding:
+      1.2rem
+      1rem
+      0.3rem;
+  }
+
+
+  .profile-section {
+    padding:
+      1.2rem
+      0.85rem;
+  }
+
+
+  .profile-stats {
+    gap: 0.4rem;
+  }
+
+
+  .profile-stat {
+    min-height: 5.4rem;
+
+    padding:
+      0.75rem
+      0.2rem;
+  }
+
+
+  .profile-stat-number {
+    font-size: 1.4rem;
+  }
+
+
+  .profile-stat-label {
+    font-size: 0.61rem;
+  }
+
+
+  .profile-contribution-card {
+    padding:
+      1.4rem
+      1rem;
+  }
+
+
+  .profile-contribution-number {
+    font-size: 2.45rem;
+  }
+
+}
+
+/* ==================================================
+   FOTO DE PERFIL
+   ================================================== */
+
+.profile-avatar-area {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+button.profile-avatar {
+  position: relative;
+
+  width: 4.6rem;
+  height: 4.6rem;
+  padding: 0;
+  overflow: visible;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #315c45,
+      #1f3b2c
+    );
+
+  color: #fff;
+
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+
+  box-shadow:
+    0 8px 20px rgba(31, 59, 44, 0.18);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+button.profile-avatar:hover {
+  transform: scale(1.03);
+
+  box-shadow:
+    0 10px 24px rgba(31, 59, 44, 0.22);
+}
+
+button.profile-avatar:focus-visible {
+  outline: 3px solid rgba(49, 92, 69, 0.3);
+  outline-offset: 3px;
+}
+
+
+/* INICIAIS */
+
+#profile-avatar-initials {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* FOTO */
+
+#profile-avatar-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#profile-avatar-image[hidden] {
+  display: none;
+}
+
+
+/* PEQUENO BOTÃO DE EDIÇÃO */
+
+.profile-avatar-edit {
+  position: absolute;
+  right: -0.15rem;
+  bottom: -0.15rem;
+  z-index: 3;
+
+  width: 1.55rem;
+  height: 1.55rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #fbf5dc;
+  border-radius: 50%;
+
+  background: #fff;
+  color: #1f3b2c;
+
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  box-shadow:
+    0 3px 8px rgba(31, 59, 44, 0.16);
+
+  pointer-events: none;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  button.profile-avatar {
+    width: 4rem;
+    height: 4rem;
+
+    font-size: 1.25rem;
+  }
+
+  .profile-avatar-edit {
+    width: 1.4rem;
+    height: 1.4rem;
+
+    font-size: 0.72rem;
+  }
+
+}
+
+.profile-stat-species-name {
+  font-size: clamp(1rem, 3.8vw, 1.55rem);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-align: center;
+}
