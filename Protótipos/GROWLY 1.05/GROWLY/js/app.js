@@ -35,7 +35,7 @@ const PLANT_IMAGES = {
   vinagreira: "assets/Vinagreira.jpg",
   capuchinha: "assets/capuchinha.jpg",
   peixinho: "assets/peixinho-da-horta.jpg",
-  tanchagem: "assets/tanchagem.jpg",
+  tanchagem: "assets/tanchagem.png",
 };
 
 function plantImage(slug) {
