@@ -53,7 +53,7 @@ function render() {
         (m) =>
           `<div class="msg ${m.role === "user" ? "user" : "eden"}">` +
           (m.role === "assistant"
-            ? '<div class="avatar">E</div>'
+            ? '<div class="avatar"><img src="assets/logo-eden.png" alt="Logo da Eden"></div>'
             : "") +
           `<div class="bubble">${formatarMarkdown(m.content)}</div>` +
           `</div>`
@@ -63,7 +63,7 @@ function render() {
     (pensando
       ? `
         <div class="msg eden">
-          <div class="avatar">E</div>
+          <div class="avatar"><img src="assets/logo-eden.png" alt="Logo da Eden"></div>
           <div class="bubble">Pensando…</div>
         </div>
       `
