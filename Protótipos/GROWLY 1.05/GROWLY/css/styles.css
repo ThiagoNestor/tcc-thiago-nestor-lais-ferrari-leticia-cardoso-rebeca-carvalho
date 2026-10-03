@@ -3815,8 +3815,8 @@ revisao-sair-esquerda {
   top: 50%;
   right: 0;
 
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 46px;
+  height: 46px;
 
   display: flex;
   align-items: center;
@@ -3825,7 +3825,10 @@ revisao-sair-esquerda {
   transform:
     translateY(-50%);
 
+  background-color: #ffffff;
+  border: 2px solid #12372a;
   border-radius: 50%;
+  box-sizing: border-box;
 
   text-decoration: none;
 
@@ -3836,16 +3839,15 @@ revisao-sair-esquerda {
 
 
 .profile-settings-btn img {
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 23px;
+  height: 23px;
 
   object-fit: contain;
 }
 
 
 .profile-settings-btn:hover {
-  background:
-    rgba(31, 59, 44, 0.07);
+  background-color: #ffffe2;
 
   transform:
     translateY(-50%)
