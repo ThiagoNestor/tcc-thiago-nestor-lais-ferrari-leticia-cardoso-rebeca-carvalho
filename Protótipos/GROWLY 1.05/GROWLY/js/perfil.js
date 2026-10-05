@@ -57,9 +57,6 @@ const profileContributionNumber =
   );
 
 
-const btnLogout =
-  document.getElementById("profile-logout");
-
 
 
 // ==========================================
@@ -948,62 +945,6 @@ async function carregarEstatisticas(
   }
 
 }
-
-
-
-// ==========================================
-// LOGOUT
-// ==========================================
-
-btnLogout.addEventListener(
-  "click",
-  async () => {
-
-    btnLogout.disabled =
-      true;
-
-    const textoOriginal =
-      btnLogout.innerHTML;
-
-    btnLogout.textContent =
-      "Saindo...";
-
-    try {
-
-      const {
-        error
-      } =
-        await db.auth.signOut();
-
-      if (error) {
-        throw error;
-      }
-
-      location.replace(
-        "login.html"
-      );
-
-    } catch (erro) {
-
-      console.error(
-        "Erro ao sair:",
-        erro
-      );
-
-      btnLogout.innerHTML =
-        textoOriginal;
-
-      btnLogout.disabled =
-        false;
-
-      alert(
-        "Não foi possível sair da conta. Tente novamente."
-      );
-
-    }
-
-  }
-);
 
 
 
