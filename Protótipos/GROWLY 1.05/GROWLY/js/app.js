@@ -53,7 +53,6 @@ function esc(value) {
 
 const NAV_ITEMS = [
   { href: "home.html", label: "Início", icon: ASSETS.iconHome },
-  { href: "explorar.html", label: "Explorar", icon: ASSETS.iconPesquisar },
   { href: "eden.html", label: "Eden IA", icon: ASSETS.iconEden },
   { href: "suporte.html", label: "Suporte", icon: ASSETS.iconSuporte },
   { href: "perfil.html", label: "Perfil", icon: ASSETS.iconPerfil },
