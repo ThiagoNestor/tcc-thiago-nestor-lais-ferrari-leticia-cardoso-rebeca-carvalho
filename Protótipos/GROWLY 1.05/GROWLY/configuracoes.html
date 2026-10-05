@@ -3,184 +3,376 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Configurações — Growly</title>
-    <link rel="icon" type="image/jpeg" href="assets/logo-original.jpeg" />
 
-  <meta name="description" content="Gerencie seu perfil e sua conta no Growly." />
+  <link
+    rel="icon"
+    type="image/jpeg"
+    href="assets/logo-original.jpeg"
+  />
 
-  
+  <meta
+    name="description"
+    content="Gerencie seu perfil e sua conta no Growly."
+  />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
 
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
 
-  <link rel="stylesheet" href="css/styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  />
 </head>
 
 <body>
 
-<div class="screen">
+  <div class="screen">
 
+    <!-- FOLHAS DECORATIVAS -->
     <img data-leaf="top-left" />
     <img data-leaf="top-right" />
 
-    <main class="page-main">
 
-        <div data-header="Configurações"></div>
+    <!-- CONTEÚDO -->
+    <main class="page-main configuracoes-main">
 
-        <p class="page-sub">
-            Gerencie seu perfil e sua conta.
-        </p>
+      <div data-header="Configurações"></div>
 
-        <p class="form-ok" id="status" hidden></p>
+      <p class="page-sub configuracoes-sub">
+        Gerencie seus dados, segurança e preferências da conta.
+      </p>
 
-        <!-- EMAIL -->
 
-        <form class="stack" id="form-email">
+      <!-- STATUS -->
+      <p
+        class="form-ok"
+        id="status"
+        hidden
+      ></p>
 
-            <div class="field">
-                <label for="novo-email">Novo e-mail</label>
 
-                <input
-                    id="novo-email"
-                    type="email"
-                    placeholder="email@exemplo.com"
-                    required
-                />
-            </div>
+      <!-- =========================================
+           INFORMAÇÕES DA CONTA
+           ========================================= -->
 
-            <button class="btn btn-secondary btn-block" type="submit">
-                Alterar e-mail
-            </button>
+      <section class="config-section">
 
-        </form>
+        <div class="config-section-heading">
 
-        <!-- NOME -->
+          <span class="config-section-kicker">
+            CONTA
+          </span>
 
-        <form class="stack" id="form-perfil">
+          <h2>
+            Informações da conta
+          </h2>
 
-            <div class="field">
-                <label for="conta-nome">Nome de usuário</label>
+          <p>
+            Atualize seus dados pessoais no Growly.
+          </p>
 
-                <input
-                    id="conta-nome"
-                    type="text"
-                    required
-                />
-            </div>
+        </div>
 
-            <button
-                class="btn btn-secondary btn-block"
-                type="submit"
-                id="salvar"
-            >
-                Salvar nome
-            </button>
 
-        </form>
+        <div class="config-card">
 
-        <!-- SENHA -->
+          <!-- E-MAIL -->
 
-        <form class="stack" id="form-senha">
+          <form
+            class="stack"
+            id="form-email"
+          >
 
             <div class="field">
-                <label for="senha-atual">Senha atual</label>
 
-                <input
-                    id="senha-atual"
-                    type="password"
-                    required
-                />
-            </div>
+              <label for="novo-email">
+                Novo e-mail
+              </label>
 
-            <div class="field">
-                <label for="senha-nova">Nova senha</label>
+              <input
+                id="novo-email"
+                type="email"
+                placeholder="email@exemplo.com"
+                autocomplete="email"
+                required
+              />
 
-                <input
-                    id="senha-nova"
-                    type="password"
-                    minlength="6"
-                    required
-                />
-            </div>
-
-            <div class="field">
-                <label for="senha-confirmar">Confirmar nova senha</label>
-
-                <input
-                    id="senha-confirmar"
-                    type="password"
-                    minlength="6"
-                    required
-                />
             </div>
 
             <button
-                class="btn btn-secondary btn-block"
-                type="submit"
+              class="btn btn-secondary btn-block"
+              type="submit"
             >
-                Alterar senha
+              Alterar e-mail
             </button>
 
-        </form>
+          </form>
 
-                    <!-- =========================================
-                ÁREA DA EQUIPE - SOMENTE ADMINS
-                ========================================= -->
 
-            <section
-            id="area-equipe"
-            class="area-equipe"
-            hidden
+          <div class="config-divider"></div>
+
+
+          <!-- NOME -->
+
+          <form
+            class="stack"
+            id="form-perfil"
+          >
+
+            <div class="field">
+
+              <label for="conta-nome">
+                Nome de usuário
+              </label>
+
+              <input
+                id="conta-nome"
+                type="text"
+                autocomplete="name"
+                required
+              />
+
+            </div>
+
+            <button
+              class="btn btn-secondary btn-block"
+              type="submit"
+              id="salvar"
             >
+              Salvar nome
+            </button>
 
-            <h2>
-                🌱 Área da equipe
-            </h2>
+          </form>
 
-            <a
-                href="revisao.html"
-                class="area-equipe-card"
+        </div>
+
+      </section>
+
+
+      <!-- =========================================
+           SEGURANÇA
+           ========================================= -->
+
+      <section class="config-section">
+
+        <div class="config-section-heading">
+
+          <span class="config-section-kicker">
+            SEGURANÇA
+          </span>
+
+          <h2>
+            Alterar senha
+          </h2>
+
+          <p>
+            Mantenha sua conta protegida com uma senha segura.
+          </p>
+
+        </div>
+
+
+        <div class="config-card">
+
+          <form
+            class="stack"
+            id="form-senha"
+          >
+
+            <!-- SENHA ATUAL -->
+
+            <div class="field">
+
+              <label for="senha-atual">
+                Senha atual
+              </label>
+
+              <input
+                id="senha-atual"
+                type="password"
+                autocomplete="current-password"
+                required
+              />
+
+            </div>
+
+
+            <!-- NOVA SENHA -->
+
+            <div class="field">
+
+              <label for="senha-nova">
+                Nova senha
+              </label>
+
+              <input
+                id="senha-nova"
+                type="password"
+                minlength="6"
+                autocomplete="new-password"
+                required
+              />
+
+            </div>
+
+
+            <!-- CONFIRMAÇÃO -->
+
+            <div class="field">
+
+              <label for="senha-confirmar">
+                Confirmar nova senha
+              </label>
+
+              <input
+                id="senha-confirmar"
+                type="password"
+                minlength="6"
+                autocomplete="new-password"
+                required
+              />
+
+            </div>
+
+
+            <button
+              class="btn btn-secondary btn-block"
+              type="submit"
             >
+              Alterar senha
+            </button>
 
-                <div class="area-equipe-conteudo">
+          </form>
 
-                <strong>
-                    Revisão da IA
-                </strong>
+        </div>
 
-                <span id="area-equipe-status">
-                    Verificando imagens pendentes...
-                </span>
+      </section>
 
-                </div>
 
-                <span class="area-equipe-seta">
-                ›
-                </span>
+      <!-- =========================================
+           ÁREA DA EQUIPE
+           SOMENTE ADMINISTRADORES
+           ========================================= -->
 
-            </a>
+      <section
+        id="area-equipe"
+        class="area-equipe config-section"
+        hidden
+      >
 
-            </section>
-        <button
-            class="plant-btn remove"
-            style="margin-top:1.5rem"
-            id="sair"
+        <div class="config-section-heading">
+
+          <span class="config-section-kicker">
+            ADMINISTRAÇÃO
+          </span>
+
+          <h2>
+            🌱 Área da equipe
+          </h2>
+
+          <p>
+            Ferramentas exclusivas para administração do Growly.
+          </p>
+
+        </div>
+
+
+        <a
+          href="revisao.html"
+          class="area-equipe-card"
         >
+
+          <div class="area-equipe-conteudo">
+
+            <strong>
+              Revisão da IA
+            </strong>
+
+            <span id="area-equipe-status">
+              Verificando imagens pendentes...
+            </span>
+
+          </div>
+
+
+          <span
+            class="area-equipe-seta"
+            aria-hidden="true"
+          >
+            ›
+          </span>
+
+        </a>
+
+      </section>
+
+
+      <!-- =========================================
+           SESSÃO
+           ========================================= -->
+
+      <section class="config-section config-session">
+
+        <div class="config-section-heading">
+
+          <span class="config-section-kicker">
+            SESSÃO
+          </span>
+
+          <h2>
             Sair da conta
+          </h2>
+
+          <p>
+            Encerre sua sessão neste dispositivo.
+          </p>
+
+        </div>
+
+
+        <button
+          class="plant-btn remove"
+          id="sair"
+          type="button"
+        >
+          Sair da conta
         </button>
+
+      </section>
 
     </main>
 
-    <nav class="bottom-nav" data-nav></nav>
 
-</div>
+    <!-- NAVEGAÇÃO -->
+    <nav
+      class="bottom-nav"
+      data-nav
+    ></nav>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  </div>
 
-<script src="js/app.js"></script>
-<script src="js/configuracoes.js"></script>
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+  <!-- GROWLY -->
+  <script src="js/app.js"></script>
+  <script src="js/configuracoes.js"></script>
 
 </body>
 </html>

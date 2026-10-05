@@ -4863,3 +4863,284 @@ button.profile-avatar:focus-visible {
   border-radius: 50%;
   object-fit: cover;
 }
+
+
+/* =========================================
+   CONFIGURAÇÕES - GROWLY
+   ========================================= */
+
+.configuracoes-main {
+  padding-bottom: 7.5rem;
+}
+
+.configuracoes-sub {
+  max-width: 32rem;
+  margin: 0.45rem auto 1.8rem;
+  text-align: center;
+  color: rgba(31, 59, 44, 0.72);
+  line-height: 1.45;
+}
+
+
+/* ===== Seções ===== */
+
+.config-section {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.config-section-heading {
+  margin-bottom: 0.85rem;
+}
+
+.config-section-kicker {
+  display: block;
+  margin-bottom: 0.22rem;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+
+  color: rgba(31, 59, 44, 0.58);
+}
+
+.config-section-heading h2 {
+  margin: 0;
+
+  font-family:
+    "Gill Sans",
+    "Gill Sans MT",
+    Calibri,
+    "Trebuchet MS",
+    sans-serif;
+
+  font-size: 1.15rem;
+  line-height: 1.2;
+
+  color: #1f3b2c;
+}
+
+.config-section-heading p {
+  margin: 0.25rem 0 0;
+
+  font-size: 0.82rem;
+  line-height: 1.4;
+
+  color: rgba(31, 59, 44, 0.65);
+}
+
+
+/* ===== Cards ===== */
+
+.config-card {
+  width: 100%;
+
+  padding: 1.15rem;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  border: 1px solid rgba(31, 59, 44, 0.1);
+  border-radius: 1.2rem;
+
+  box-shadow:
+    0 5px 18px rgba(31, 59, 44, 0.07);
+}
+
+.config-card form.stack {
+  gap: 0.9rem;
+}
+
+
+/* ===== Campos ===== */
+
+.config-card .field {
+  gap: 0.45rem;
+}
+
+.config-card .field label {
+  padding-left: 0.2rem;
+
+  font-size: 0.8rem;
+  font-weight: 800;
+
+  color: #1f3b2c;
+}
+
+.config-card .field input {
+  height: 2.85rem;
+
+  background: #eee7cf;
+
+  border: 1px solid transparent;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.config-card .field input:focus {
+  background: #fffdf5;
+
+  border-color: rgba(31, 59, 44, 0.32);
+
+  box-shadow:
+    0 0 0 3px rgba(31, 59, 44, 0.1);
+}
+
+
+/* ===== Botões ===== */
+
+.config-card .btn {
+  min-height: 2.8rem;
+
+  font-weight: 800;
+}
+
+.config-card .btn-secondary {
+  background: #dfe7d5;
+  color: #1f3b2c;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.config-card .btn-secondary:hover {
+  background: #d2dfc6;
+}
+
+.config-card .btn-secondary:active {
+  transform: scale(0.985);
+}
+
+
+/* ===== Divisão interna ===== */
+
+.config-divider {
+  height: 1px;
+
+  margin: 1.2rem 0;
+
+  background: rgba(31, 59, 44, 0.1);
+}
+
+
+/* =========================================
+   ÁREA ADMINISTRATIVA
+   ========================================= */
+
+.area-equipe.config-section {
+  margin-top: 2rem;
+}
+
+.area-equipe.config-section > h2 {
+  display: none;
+}
+
+.area-equipe.config-section .area-equipe-card {
+  margin-top: 0;
+
+  border-color: rgba(31, 59, 44, 0.16);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(229, 237, 218, 0.92)
+    );
+}
+
+.area-equipe.config-section .area-equipe-card:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #e5edda
+    );
+}
+
+
+/* =========================================
+   SESSÃO
+   ========================================= */
+
+.config-session {
+  margin-bottom: 1rem;
+}
+
+.config-session .plant-btn.remove {
+  min-height: 2.8rem;
+
+  border: 1px solid rgba(157, 47, 34, 0.12);
+
+  background: rgba(180, 50, 50, 0.9);
+
+  box-shadow:
+    0 4px 12px rgba(130, 35, 35, 0.1);
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.config-session .plant-btn.remove:hover {
+  background: rgba(165, 43, 43, 0.96);
+}
+
+.config-session .plant-btn.remove:active {
+  transform: scale(0.985);
+}
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.configuracoes-main #status {
+  margin: 0 0 1rem;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (min-width: 700px) {
+
+  .configuracoes-main {
+    max-width: 38rem;
+  }
+
+  .config-card {
+    padding: 1.35rem;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .configuracoes-sub {
+    margin-bottom: 1.4rem;
+    font-size: 0.84rem;
+  }
+
+  .config-section {
+    margin-top: 1.65rem;
+  }
+
+  .config-card {
+    padding: 1rem;
+    border-radius: 1.05rem;
+  }
+
+  .config-section-heading h2 {
+    font-size: 1.08rem;
+  }
+
+  .config-section-heading p {
+    font-size: 0.78rem;
+  }
+
+}
