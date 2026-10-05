@@ -4,8 +4,8 @@ const SUPABASE_URL = "https://gjsweqyckjxycbwzzqys.supabase.co";
 const SUPABASE_KEY = "sb_publishable_MKPsiIWRlD_aVnRwiMY1Cg_MSeatyF0";
 
 const db = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 const ASSETS = {
@@ -62,7 +62,10 @@ const NAV_ITEMS = [
 function mountNav() {
   const nav = document.querySelector("[data-nav]");
   if (!nav) return;
-  const atual = location.pathname.split("/").pop() || "index.html";
+
+  const atual =
+    location.pathname.split("/").pop() || "index.html";
+
   nav.innerHTML =
     "<ul>" +
     NAV_ITEMS.map(
@@ -77,12 +80,14 @@ function mountNav() {
 function mountLeaves() {
   document.querySelectorAll("[data-leaf]").forEach((el) => {
     const pos = el.getAttribute("data-leaf");
+
     const src =
       pos === "top-left"
         ? ASSETS.leavesTopLeft
         : pos === "top-right"
           ? ASSETS.leavesTopRight
           : ASSETS.leavesBottomRight;
+
     el.src = src;
     el.className = "leaf " + pos;
     el.alt = "";
@@ -94,51 +99,111 @@ function mountLeaves() {
 function mountHeader() {
   const header = document.querySelector("[data-header]");
   if (!header) return;
-  const titulo = header.getAttribute("data-header");
+
+  const titulo =
+    header.getAttribute("data-header");
+
   header.className = "page-header";
+
   header.innerHTML =
     `<button type="button" class="back-btn" aria-label="Voltar"><img src="${ASSETS.iconVoltar}" alt=""></button>` +
     `<h1 class="page-title">${esc(titulo)}</h1><div style="width:2rem"></div>`;
-  header.querySelector("button").addEventListener("click", () => {
-    if (history.length > 1) history.back();
-    else location.href = "home.html";
-  });
+
+  header
+    .querySelector("button")
+    .addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        location.href = "home.html";
+      }
+    });
 }
 
-/** Garante sessão ativa; redireciona para login.html se não houver. */
+/**
+ * Garante que o usuário possui uma autenticação válida no Supabase.
+ * Não confia apenas em uma sessão armazenada localmente.
+ */
 async function requireAuth() {
-  const { data } = await db.auth.getSession();
-  if (!data.session) {
+  const {
+    data: { user },
+    error,
+  } = await db.auth.getUser();
+
+  if (error || !user) {
+    await db.auth.signOut();
     location.replace("login.html");
     return null;
   }
-  return data.session.user;
+
+  return user;
 }
 
 async function carregarPancs() {
-  const { data, error } = await db.from("pancs").select("*").order("nome");
-  if (error) throw error;
+  const { data, error } =
+    await db
+      .from("pancs")
+      .select("*")
+      .order("nome");
+
+  if (error) {
+    throw error;
+  }
+
   return data;
 }
 
 async function carregarJardim() {
-  const { data, error } = await db.from("jardim").select("panc_id");
-  if (error) throw error;
-  return data.map((row) => row.panc_id);
+  const { data, error } =
+    await db
+      .from("jardim")
+      .select("panc_id");
+
+  if (error) {
+    throw error;
+  }
+
+  return data.map(
+    (row) => row.panc_id
+  );
 }
 
-async function alternarJardim(userId, pancId, salvo) {
+async function alternarJardim(
+  userId,
+  pancId,
+  salvo
+) {
   if (salvo) {
-    const { error } = await db.from("jardim").delete().eq("user_id", userId).eq("panc_id", pancId);
-    if (error) throw error;
+    const { error } =
+      await db
+        .from("jardim")
+        .delete()
+        .eq("user_id", userId)
+        .eq("panc_id", pancId);
+
+    if (error) {
+      throw error;
+    }
   } else {
-    const { error } = await db.from("jardim").insert({ user_id: userId, panc_id: pancId });
-    if (error) throw error;
+    const { error } =
+      await db
+        .from("jardim")
+        .insert({
+          user_id: userId,
+          panc_id: pancId,
+        });
+
+    if (error) {
+      throw error;
+    }
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  mountLeaves();
-  mountHeader();
-  mountNav();
-});
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    mountLeaves();
+    mountHeader();
+    mountNav();
+  }
+);
