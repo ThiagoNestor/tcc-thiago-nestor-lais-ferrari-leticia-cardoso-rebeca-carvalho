@@ -6,7 +6,7 @@
 
 **Aplicação web responsiva para identificação e conhecimento sobre Plantas Alimentícias Não Convencionais (PANCs)**
 
-[![Versão](https://img.shields.io/badge/versão-1.05.6-315b45?style=flat-square)](https://growly.com.br/)
+[![Versão](https://img.shields.io/badge/versão-1.05.7-315b45?style=flat-square)](https://growly.com.br/)
 [![Status](https://img.shields.io/badge/status-em%20desenvolvimento-6f8f72?style=flat-square)](https://growly.com.br/)
 [![Front-end](https://img.shields.io/badge/front--end-HTML%20%7C%20CSS%20%7C%20JavaScript-315b45?style=flat-square)](#stack-tecnológica)
 [![Backend](https://img.shields.io/badge/backend-Supabase-315b45?style=flat-square)](#backend-e-persistência)
@@ -740,6 +740,8 @@ requireAuth()
 
 A função é utilizada para impedir o carregamento de dados pessoais quando não existe uma sessão válida.
 
+Na versão `1.05.7`, a verificação passou a validar o usuário autenticado junto ao Supabase, evitando depender exclusivamente de uma sessão armazenada localmente. Quando a sessão não é aceita pelo serviço de autenticação, a aplicação encerra o estado local correspondente e redireciona o acesso para a tela de login.
+
 ## UUID
 
 Cada usuário é identificado por um UUID.
@@ -911,6 +913,30 @@ Foram implementados estados visuais para situações como:
 - erro;
 - seleção;
 - indisponibilidade.
+
+### Perfil e Configurações
+
+Na versão `1.05.7`, Perfil e Configurações foram organizados com responsabilidades mais claras.
+
+O Perfil concentra a apresentação das informações e estatísticas do usuário, enquanto Configurações reúne:
+
+- dados da conta;
+- alteração de informações do perfil;
+- segurança e senha;
+- acesso administrativo quando autorizado;
+- encerramento da sessão.
+
+A ação de logout permanece centralizada em Configurações, evitando controles duplicados em diferentes telas.
+
+### Navegação principal
+
+A navegação principal da versão `1.05.7` utiliza quatro destinos:
+
+```text
+Início | Eden IA | Suporte | Perfil
+```
+
+A tela Explorar continua disponível por meio dos fluxos internos da aplicação, sem ocupar um item permanente na barra principal.
 
 ---
 
@@ -1160,9 +1186,30 @@ O Growly passou por diversas versões:
   │
   ▼
 1.05.6
+  │
+  ▼
+1.05.7 ─── refinamentos de interface, configurações, navegação e autenticação
 ```
 
 O controle de versão permitiu preservar versões funcionais enquanto novas implementações eram avaliadas.
+
+### Versão 1.05.7
+
+A versão `1.05.7` consolida refinamentos realizados sobre a arquitetura da série 1.05, preservando as funcionalidades centrais e melhorando pontos de interface, navegação e autenticação.
+
+Entre as alterações registradas nesta versão estão:
+
+- refinamento da tela de Perfil;
+- reorganização da tela de Configurações em áreas de conta, segurança, administração e sessão;
+- centralização da ação de logout em Configurações, removendo a ação duplicada do Perfil;
+- navegação principal consolidada com quatro itens: Início, Eden IA, Suporte e Perfil;
+- atualização da identidade visual da Eden;
+- atualização da imagem da Tanchagem utilizada pela interface;
+- inclusão do favicon oficial do Growly;
+- atualização do endereço oficial de contato para `growlypancs@gmail.com`;
+- validação da sessão autenticada junto ao Supabase antes do acesso às páginas protegidas;
+- ajustes de publicação e sincronização entre as branches `main` e `site`;
+- atualização da identificação pública da aplicação para a versão `1.05.7`.
 
 A evolução envolveu mudanças em:
 
@@ -1352,6 +1399,8 @@ O Growly é desenvolvido por estudantes do **3º ano do curso Técnico em Desenv
 | **Letícia Rodrigues Cardoso** | Desenvolvimento do Growly |
 | **Rebeca Carvalho Trindade** | Desenvolvimento do Growly |
 
+**Contato oficial do projeto:** growlypancs@gmail.com
+
 O projeto é resultado do trabalho conjunto da equipe nas etapas de pesquisa, levantamento de requisitos, documentação, modelagem, desenvolvimento da aplicação, construção do banco de dados, integração dos recursos de Inteligência Artificial, produção e organização do dataset, testes e evolução das versões.
 
 ---
@@ -1504,7 +1553,7 @@ Instituição reconhecida pela equipe entre os apoios e referências relacionado
 
 # Status atual
 
-**Versão atual:** `1.05.6`  
+**Versão atual:** `1.05.7`  
 **Plataforma:** aplicação web responsiva  
 **Estado:** desenvolvimento, testes e aprimoramento contínuo
 
@@ -1535,7 +1584,7 @@ O status "implementado" indica que o recurso já faz parte da versão atual do s
 
 # Escopo atual
 
-A versão 1.05.6 concentra-se nas cinco espécies utilizadas pelo classificador:
+A versão 1.05.7 concentra-se nas cinco espécies utilizadas pelo classificador:
 
 ```text
 Peixinho-da-horta
@@ -1651,6 +1700,12 @@ Versão web pública do projeto.
 **https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho**
 
 Repositório utilizado para versionamento e preservação do histórico do desenvolvimento.
+
+### Contato
+
+**growlypancs@gmail.com**
+
+Endereço oficial de contato do projeto.
 
 ### Documento acadêmico
 
@@ -1772,7 +1827,7 @@ O Growly foi construído de forma incremental. Cada coleta de imagens, teste, er
 
 # Continuidade do Growly
 
-A versão 1.05.6 representa o estado atual do projeto, mas não necessariamente seu estado final.
+A versão 1.05.7 representa o estado atual do projeto, mas não necessariamente seu estado final.
 
 A arquitetura foi organizada para permitir a evolução independente de diferentes componentes. Novos modelos podem substituir versões anteriores do classificador; novas espécies podem ser adicionadas ao catálogo; regras de segurança podem ser fortalecidas; a Eden pode evoluir; e novas interfaces podem ser desenvolvidas sem exigir que todo o sistema seja reconstruído.
 
@@ -1790,7 +1845,7 @@ O crescimento do projeto deve priorizar **qualidade e confiabilidade**, e não a
 
 *Onde cada planta encontra seu caminho para florescer.*
 
-**Versão 1.05.6 · São Paulo · 2026**
+**Versão 1.05.7 · São Paulo · 2026**
 
 [Aplicação](https://growly.com.br/) · [Repositório](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho)
 
