@@ -568,15 +568,59 @@ arquivo.addEventListener(
           new FileReader();
 
 
-        reader.onload =
-          () => {
 
-            adicionarFoto(
-              String(
-                reader.result
-              )
-            );
-          };
+reader.onload = async () => {
+  try {
+    const img = new Image();
+    img.src = String(reader.result);
+
+    await img.decode();
+
+    const canvasConversao =
+      document.createElement("canvas");
+
+ const LIMITE_DIMENSAO = 1600;
+
+const proporcao = Math.min(
+  1,
+  LIMITE_DIMENSAO / Math.max(img.naturalWidth, img.naturalHeight)
+);
+
+canvasConversao.width = Math.round(img.naturalWidth * proporcao);
+canvasConversao.height = Math.round(img.naturalHeight * proporcao);
+
+
+    const ctx = canvasConversao.getContext("2d");
+
+    if (!ctx) {
+      throw new Error("Não foi possível processar a imagem.");
+    }
+
+    // Fundo branco para imagens com transparência.
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(
+      0,
+      0,
+      canvasConversao.width,
+      canvasConversao.height
+    );
+
+    ctx.drawImage(img, 0, 0);
+
+    const fotoJpeg =
+      canvasConversao.toDataURL("image/jpeg", 0.92);
+
+    adicionarFoto(fotoJpeg);
+  } catch (error) {
+    console.error("Erro ao converter imagem:", error);
+
+    erro.textContent =
+      "Não foi possível processar esta imagem. Tente outra foto.";
+
+    erro.hidden = false;
+  }
+};
+
 
 
         reader.readAsDataURL(
@@ -907,6 +951,13 @@ async function enviarFotosParaTreinamento(
     const caminho =
       `${usuario.id}/${loteId}/foto-${index + 1}.jpg`;
 
+      const LIMITE_UPLOAD = 5 * 1024 * 1024; // 5 MB
+
+if (blob.size > LIMITE_UPLOAD) {
+  throw new Error(
+    "Uma das fotografias ultrapassa o limite de 5 MB."
+  );
+}
 
     const {
       error: erroUpload
