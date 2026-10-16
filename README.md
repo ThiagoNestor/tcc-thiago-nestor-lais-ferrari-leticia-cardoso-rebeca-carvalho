@@ -1,2358 +1,809 @@
-\<div *align*="center">
+<div align="center">
 
+# 🌱 Growly
 
+### Manual da aplicação web · Guia técnico · Branch `site`
 
-**# 🌱 Growly — Site**
+**Identificação assistida de PANCs, conhecimento botânico e jardim virtual.**
 
+[![Aplicação](https://img.shields.io/badge/Acessar-growly.com.br-315b45?style=for-the-badge)](https://growly.com.br/)
+[![Versão](https://img.shields.io/badge/Versão-1.05.7-6f8f72?style=for-the-badge)](https://growly.com.br/)
+[![Branch](https://img.shields.io/badge/Branch-site-233c30?style=for-the-badge)](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/site)
+[![Documentação acadêmica](https://img.shields.io/badge/Documentação-main-557e66?style=for-the-badge)](https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/main)
 
-
-**### Branch de publicação da aplicação web**
-
-
-
-**\*\*Versão atual: 1.05.6\*\***
-
-
-
-[![Produção]\(https\://img.shields.io/badge/produção-growly.com.br-315b45?style=flat-square)]\(https\://growly.com.br/)
-
-[![Versão]\(https\://img.shields.io/badge/versão-1.05.7-315b45?style=flat-square)]\(https\://growly.com.br/)
-
-[![Branch]\(https\://img.shields.io/badge/branch-site-6f8f72?style=flat-square)]\(https\://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/site)
-
-
-
-**\*\*[Acessar o Growly]\(**&#x68;ttps\://growly.com.br/**) · [Documentação completa na main]\(**&#x68;ttps\://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/mai&#x6E;**)\*\***
-
-
-
-\</div>
-
-
-
-**---**
-
-
-
-**## Sobre esta branch**
-
-
-
-A branch \`site\` contém a estrutura utilizada pela versão web publicada do **\*\*Growly\*\***.
-
-
-
-Enquanto a branch \`main\` preserva o histórico de desenvolvimento, as versões do TCC e a documentação técnica completa do projeto, a \`site\` é voltada à **\*\*aplicação em produção\*\***.
-
-
-
-Este README, portanto, possui uma finalidade mais prática. Ele explica:
-
-
-
-\- como utilizar as principais funcionalidades do Growly;
-
-\- como executar o site localmente;
-
-\- como funciona o scanner;
-
-\- quais serviços são necessários;
-
-\- como a estrutura publicada se relaciona com a \`main\`;
-
-\- cuidados ao atualizar a versão em produção;
-
-\- problemas comuns durante desenvolvimento e testes.
-
-
-
-\> Para arquitetura detalhada, banco de dados, Inteligência Artificial, metodologia, segurança, histórico completo e documentação acadêmica, consulte o README da branch \`main\`.
-
-
-
-**---**
-
-
-
-**## Sumário**
-
-
-
-1\. [Acessando o Growly]\(#acessando-o-growly)
-
-2\. [Como utilizar]\(#como-utilizar)
-
-3\. [Identificando uma planta]\(#identificando-uma-planta)
-
-4\. [Entendendo o resultado]\(#entendendo-o-resultado)
-
-5\. [Explorar]\(#explorar)
-
-6\. [Meu Jardim]\(#meu-jardim)
-
-7\. [Eden IA]\(#eden-ia)
-
-8\. [Contribuição de imagens]\(#contribuição-de-imagens)
-
-9\. [Aviso sobre identificação]\(#aviso-sobre-identificação)
-
-10\. [Funcionamento técnico resumido]\(#funcionamento-técnico-resumido)
-
-11\. [Executando localmente]\(#executando-localmente)
-
-12\. [Serviços utilizados]\(#serviços-utilizados)
-
-13\. [Estrutura da aplicação]\(#estrutura-da-aplicação)
-
-14\. [Branches]\(#branches)
-
-15\. [Atualizando a versão publicada]\(#atualizando-a-versão-publicada)
-
-16\. [Testando antes de publicar]\(#testando-antes-de-publicar)
-
-17\. [Problemas comuns]\(#problemas-comuns)
-
-18\. [Segurança]\(#segurança)
-
-19\. [Status atual]\(#status-atual)
-
-20\. [Documentação]\(#documentação)
-
-21\. [Equipe]\(#equipe)
-
-
-
-**---**
-
-
-
-**# Acessando o Growly**
-
-
-
-A versão pública está disponível em:
-
-
-
-**## https\://growly.com.br/**
-
-
-
-O Growly é uma **\*\*aplicação web responsiva\*\***, portanto não é necessário instalar um aplicativo para utilizar a versão publicada.
-
-
-
-O acesso pode ser realizado por navegadores modernos em:
-
-
-
-\- smartphones;
-
-\- tablets;
-
-\- notebooks;
-
-\- computadores.
-
-
-
-Algumas funcionalidades dependem de permissões do navegador, principalmente o acesso à câmera.
-
-
-
-**---**
-
-
-
-**# Como utilizar**
-
-
-
-O Growly reúne diferentes funcionalidades relacionadas às Plantas Alimentícias Não Convencionais.
-
-
-
-O fluxo básico de utilização pode ser representado por:
-
-
-
-\`\`\`text
-
-Acessar o Growly
-
-       │
-
-       ├── Explorar espécies
-
-       │
-
-       ├── Criar conta / Entrar
-
-       │
-
-       ├── Identificar uma planta
-
-       │       │
-
-       │       ├── selecionar 4 fotos
-
-       │       ├── executar análise
-
-       │       ├── consultar resultado
-
-       │       └── contribuir com imagens
-
-       │
-
-       ├── Organizar Meu Jardim
-
-       │
-
-       └── Conversar com a Eden IA
-
-\`\`\`
-
-
-
-**---**
-
-
-
-**# Criando uma conta**
-
-
-
-Algumas funcionalidades dependem de autenticação.
-
-
-
-Na área de cadastro, informe os dados solicitados e crie uma senha válida.
-
-
-
-A senha deve possuir:
-
-
-
-\`\`\`text
-
-mínimo de 6 caracteres
-
-\+ uma letra maiúscula
-
-\+ um número
-
-\+ um caractere especial
-
-\`\`\`
-
-
-
-A interface informa quais requisitos já foram cumpridos.
-
-
-
-Também é necessário confirmar a senha antes de finalizar o cadastro.
-
-
-
-Dependendo da configuração de autenticação ativa, poderá ser necessário confirmar o endereço de e-mail.
-
-
-
-Após a autenticação, o Growly mantém uma sessão para relacionar a conta às funcionalidades personalizadas.
-
-Nas páginas protegidas, a aplicação valida o usuário autenticado junto ao Supabase Auth. Caso a autenticação armazenada localmente não seja aceita pelo serviço, a sessão é encerrada e o usuário é direcionado novamente ao login.
-
-
-
-**---**
-
-
-
-**# Identificando uma planta**
-
-
-
-A identificação é uma das principais funcionalidades da aplicação.
-
-
-
-**## 1. Abra o scanner**
-
-
-
-Acesse a área de identificação do Growly.
-
-
-
-**## 2. Forneça quatro imagens**
-
-
-
-O sistema utiliza **\*\*quatro fotografias da mesma planta\*\***.
-
-
-
-As imagens podem ser:
-
-
-
-\- capturadas pela câmera;
-
-\- selecionadas da galeria do dispositivo.
-
-
-
-Para obter entradas melhores para o classificador, procure utilizar fotografias nítidas, com a planta visível e sem obstruções desnecessárias.
-
-
-
-As quatro fotografias devem representar **\*\*a mesma planta\*\***.
-
-
-
-**## 3. Confira a pré-visualização**
-
-
-
-Antes de iniciar a análise, o Growly apresenta as imagens selecionadas.
-
-
-
-Verifique se:
-
-
-
-\`\`\`text
-
-[1] todas pertencem à mesma planta
-
-[2] a planta está visível
-
-[3] não há imagem selecionada por engano
-
-[4] as quatro posições foram preenchidas
-
-\`\`\`
-
-
-
-Se necessário, remova uma imagem e selecione outra.
-
-
-
-**## 4. Inicie a análise**
-
-
-
-Depois que as quatro imagens estiverem prontas, inicie a identificação.
-
-
-
-O modelo processa cada fotografia individualmente.
-
-
-
-**## 5. Aguarde o resultado**
-
-
-
-O Growly combina as previsões das quatro análises e apresenta a espécie com maior pontuação média.
-
-
-
-**---**
-
-
-
-**# Entendendo o resultado**
-
-
-
-O resultado pode apresentar:
-
-
-
-\- espécie sugerida;
-
-\- nível de confiança;
-
-\- imagens utilizadas;
-
-\- outras previsões relevantes;
-
-\- ações relacionadas à espécie;
-
-\- opção de contribuição das fotografias.
-
-
-
-**## O que significa a confiança?**
-
-
-
-A confiança representa a pontuação calculada pelo modelo para aquela classe.
-
-
-
-Ela **\*\*não representa uma confirmação botânica\*\***.
-
-
-
-Por exemplo, um resultado com confiança elevada significa que, entre as classes conhecidas pelo modelo, aquela recebeu a maior probabilidade de acordo com as imagens analisadas.
-
-
-
-Isso não garante que a planta realmente pertença à espécie indicada.
-
-
-
-**---**
-
-
-
-**# Como o scanner chega ao resultado**
-
-
-
-Cada uma das quatro fotografias produz probabilidades para as classes conhecidas.
-
-
-
-De forma simplificada:
-
-
-
-\`\`\`text
-
-Foto 1 ──> previsões
-
-Foto 2 ──> previsões
-
-Foto 3 ──> previsões
-
-Foto 4 ──> previsões
-
-              │
-
-              ▼
-
-       média por classe
-
-              │
-
-              ▼
-
-        maior resultado
-
-              │
-
-              ▼
-
-       espécie sugerida
-
-\`\`\`
-
-
-
-Para uma classe \`c\`:
-
-
-
-\`\`\`text
-
-P(c) = (p1 + p2 + p3 + p4) / 4
-
-\`\`\`
-
-
-
-A utilização de quatro fotografias foi adotada depois de testes com uma única imagem apresentarem maior variação nos resultados.
-
-
-
-**---**
-
-
-
-**# Espécies reconhecidas**
-
-
-
-A versão atual do modelo trabalha principalmente com cinco PANCs:
-
-
-
-\| Espécie | Classe interna |
-
-\|---|---|
-
-\| Peixinho-da-horta | \`peixinho\` |
-
-\| Tanchagem | \`tanchagem\` |
-
-\| Ora-pro-nóbis | \`ora\` |
-
-\| Vinagreira | \`vinagreira\` |
-
-\| Taioba | \`taioba\` |
-
-
-
-Também existem classes auxiliares utilizadas pelo classificador para lidar com entradas diferentes das cinco espécies principais.
-
-
-
-O escopo do modelo é limitado às classes para as quais ele foi treinado.
-
-
-
-**---**
-
-
-
-**# Explorar**
-
-
-
-A área **\*\*Explorar\*\*** permite consultar as espécies disponíveis no Growly sem utilizar o scanner.
-
-
-
-Ela funciona como um catálogo conectado ao banco de dados.
-
-
-
-Esse recurso é útil para quem deseja:
-
-
-
-\- conhecer as PANCs cadastradas;
-
-\- consultar informações de uma espécie;
-
-\- navegar pelo conteúdo sem realizar uma identificação.
-
-
-
-O catálogo também é utilizado internamente por outras funcionalidades. Quando o scanner identifica uma classe, o resultado é relacionado ao registro correspondente no banco.
-
-
-
-**---**
-
-
-
-**# Meu Jardim**
-
-
-
-O **\*\*Meu Jardim\*\*** funciona como uma coleção pessoal de PANCs.
-
-
-
-Depois de autenticado, o usuário pode adicionar espécies ao Jardim e consultar posteriormente os itens salvos.
-
-
-
-O Jardim não cria uma cópia completa das informações da planta para cada usuário.
-
-
-
-De maneira simplificada:
-
-
-
-\`\`\`text
-
-Usuário
-
-   │
-
-   ▼
-
-Meu Jardim
-
-   │
-
-   ▼
-
-Referência à PANC
-
-   │
-
-   ▼
-
-Catálogo
-
-\`\`\`
-
-
-
-Isso permite manter as informações gerais da espécie centralizadas.
-
-
-
-**## Quando a planta já está no Jardim**
-
-
-
-Uma espécie já salva não impede necessariamente uma nova contribuição.
-
-
-
-Depois de uma nova identificação, a aplicação pode disponibilizar:
-
-
-
-\`\`\`text
-
-Enviar novas fotos
-
-\`\`\`
-
-
-
-permitindo contribuir novamente com imagens sem remover a espécie do Jardim.
-
-
-
-**---**
-
-
-
-**# Perfil e Configurações**
-
-O **Perfil** reúne as informações pessoais apresentadas pela aplicação e oferece acesso às configurações da conta.
-
-A tela de **Configurações** concentra as ações de gerenciamento da conta em áreas separadas:
-
-- **Conta:** alteração das informações disponíveis do usuário;
-- **Segurança:** gerenciamento relacionado à senha;
-- **Administração:** área exibida apenas quando a conta possui acesso administrativo;
-- **Sessão:** opção para sair da conta.
-
-O encerramento da sessão fica centralizado em **Configurações**, evitando ações duplicadas em diferentes telas.
-
-A navegação principal da versão atual utiliza quatro acessos:
-
-```text
-Início | Eden IA | Suporte | Perfil
+**Onde cada planta encontra seu caminho para florescer.**
+
+</div>
+
+---
+
+> [!IMPORTANT]
+> **Este README documenta a aplicação publicada.** Ele combina o manual de uso com uma visão técnica de arquitetura, módulos, dados, inteligência artificial, segurança e manutenção. Algumas informações de implementação são derivadas do README anterior e do código compartilhado de `js/app.js`; detalhes internos dos demais módulos devem ser conferidos no código antes de alterações de produção.
+
+> [!CAUTION]
+> **Não consuma plantas com base apenas na identificação do Growly.** O classificador é uma ferramenta educacional e pode errar. Confirme a espécie por fontes botânicas confiáveis e profissionais qualificados quando necessário.
+
+## 📚 Índice
+
+1. [Visão geral](#-visão-geral)
+2. [Mapa da aplicação](#-mapa-da-aplicação)
+3. [Manual de utilização](#-manual-de-utilização)
+4. [Scanner: experiência do usuário](#-scanner-experiência-do-usuário)
+5. [Scanner: implementação e modelo](#-scanner-implementação-e-modelo)
+6. [Eden IA](#-eden-ia)
+7. [Catálogo e Meu Jardim](#-catálogo-e-meu-jardim)
+8. [Contas, perfil e configurações](#-contas-perfil-e-configurações)
+9. [Contribuição de imagens e revisão](#-contribuição-de-imagens-e-revisão)
+10. [Arquitetura e tecnologias](#-arquitetura-e-tecnologias)
+11. [Dados e integração com Supabase](#-dados-e-integração-com-supabase)
+12. [Estrutura do repositório](#-estrutura-do-repositório)
+13. [Instalação e execução local](#-instalação-e-execução-local)
+14. [Segurança e privacidade](#-segurança-e-privacidade)
+15. [Testes, limitações e diagnóstico](#-testes-limitações-e-diagnóstico)
+16. [Deploy, branches e manutenção](#-deploy-branches-e-manutenção)
+17. [Equipe e referências](#-equipe-e-referências)
+
+---
+
+## 🌿 Visão geral
+
+O **Growly** é uma aplicação web responsiva sobre **Plantas Alimentícias Não Convencionais (PANCs)**. O projeto reúne identificação visual assistida por inteligência artificial, consulta a espécies, organização de um jardim virtual, assistência conversacional e um fluxo opcional de contribuição de fotografias.
+
+A aplicação pode ser acessada em **[growly.com.br](https://growly.com.br/)**, sem instalação obrigatória. Recursos como câmera, autenticação e serviços remotos dependem das permissões e da conectividade do dispositivo.
+
+| Característica | Implementação documentada |
+|---|---|
+| Interface | HTML, CSS e JavaScript puro, sem etapa de build no núcleo compartilhado |
+| Identificação | Modelo exportado do Teachable Machine, executado com TensorFlow.js no navegador |
+| Backend | Supabase: autenticação, PostgreSQL, armazenamento e funções de borda |
+| Assistente | Eden, com integração Gemini intermediada por Supabase Edge Function |
+| Dados pessoais | Associados à sessão autenticada e sujeitos às políticas de autorização do backend |
+| Distribuição | Branch `site` como estrutura de publicação; `main` como documentação e histórico do TCC |
+
+### O que o Growly faz — e o que não faz
+
+O Growly **sugere** uma classe botânica a partir de imagens, apresenta informações sobre PANCs e oferece ferramentas de organização e aprendizagem. Ele **não certifica a identidade de uma planta**, não substitui avaliação especializada e não garante que uma espécie seja segura para consumo.
+
+---
+
+## 🧭 Mapa da aplicação
+
+A estrutura disponibilizada na branch `site` contém **16 páginas HTML** e **14 módulos JavaScript**, organizados por função.
+
+| Página | Módulo JS associado | Finalidade |
+|---|---|---|
+| `index.html` | Núcleo compartilhado conforme carregamento da página | Entrada da aplicação |
+| `home.html` | `home.js` | Página inicial e acesso aos recursos |
+| `cadastro.html` | `cadastro.js` | Criação de conta |
+| `login.html` | `login.js` | Autenticação |
+| `recuperar-senha.html` | `recuperar-senha.js` | Solicitação de recuperação |
+| `nova-senha.html` | `nova-senha.js` | Definição de nova senha |
+| `identificar.html` | `identificar.js`, `panc-model.js` | Seleção de imagens, classificação e resultado |
+| `explorar.html` | `explorar.js` | Consulta ao catálogo |
+| `jardim.html` | `jardim.js` | Coleção pessoal de espécies |
+| `eden.html` | `eden.js` | Conversa com a assistente |
+| `perfil.html` | `perfil.js` | Visualização do perfil |
+| `configuracoes.html` | `configuracoes.js` | Gestão da conta e segurança |
+| `revisao.html` | `revisao.js` | Fluxos de revisão administrativa |
+| `sobre.html` | Comportamento conforme scripts carregados | Informações institucionais |
+| `suporte.html` | Comportamento conforme scripts carregados | Informações de suporte |
+
+> **Nota técnica:** a associação acima reflete a nomenclatura e a estrutura dos arquivos observados. Dependências exatas de cada HTML devem ser confirmadas em suas tags `<script>`.
+
+### Navegação inferior
+
+O `js/app.js` define explicitamente quatro destinos na barra de navegação compartilhada:
+
+| Item | Destino | Ícone |
+|---|---|---|
+| Início | `home.html` | `assets/icon-home.png` |
+| Eden IA | `eden.html` | `assets/icon-eden.png` |
+| Suporte | `suporte.html` | `assets/icon-suporte.png` |
+| Perfil | `perfil.html` | `assets/icon-perfil.png` |
+
+O catálogo **Explorar** permanece acessível pelos fluxos internos da aplicação, mesmo não fazendo parte desses quatro itens.
+
+```mermaid
+flowchart TD
+    A[Entrada / Início] --> B[Explorar espécies]
+    A --> C[Identificar planta]
+    A --> D[Entrar ou cadastrar]
+    D --> E[Meu Jardim]
+    D --> F[Perfil e configurações]
+    A --> G[Eden IA]
+    A --> H[Suporte / Sobre]
+    C --> I[Resultado da identificação]
+    I --> E
+    I --> J[Contribuição opcional de fotos]
+    J --> K[Revisão administrativa]
 ```
 
-A área **Explorar** continua disponível pelos fluxos internos da aplicação.
+---
 
-**---**
+## 📱 Manual de utilização
 
-**# Eden IA**
+### 1. Acessar a plataforma
 
+Abra **https://growly.com.br/** em um navegador moderno. O layout foi projetado para telas de celulares e computadores. Para utilizar a câmera, autorize o acesso quando o navegador solicitar. A seleção de arquivos da galeria pode ser uma alternativa, quando oferecida pela interface.
 
+### 2. Conhecer as espécies
 
-A **\*\*Eden\*\*** é a assistente conversacional do Growly.
+Entre em **Explorar** por um dos acessos disponíveis na aplicação. Consulte o catálogo e abra as informações da PANC de interesse. Essa navegação não depende da execução do classificador.
 
+### 3. Criar uma conta
 
+Acesse **Cadastro**, preencha os dados solicitados e confirme a senha. A política de senha foi atualizada para **mínimo de 8 caracteres**, além dos critérios de complexidade exibidos pela interface. O fluxo de confirmação de e-mail depende da configuração ativa do Supabase Auth.
 
-Ela permite fazer perguntas relacionadas às PANCs por meio de uma interface de chat.
+### 4. Entrar e manter sua sessão
 
+Em **Login**, autentique-se com as credenciais cadastradas. As páginas que exigem autenticação devem validar o usuário com o serviço de autenticação, não apenas confiar em dados salvos no navegador. Em caso de sessão inválida, o núcleo compartilhado redireciona para `login.html`.
 
+### 5. Recuperar o acesso
 
-**## Fluxo simplificado**
+Use **Recuperar senha** e siga as orientações recebidas pelo mecanismo de recuperação. A página `nova-senha.html` integra o fluxo de definição de uma nova senha.
 
+### 6. Utilizar as funcionalidades personalizadas
 
+Com uma sessão válida, acesse os recursos associados à sua conta, como o **Meu Jardim**, **Perfil** e **Configurações**. As permissões efetivas de leitura e escrita devem ser aplicadas no backend.
 
-\`\`\`text
+<details>
+<summary><strong>Resumo rápido: por onde começar?</strong></summary>
 
-Usuário
+1. Abra o site e explore as espécies.
+2. Crie uma conta se desejar usar recursos personalizados.
+3. Use o scanner com quatro imagens da mesma planta.
+4. Analise a sugestão e as informações disponíveis.
+5. Organize as espécies no Jardim, quando aplicável.
+6. Converse com a Eden para dúvidas educativas sobre PANCs.
 
-   │
+</details>
 
-   ▼
+---
 
-Eden
+## 📷 Scanner: experiência do usuário
 
-   │
+O scanner foi concebido para analisar **quatro fotografias da mesma planta**, reduzindo a dependência de um único enquadramento.
 
-   ▼
+### Passo a passo
 
-Supabase Edge Function
+1. Abra a página **Identificar**.
+2. Capture ou selecione **quatro imagens da mesma planta**.
+3. Confira a pré-visualização e substitua fotografias inadequadas.
+4. Inicie a análise quando as quatro posições estiverem preenchidas.
+5. Aguarde o processamento e consulte a espécie sugerida e a pontuação exibida.
+6. Utilize as ações disponibilizadas pelo resultado, como consultar a espécie, adicioná-la ao Jardim ou contribuir com imagens, conforme o estado da sessão e da interface.
 
-   │
+**Recomendações para fotografar:** prefira boa iluminação, foco adequado, folhas e outras características visíveis, enquadramentos diferentes e fundo sem excesso de distrações. Evite misturar plantas distintas nas quatro entradas.
 
-   ▼
+### Interpretando a confiança
 
-Gemini API
+A confiança apresentada corresponde à **pontuação produzida pelo classificador para uma classe**. Não é uma confirmação botânica, nem uma garantia de comestibilidade. Uma pontuação elevada pode estar errada quando a espécie está fora do conjunto treinado ou se parece visualmente com outra classe.
 
-   │
+```mermaid
+flowchart LR
+    A[Foto 1] --> E[Classificação por imagem]
+    B[Foto 2] --> E
+    C[Foto 3] --> E
+    D[Foto 4] --> E
+    E --> F[Média das pontuações por classe]
+    F --> G[Classe com maior média]
+    G --> H[Resultado apresentado]
+```
 
-   ▼
+---
 
-Edge Function
+## 🧠 Scanner: implementação e modelo
 
-   │
+### Treinamento e execução
 
-   ▼
+O **Teachable Machine** foi utilizado para organizar o treinamento e exportar o classificador de imagens. O modelo exportado é carregado no navegador pelo **TensorFlow.js**, responsável pela inferência local. Assim, a classificação visual não depende de enviar cada imagem à Gemini: **scanner e Eden são sistemas de IA distintos**.
 
-Resposta no chat
+O diretório do modelo reúne os artefatos de exportação:
 
-\`\`\`
+```text
+model/
+├── model.json       # definição da arquitetura e referências aos pesos
+├── metadata.json    # metadados e nomes das classes
+└── weights.bin      # parâmetros treinados
+```
 
+Os metadados documentados indicam imagens de entrada de **224 × 224 pixels**. A interface pode utilizar outros tamanhos de captura ou pré-visualização; o pré-processamento deve adequar as entradas às exigências do modelo.
 
+### Classes principais
 
-A comunicação com a Gemini API não é realizada diretamente pelo navegador.
+| Nome exibido | Rótulo interno documentado |
+|---|---|
+| Peixinho-da-horta | `peixinho` |
+| Tanchagem | `tanchagem` |
+| Ora-pro-nóbis | `ora` |
+| Vinagreira | `vinagreira` |
+| Taioba | `taioba` |
 
+O classificador também possui classes auxiliares **`nd`** (não identificado) e **`pessoa`**. Elas não devem ser confundidas com novas espécies de PANCs.
 
+### Agregação das quatro imagens
 
-Uma Edge Function atua como intermediária, mantendo a credencial do serviço fora do código público do front-end.
+Para cada classe `c`, a abordagem documentada calcula a média das pontuações individuais:
 
+\[
+P(c) = \frac{p_1(c) + p_2(c) + p_3(c) + p_4(c)}{4}
+\]
 
+A classe com maior média é utilizada para a sugestão final. **A média não elimina erros sistemáticos**, especialmente em classes com dados insuficientes ou imagens muito parecidas.
 
-Parte do histórico recente da conversa é enviada junto com a mensagem atual para manter contexto entre as interações.
+### Responsabilidades dos módulos
 
+| Arquivo | Responsabilidade documentada |
+|---|---|
+| `js/panc-model.js` | Carregamento do modelo e operações de classificação |
+| `js/identificar.js` | Fluxo de imagens, interação com o scanner e apresentação do resultado |
+| `model/metadata.json` | Ordem e identificação das classes |
+| `js/app.js` | Integração compartilhada com dados e utilitários de interface |
 
+> [!WARNING]
+> **Ao substituir o modelo, atualize e valide o conjunto completo** (`model.json`, `metadata.json`, `weights.bin`). Confira a ordem dos rótulos e o mapeamento entre classe prevista e registro da PANC no banco. Uma predição correta com rótulo associado incorretamente ainda gera uma experiência errada.
 
-**## Falhas temporárias**
+<details>
+<summary><strong>Checklist para validar uma nova versão do classificador</strong></summary>
 
+- [ ] Os três arquivos exportados pertencem ao mesmo treinamento.
+- [ ] O carregamento via HTTP/HTTPS funciona sem erros.
+- [ ] As classes do `metadata.json` correspondem ao mapeamento JavaScript.
+- [ ] Cada uma das cinco PANCs foi testada com imagens adequadas.
+- [ ] Entradas não pertencentes às espécies principais foram testadas.
+- [ ] As quatro imagens participam da agregação.
+- [ ] O resultado aponta para a espécie correta do catálogo.
+- [ ] O fluxo foi testado no navegador de computador e no celular.
 
+</details>
 
-Serviços externos podem ficar temporariamente indisponíveis.
+---
 
+## 💬 Eden IA
 
+A **Eden** é a assistente conversacional do Growly, voltada a dúvidas e conteúdos relacionados às PANCs.
 
-A integração possui tratamento para determinadas respostas \`HTTP 503\` e pode realizar novas tentativas antes de informar uma falha ao usuário.
+### Como usar
 
+Acesse **Eden IA** na navegação inferior, escreva uma pergunta e aguarde a resposta. Perguntas objetivas, com o contexto necessário, tendem a facilitar a compreensão. As respostas são **geradas por IA e podem conter imprecisões**.
 
+### Como a integração funciona
 
-**## Importante**
+O fluxo documentado utiliza uma **Supabase Edge Function** como intermediária entre o navegador e a **Gemini API**. A credencial privada da Gemini permanece no ambiente de backend, não no JavaScript público. Parte do histórico recente pode ser incluída na solicitação para manter o contexto conversacional.
 
+```mermaid
+sequenceDiagram
+    actor U as Usuário
+    participant B as Navegador / eden.js
+    participant F as Supabase Edge Function
+    participant G as Gemini API
+    U->>B: Envia pergunta
+    B->>F: Requisição com contexto pertinente
+    F->>G: Solicitação autenticada
+    G-->>F: Resposta gerada
+    F-->>B: Resposta processada
+    B-->>U: Exibe mensagem
+```
 
+O README anterior registra tratamento de determinadas falhas **HTTP 503**, incluindo tentativas adicionais antes de apresentar erro. Os parâmetros exatos dessas tentativas devem ser conferidos em `js/eden.js` e na Edge Function correspondente.
 
-A Eden utiliza Inteligência Artificial generativa.
+**Limitação:** a Eden não substitui identificação botânica profissional, atendimento médico ou validação de segurança alimentar.
 
+---
 
+## 📚 Catálogo e Meu Jardim
 
-Suas respostas podem conter erros ou imprecisões e não substituem fontes especializadas.
+### Explorar: catálogo compartilhado
 
+A página **Explorar** apresenta informações sobre as PANCs cadastradas. No código compartilhado, a função `carregarPancs()` consulta a tabela `pancs` com `select('*')` e ordena por `nome`. A interface pode utilizar imagens locais associadas aos slugs de cada espécie.
 
+O objeto `PLANT_IMAGES` em `js/app.js` contempla recursos visuais para **azedinha, ora-pro-nóbis, taioba, vinagreira, capuchinha, peixinho-da-horta e tanchagem**. **Ter imagem no catálogo não significa que a espécie seja reconhecida pelo scanner**: o modelo documentado trabalha principalmente com cinco PANCs.
 
-**---**
+### Meu Jardim: coleção pessoal
 
+O **Meu Jardim** permite relacionar espécies a uma conta autenticada, sem duplicar todos os dados botânicos para cada pessoa. O código compartilhado utiliza a tabela `jardim` e os campos `user_id` e `panc_id`.
 
+- `carregarJardim()` consulta `panc_id` na tabela `jardim` e retorna uma lista de identificadores.
+- `alternarJardim(userId, pancId, salvo)` **remove** a relação quando `salvo` é verdadeiro ou **insere** a relação quando é falso.
+- As políticas de autorização no banco devem garantir que cada pessoa só possa manipular as relações permitidas.
 
-**# Contribuição de imagens**
+```mermaid
+erDiagram
+    USUARIO ||--o{ JARDIM : possui
+    PANCS ||--o{ JARDIM : integra
+    USUARIO {
+      uuid id
+    }
+    PANCS {
+      uuid id
+      string nome
+    }
+    JARDIM {
+      uuid user_id
+      uuid panc_id
+    }
+```
 
+> **Diagrama lógico simplificado:** os nomes e tipos apresentados para as entidades `USUARIO` e `PANCS` são ilustrativos. Os campos `user_id` e `panc_id` da tabela `jardim` e a consulta à tabela `pancs` foram observados no `app.js`; consulte o esquema SQL para tipos, constraints e relações exatas.
 
+Uma espécie já presente no Jardim pode continuar elegível a **nova contribuição de fotografias**, conforme o fluxo documentado de identificação.
 
-O Growly possui um processo opcional de contribuição de fotografias.
+---
 
+## 👤 Contas, perfil e configurações
 
+### Autenticação
 
-Depois de uma identificação, o usuário pode autorizar o envio das imagens utilizadas para uma área privada destinada ao aprimoramento futuro do modelo.
+O **Supabase Auth** gerencia a autenticação. No núcleo compartilhado, `requireAuth()` executa `db.auth.getUser()`. Se a resposta contiver erro ou não retornar usuário, a aplicação chama `signOut()` e redireciona para `login.html`.
 
+Esse procedimento verifica a identidade junto ao serviço em vez de depender exclusivamente de uma sessão armazenada localmente. Ele **não substitui** políticas RLS no banco.
 
+### Cadastro e recuperação
 
-**## O que acontece com uma contribuição?**
+O fluxo envolve `cadastro.html`, `login.html`, `recuperar-senha.html` e `nova-senha.html`, com módulos JavaScript próprios. A versão atualizada exige **no mínimo 8 caracteres na senha**, respeitando também os requisitos de complexidade indicados na interface. A confirmação de e-mail depende das configurações do projeto Supabase.
 
+### Perfil
 
+`perfil.html` e `js/perfil.js` compõem a área de perfil e apresentação de informações associadas à conta. O módulo merece atenção especial na manutenção, pois possui aproximadamente **1.000 linhas** na versão analisada.
 
-\`\`\`text
+### Configurações
 
-4 imagens
+A documentação existente divide as configurações em:
 
-   │
+| Área | Finalidade |
+|---|---|
+| Conta | Gerenciar dados disponibilizados pela interface |
+| Segurança | Gerenciar senha e controles relacionados |
+| Administração | Acesso condicionado ao privilégio administrativo |
+| Sessão | Encerrar a sessão |
 
-   ▼
+O logout foi centralizado em **Configurações**, evitando ações duplicadas em telas diferentes.
 
-autorização do usuário
+---
 
-   │
+## 🖼️ Contribuição de imagens e revisão
 
-   ▼
+Após uma identificação, o usuário pode **optar por autorizar o envio das quatro fotografias** para possível aprimoramento futuro do dataset. A contribuição não é necessária para utilizar o scanner.
 
-armazenamento privado
+```mermaid
+flowchart TD
+    A[Resultado da identificação] --> B{Usuário autoriza contribuir?}
+    B -->|Não| C[Encerrar sem envio opcional]
+    B -->|Sim| D[Enviar imagens]
+    D --> E[Armazenamento privado]
+    E --> F[Registrar metadados]
+    F --> G[Fila de revisão]
+    G --> H[Análise administrativa]
+    H --> I{Imagens adequadas?}
+    I -->|Sim| J[Potencial uso futuro em dataset]
+    I -->|Não| K[Não utilizar como exemplo validado]
+```
 
-   │
+### Por que existe revisão?
 
-   ▼
+Uma previsão do modelo **não equivale a um rótulo confirmado**. Incorporar imagens automaticamente com a classe prevista poderia perpetuar erros. O processo de revisão separa a **contribuição do usuário** da **validação da equipe**.
 
-registro dos metadados
+### Administração
 
-   │
+A página `revisao.html` e o módulo `js/revisao.js` dão suporte ao fluxo de revisão. O módulo é um dos mais extensos do projeto, com aproximadamente **2.163 linhas**. O acesso administrativo deve ser protegido **no backend**, independentemente de links ocultos ou verificações visuais no front-end.
 
-   ▼
+<details>
+<summary><strong>Cuidados técnicos com imagens contribuídas</strong></summary>
 
-fila de revisão
+- Solicitar autorização clara antes de enviar fotografias.
+- Manter as permissões de leitura e escrita adequadas no Storage.
+- Associar metadados necessários ao processo de revisão.
+- Não assumir que a espécie sugerida é a espécie verdadeira.
+- Restringir operações de revisão a contas autorizadas.
+- Avaliar retenção, exclusão e exposição de dados conforme as políticas do projeto.
 
-   │
+</details>
 
-   ▼
+---
 
-análise pela equipe
+## 🏗️ Arquitetura e tecnologias
 
-\`\`\`
+A aplicação combina **interface estática no navegador**, **inferência local de imagens** e **serviços gerenciados de backend**.
 
+```mermaid
+flowchart TB
+    U[Usuário] --> WEB[HTML + CSS + JavaScript]
+    WEB --> TF[TensorFlow.js]
+    TF --> MODEL[Modelo local de PANCs]
+    WEB --> AUTH[Supabase Auth]
+    WEB --> DB[Supabase PostgreSQL]
+    WEB --> STORE[Supabase Storage]
+    WEB --> EDGE[Supabase Edge Functions]
+    EDGE --> GEM[Gemini API]
+    DB --- RLS[Políticas RLS]
+```
 
+### Tecnologia por tecnologia
 
-As imagens não devem ser tratadas automaticamente como exemplos corretos da espécie prevista pelo modelo.
+| Tecnologia | Papel no Growly | Como é utilizada |
+|---|---|---|
+| **HTML5** | Estrutura | Define páginas, formulários, navegação e regiões da interface |
+| **CSS3** | Apresentação | Estilos, identidade visual, organização e responsividade |
+| **JavaScript** | Comportamento | Eventos, renderização dinâmica, validação, navegação e integrações |
+| **Supabase JavaScript Client** | Comunicação com backend | Inicializado em `app.js` com `supabase.createClient(...)` |
+| **Supabase Auth** | Identidade e sessão | Cadastro, login, recuperação e validação do usuário |
+| **PostgreSQL** | Persistência | Catálogo, relações do Jardim e demais dados do sistema |
+| **Row Level Security** | Autorização | Regras de acesso aos registros no banco |
+| **Supabase Storage** | Arquivos | Armazenamento de imagens contribuídas, conforme políticas configuradas |
+| **Supabase Edge Functions** | Lógica de servidor | Intermediação segura de serviços externos, como a Eden |
+| **Teachable Machine** | Treinamento | Preparação e exportação do classificador visual |
+| **TensorFlow.js** | Inferência | Execução do modelo no navegador |
+| **Gemini API** | IA generativa | Respostas conversacionais da Eden via backend |
+| **Git / GitHub** | Versionamento | Histórico, branches e publicação do código |
 
+### O que acontece no carregamento de uma página?
 
+No `js/app.js`, o evento `DOMContentLoaded` chama três funções compartilhadas:
 
-Antes de serem consideradas para futuros datasets, existe um processo de revisão.
+1. `mountLeaves()`: aplica folhas decorativas aos elementos marcados com `data-leaf`.
+2. `mountHeader()`: cria um cabeçalho com título escapado e botão de voltar.
+3. `mountNav()`: monta a barra inferior em um elemento marcado com `data-nav`.
 
+O botão voltar utiliza o histórico do navegador quando disponível; caso contrário, direciona para `home.html`. O item ativo da navegação é identificado a partir do nome da página atual.
 
+### Utilitários importantes de `app.js`
 
-A contribuição é opcional e não é necessária para utilizar normalmente o scanner.
+| Função ou constante | Função no sistema |
+|---|---|
+| `ASSETS` | Centraliza caminhos de ícones, cards e decoração |
+| `PLANT_IMAGES` | Relaciona slugs a imagens locais de espécies |
+| `plantImage(slug)` | Retorna imagem correspondente ou fallback |
+| `esc(value)` | Escapa `&`, `<`, `>` e aspas antes de inserir texto em HTML |
+| `NAV_ITEMS` | Define os quatro itens da navegação inferior |
+| `mountNav()` | Renderiza a barra de navegação |
+| `mountLeaves()` | Insere elementos visuais decorativos |
+| `mountHeader()` | Monta o cabeçalho e ação de retorno |
+| `requireAuth()` | Verifica a identidade autenticada |
+| `carregarPancs()` | Busca espécies em `pancs` |
+| `carregarJardim()` | Busca identificadores em `jardim` |
+| `alternarJardim(...)` | Insere ou exclui uma relação usuário–PANC |
 
+**Observação:** `esc()` é uma proteção pontual para inserção de texto em HTML; sua existência não garante, por si só, que toda a aplicação esteja imune a XSS. Cada ponto de renderização deve ser revisado.
 
+---
 
-**---**
+## 🗃️ Dados e integração com Supabase
 
+### Cliente JavaScript
 
+O núcleo compartilhado inicializa o cliente Supabase a partir de uma **URL de projeto** e uma **chave publicável**. Essas informações permitem ao navegador chamar os serviços previstos para clientes públicos, mas **não concedem acesso irrestrito**: a autorização deve ser efetivamente aplicada por RLS, políticas de Storage e verificações nas funções de backend.
 
-**# Aviso sobre identificação**
+Por segurança e manutenção, este README **não reproduz valores de configuração**. Consulte `js/app.js` para a configuração pública atualmente utilizada e o painel Supabase para regras e segredos de servidor.
 
+### Operações confirmadas em `app.js`
 
+| Recurso | Operação | Observação |
+|---|---|---|
+| `pancs` | `select('*').order('nome')` | Lista espécies em ordem alfabética |
+| `jardim` | `select('panc_id')` | Recupera referências às PANCs do Jardim |
+| `jardim` | `insert({user_id, panc_id})` | Adiciona associação |
+| `jardim` | `delete().eq('user_id', ...).eq('panc_id', ...)` | Remove associação específica |
+| Auth | `getUser()` | Verifica o usuário autenticado |
+| Auth | `signOut()` | Encerra sessão inválida no fluxo protegido |
 
-\> **\*\*O Growly é uma ferramenta educacional e assistiva. O resultado do scanner não constitui confirmação botânica absoluta.\*\***
+### Separação entre autenticação e autorização
 
+- **Autenticação:** determina quem está acessando o sistema.
+- **Autorização:** determina quais dados e operações aquela pessoa pode acessar.
+- **RLS:** aplica regras de acesso por linha no PostgreSQL.
+- **Storage Policies:** regulam operações sobre arquivos e objetos.
+- **Edge Functions:** executam lógica de servidor e protegem credenciais privadas.
 
+> [!NOTE]
+> O esquema SQL completo, os nomes de todas as tabelas, as funções SQL, os buckets e as políticas não foram fornecidos nesta etapa. Este README documenta os elementos confirmados e o fluxo descrito anteriormente; para uma referência de banco 100% exata, consulte os arquivos SQL e os relatórios na branch `main`.
 
-Modelos de classificação podem errar.
+---
 
+## 🗂️ Estrutura do repositório
 
+A raiz observada da branch `site` está organizada assim:
 
-O resultado pode ser influenciado por:
-
-
-
-\- iluminação;
-
-\- foco;
-
-\- enquadramento;
-
-\- distância;
-
-\- fundo;
-
-\- ângulo;
-
-\- qualidade da câmera;
-
-\- aparência da planta;
-
-\- semelhança entre espécies;
-
-\- limitações do dataset.
-
-
-
-**## Não consuma uma planta exclusivamente com base no resultado do Growly.**
-
-
-
-Antes de qualquer decisão relacionada ao consumo, confirme a espécie utilizando fontes confiáveis e, quando necessário, profissionais adequados.
-
-
-
-**---**
-
-
-
-**# Funcionamento técnico resumido**
-
-
-
-A versão publicada utiliza a seguinte arquitetura:
-
-
-
-\`\`\`text
-
-┌──────────────────────────────────────────────────┐
-
-│                    NAVEGADOR                     │
-
-│              HTML + CSS + JavaScript             │
-
-└───────────────┬──────────────────┬───────────────┘
-
-                │                  │
-
-                ▼                  ▼
-
-       ┌────────────────┐   ┌─────────────────────┐
-
-       │ TensorFlow\.js  │   │      Supabase       │
-
-       │                │   │                     │
-
-       │ modelo local   │   │ Auth                │
-
-       │ classificação │   │ PostgreSQL          │
-
-       └────────────────┘   │ Storage             │
-
-                            │ RLS                 │
-
-                            │ Edge Functions      │
-
-                            └──────────┬──────────┘
-
-                                       │
-
-                                       ▼
-
-                               ┌──────────────┐
-
-                               │ Gemini API   │
-
-                               │   Eden IA    │
-
-                               └──────────────┘
-
-\`\`\`
-
-
-
-A classificação visual e a Eden são recursos de IA diferentes.
-
-
-
-**### Scanner**
-
-
-
-\`\`\`text
-
-browser → TensorFlow\.js → modelo → resultado
-
-\`\`\`
-
-
-
-**### Eden**
-
-
-
-\`\`\`text
-
-browser → Supabase → Edge Function → Gemini
-
-\`\`\`
-
-
-
-**---**
-
-
-
-**# Serviços utilizados**
-
-
-
-**## TensorFlow\.js**
-
-
-
-Executa o modelo de classificação diretamente no navegador.
-
-
-
-**## Teachable Machine**
-
-
-
-Foi utilizado para treinamento e exportação do modelo de reconhecimento.
-
-
-
-**## Supabase**
-
-
-
-Fornece a infraestrutura de backend da versão atual.
-
-
-
-São utilizados:
-
-
-
-\`\`\`text
-
-Supabase
-
-├── Auth
-
-├── PostgreSQL
-
-├── Storage
-
-├── Row Level Security
-
-└── Edge Functions
-
-\`\`\`
-
-
-
-**## Gemini API**
-
-
-
-Utilizada pela Eden para geração das respostas conversacionais.
-
-
-
-A credencial é mantida no backend.
-
-
-
-**---**
-
-
-
-**# Estrutura da aplicação**
-
-
-
-A organização exata pode evoluir entre versões. Conceitualmente, a branch publicada contém:
-
-
-
-\`\`\`text
-
-/
-
-├── páginas HTML
-
-├── css/
-
-│   └── estilos da aplicação
-
-├── js/
-
-│   └── lógica e integrações
-
+```text
+site/
+├── CNAME
+├── README.md
+├── index.html
+├── home.html
+├── cadastro.html
+├── login.html
+├── recuperar-senha.html
+├── nova-senha.html
+├── identificar.html
+├── explorar.html
+├── jardim.html
+├── eden.html
+├── perfil.html
+├── configuracoes.html
+├── revisao.html
+├── sobre.html
+├── suporte.html
 ├── assets/
-
-│   └── recursos visuais
-
+├── css/
+├── js/
+│   ├── app.js
+│   ├── cadastro.js
+│   ├── configuracoes.js
+│   ├── eden.js
+│   ├── explorar.js
+│   ├── home.js
+│   ├── identificar.js
+│   ├── jardim.js
+│   ├── login.js
+│   ├── nova-senha.js
+│   ├── panc-model.js
+│   ├── perfil.js
+│   ├── recuperar-senha.js
+│   └── revisao.js
 ├── model/
+│   ├── model.json
+│   ├── metadata.json
+│   └── weights.bin
+└── Protótipos/
+```
 
-│   ├── model.json
+### Módulos JavaScript: tamanho observado
 
-│   ├── metadata.json
+| Módulo | Linhas |
+|---|---:|
+| `revisao.js` | 2.163 |
+| `identificar.js` | 1.966 |
+| `perfil.js` | 1.000 |
+| `configuracoes.js` | 580 |
+| `cadastro.js` | 410 |
+| `eden.js` | 327 |
+| `app.js` | 208 |
+| `nova-senha.js` | 92 |
+| `explorar.js` | 87 |
+| `login.js` | 71 |
+| `jardim.js` | 55 |
+| `recuperar-senha.js` | 46 |
+| `panc-model.js` | 42 |
+| `home.js` | 16 |
+| **Total** | **7.063** |
 
-│   └── weights.bin
+Esses números são um retrato da versão examinada, não um limite fixo para versões futuras.
 
-├── docs/
+---
 
-│   └── documentação disponibilizada pelo projeto
+## 💻 Instalação e execução local
 
-└── outros recursos utilizados pela aplicação
+### Pré-requisitos
 
-\`\`\`
+- Git para obter o código.
+- Navegador atualizado.
+- Servidor HTTP local, como **Live Server** no Visual Studio Code ou o servidor simples do Python.
+- Conexão com a internet para os serviços remotos e bibliotecas que não estejam armazenadas localmente.
 
+### 1. Clonar o repositório
 
-
-\> Essa árvore é uma representação funcional e não deve ser interpretada como listagem exata de todos os arquivos existentes na versão atual.
-
-
-
-**---**
-
-
-
-**# Modelo local**
-
-
-
-O classificador exportado para TensorFlow\.js utiliza principalmente:
-
-
-
-\`\`\`text
-
-model.json
-
-metadata.json
-
-weights.bin
-
-\`\`\`
-
-
-
-Os metadados atuais definem uma entrada de imagem de:
-
-
-
-\`\`\`text
-
-224 × 224 px
-
-\`\`\`
-
-
-
-O carregamento desses arquivos deve ocorrer por HTTP/HTTPS.
-
-
-
-**---**
-
-
-
-**# Executando localmente**
-
-
-
-**## 1. Clone o repositório**
-
-
-
-\`\`\`bash
-
-git clone https\://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho.git
-
-\`\`\`
-
-
-
-**## 2. Entre no repositório**
-
-
-
-\`\`\`bash
-
+```bash
+git clone https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho.git
 cd tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho
-
-\`\`\`
-
-
-
-**## 3. Acesse a branch do site**
-
-
-
-\`\`\`bash
-
 git switch site
+```
 
-\`\`\`
+### 2. Iniciar um servidor local
 
+**Opção A — VS Code:** abra a pasta do projeto e execute **Live Server** na página inicial.
 
+**Opção B — Python instalado:**
 
-**## 4. Confirme a branch**
+```bash
+python -m http.server 8000
+```
 
+Acesse `http://localhost:8000/` no computador. A porta é um exemplo e pode ser alterada conforme a ferramenta utilizada.
 
+### 3. Testar o fluxo
 
-\`\`\`bash
+Abra a página inicial, navegue pelo catálogo, verifique a autenticação e confirme se o scanner carrega os arquivos do modelo. Recursos remotos só funcionarão se as configurações, políticas e serviços associados estiverem disponíveis.
 
-git branch
+### Por que não abrir com `file:///`?
 
-\`\`\`
+O carregamento de JSON, pesos do modelo, requisições e APIs do navegador pode falhar por restrições de origem. Execute o projeto em **HTTP local** ou **HTTPS publicado**. Para câmera em dispositivos móveis, prefira HTTPS: alguns recursos exigem um contexto seguro.
 
+---
 
+## 🔐 Segurança e privacidade
 
-A saída deve indicar:
+### Princípios de implementação
 
+1. **Segredos de servidor não pertencem ao front-end.** Nunca publique chaves `service_role`, tokens administrativos, credenciais privadas ou chave Gemini em HTML/JavaScript público.
+2. **Chave publicável não substitui RLS.** O controle de acesso deve ser imposto no Supabase.
+3. **Links ocultos não criam autorização.** Rotas e operações administrativas precisam de verificação efetiva no backend.
+4. **Dados recebidos exigem tratamento.** Escapar texto ao inserir HTML é uma medida importante, mas cada contexto de uso requer revisão.
+5. **Imagens contribuídas exigem consentimento e proteção.** A contribuição é opcional e passa por revisão.
+6. **Senhas e recuperação precisam de testes completos.** Validar a interface não é o mesmo que validar todo o fluxo de autenticação.
 
+### Auditoria e pontos de atenção
 
-\`\`\`text
+A revisão recente do Supabase Security Advisor foi registrada com **zero erros e cinco avisos**: quatro associados à exposição/permissões de execução de funções SQL `SECURITY DEFINER` (`public.is_admin()` e `public.is_current_user_admin()`) e um relacionado à proteção contra senhas vazadas, dependente das opções do plano. Esses avisos **não devem ser descritos como resolvidos** sem nova verificação e evidência.
 
-\* site
+A política mínima de senha foi atualizada de **6 para 8 caracteres** nas interfaces de cadastro e alteração de senha. A configuração efetiva do provedor de autenticação deve permanecer coerente com as validações da interface.
 
-  main
+<details>
+<summary><strong>Checklist de segurança antes de publicar</strong></summary>
 
-\`\`\`
+- [ ] Nenhum segredo privado foi incluído no commit.
+- [ ] RLS está habilitado e suas políticas foram revisadas.
+- [ ] Operações administrativas são verificadas no servidor.
+- [ ] Buckets e políticas de Storage estão corretos.
+- [ ] Os fluxos de cadastro, login, logout e recuperação foram testados.
+- [ ] As contribuições exigem consentimento e respeitam o fluxo de revisão.
+- [ ] Alertas do Security Advisor foram registrados e reavaliados.
+- [ ] A aplicação foi testada em HTTPS após o deploy.
 
+</details>
 
+---
 
-**## 5. Inicie um servidor local**
+## 🧪 Testes, limitações e diagnóstico
 
+### Matriz de verificação funcional
 
+| Área | Verificação recomendada |
+|---|---|
+| Entrada | `index.html` e `home.html` carregam corretamente |
+| Navegação | Quatro itens inferiores e links internos funcionam |
+| Cadastro | Regras de senha, confirmação e feedback funcionam |
+| Login | Sessão válida entra; sessão inválida é redirecionada |
+| Recuperação | Solicitação e definição de nova senha completam o fluxo |
+| Explorar | Catálogo e imagens carregam sem associações erradas |
+| Jardim | Adicionar, consultar e remover espécies respeita o usuário |
+| Scanner | Quatro imagens, modelo, agregação e resultado funcionam |
+| Eden | Mensagens, resposta e tratamento de indisponibilidade funcionam |
+| Perfil | Dados e informações exibidas correspondem à sessão |
+| Configurações | Alterações e logout funcionam conforme previsto |
+| Revisão | Usuário comum não obtém privilégios administrativos |
+| Responsividade | Testes em desktop e celular real |
+| Publicação | Arquivos, links, domínio e cache conferidos após o push |
 
-Utilize um servidor HTTP local.
+### Limitações conhecidas
 
+- O classificador cobre **cinco PANCs principais**, além das classes auxiliares.
+- **Tanchagem e Vinagreira** apresentaram instabilidade em testes anteriores; a ampliação e revisão do dataset continuam relevantes.
+- Fotografias com iluminação ruim, enquadramento inadequado ou espécies semelhantes podem gerar erros.
+- A Eden depende de serviço externo e pode produzir respostas incorretas.
+- A aplicação depende do Supabase para recursos de conta e persistência.
+- A presença de uma funcionalidade no código não dispensa validação ponta a ponta em produção.
 
+### Diagnóstico de problemas comuns
 
-No Visual Studio Code, uma alternativa prática é a extensão **\*\*Live Server\*\***.
+<details>
+<summary><strong>O modelo não carrega</strong></summary>
 
+Confira se `model/model.json`, `model/metadata.json` e `model/weights.bin` estão acessíveis; observe erros `404`, CORS e requisições no painel **Network**. Garanta que os arquivos sejam da mesma exportação.
 
+</details>
 
-Abra o arquivo inicial da aplicação por meio do endereço fornecido pelo servidor.
+<details>
+<summary><strong>O resultado apresenta a espécie errada</strong></summary>
 
+Confira a ordem das classes no `metadata.json`, o mapeamento no JavaScript, a normalização do rótulo e a associação ao catálogo. Diferencie **erro de predição** de **erro de mapeamento**.
 
+</details>
 
-Exemplo conceitual:
+<details>
+<summary><strong>A câmera não abre</strong></summary>
 
+Verifique permissões do navegador e do sistema operacional, HTTPS, dispositivo disponível e erros no Console. Quando oferecido, utilize a galeria como alternativa.
 
+</details>
 
-\`\`\`text
+<details>
+<summary><strong>A Eden não responde</strong></summary>
 
-http\://127.0.0.1:...
+Confira conexão, requisição à Edge Function, status HTTP, logs de servidor e disponibilidade do provedor de IA. Respostas `503` podem indicar indisponibilidade temporária.
 
-\`\`\`
+</details>
 
+<details>
+<summary><strong>O Jardim ou perfil não carrega</strong></summary>
 
+Confira usuário autenticado, resposta do Supabase, UUID, consultas, RLS e erros no Console/Network. **Não desative RLS para contornar falhas sem investigar a causa.**
 
-ou:
+</details>
 
+<details>
+<summary><strong>O GitHub foi atualizado, mas o site continua antigo</strong></summary>
 
+Confira a branch, o commit enviado, a configuração de publicação, o estado do deploy e os arquivos recebidos no Network. Teste hard refresh e janela privada antes de atribuir o problema ao cache.
 
-\`\`\`text
+</details>
 
-http\://localhost:...
+---
 
-\`\`\`
+## 🚀 Deploy, branches e manutenção
 
+### Responsabilidades das branches
 
+| Branch | Finalidade |
+|---|---|
+| **`main`** | Histórico acadêmico, versões preservadas, pesquisas, relatórios e documentação geral do TCC |
+| **`site`** | Estrutura raiz utilizada pela versão web publicada e seu README operacional |
 
-O endereço e a porta dependem da ferramenta utilizada.
+**As branches têm estruturas e históricos diferentes.** Evite merges e rebases automáticos apenas para transferir um arquivo. Prefira alterações específicas e revisão cuidadosa do diff.
 
+### Fluxo recomendado de manutenção
 
+```mermaid
+flowchart LR
+    A[Alteração local na site] --> B[Revisar git diff]
+    B --> C[Testar funcionalidade]
+    C --> D[Commit]
+    D --> E[Push origin site]
+    E --> F[Verificar publicação HTTPS]
+    F --> G[Registrar resultado]
+```
 
-**---**
+### Comandos essenciais
 
+```bash
+# Confirme a branch antes de editar
+git branch --show-current
 
+# Veja os arquivos alterados
+git status --short
 
-**# Por que não abrir com file:///**
-
-
-
-Abrir diretamente:
-
-
-
-\`\`\`text
-
-file:///caminho/do/projeto/index.html
-
-\`\`\`
-
-
-
-pode causar problemas relacionados à política de origem do navegador.
-
-
-
-Entre os recursos que podem ser afetados estão:
-
-
-
-\- carregamento do modelo;
-
-\- requisições;
-
-\- arquivos JSON;
-
-\- câmera;
-
-\- integrações externas.
-
-
-
-Durante o desenvolvimento, utilize um servidor HTTP.
-
-
-
-**---**
-
-
-
-**# Uso no celular durante desenvolvimento**
-
-
-
-Para testar a interface em um dispositivo móvel, o celular precisa conseguir acessar o servidor utilizado pelo computador.
-
-
-
-Dependendo da configuração de rede e do servidor local, pode ser necessário disponibilizar o servidor para outros dispositivos da mesma rede.
-
-
-
-Alguns recursos, principalmente câmera e APIs sensíveis do navegador, também podem possuir restrições adicionais fora de um contexto seguro.
-
-
-
-Para testes finais, a versão publicada em HTTPS deve ser utilizada sempre que possível.
-
-
-
-**---**
-
-
-
-**# Branches**
-
-
-
-O repositório utiliza \`main\` e \`site\` com finalidades diferentes.
-
-
-
-**## main**
-
-
-
-A \`main\` preserva o projeto dentro da estrutura histórica do TCC.
-
-
-
-Ela contém as versões e a documentação técnica principal.
-
-
-
-Exemplo da organização utilizada:
-
-
-
-\`\`\`text
-
-Protótipos/
-
-└── GROWLY 1.05/
-
-    └── GROWLY/
-
-        └── projeto
-
-\`\`\`
-
-
-
-**## site**
-
-
-
-A \`site\` mantém a estrutura necessária para a versão publicada.
-
-
-
-Os arquivos ficam organizados a partir da raiz adequada ao deploy.
-
-
-
-**## Resumo**
-
-
-
-\`\`\`text
-
-main
-
-│
-
-├── documentação
-
-├── histórico
-
-└── versões do TCC
-
-        │
-
-        │ arquivos selecionados
-
-        ▼
-
-site
-
-│
-
-└── versão publicada
-
-        │
-
-        ▼
-
-growly.com.br
-
-\`\`\`
-
-
-
-**---**
-
-
-
-**# Atualizando a versão publicada**
-
-
-
-A separação entre as branches exige atenção.
-
-
-
-Antes de executar comandos, sempre confirme em qual branch você está:
-
-
-
-\`\`\`bash
-
-git branch
-
-\`\`\`
-
-
-
-ou:
-
-
-
-\`\`\`bash
-
-git status
-
-\`\`\`
-
-
-
-**## Transferindo um arquivo da main para a site**
-
-
-
-Quando um arquivo atualizado está na versão preservada na \`main\`, ele pode ser obtido sem misturar todo o histórico das branches.
-
-
-
-Primeiro:
-
-
-
-\`\`\`bash
-
-git switch site
-
-\`\`\`
-
-
-
-Depois:
-
-
-
-\`\`\`bash
-
-git show main:"Protótipos/GROWLY 1.05/GROWLY/\<arquivo>" > \<arquivo>
-
-\`\`\`
-
-
-
-Exemplo conceitual:
-
-
-
-\`\`\`bash
-
-git show main:"Protótipos/GROWLY 1.05/GROWLY/js/arquivo.js" > js/arquivo.js
-
-\`\`\`
-
-
-
-Depois confira:
-
-
-
-\`\`\`bash
-
-git status
-
-\`\`\`
-
-
-
-Se estiver correto:
-
-
-
-\`\`\`bash
-
-git add .
-
-git commit -m "Atualiza versão publicada"
-
-git push origin site
-
-\`\`\`
-
-
-
-**## Transferindo um arquivo da site para a main**
-
-
-
-Quando uma correção foi realizada primeiro na \`site\`:
-
-
-
-\`\`\`bash
-
-git switch main
-
-\`\`\`
-
-
-
-Depois:
-
-
-
-\`\`\`bash
-
-git show site:\<arquivo> > "Protótipos/GROWLY 1.05/GROWLY/\<arquivo>"
-
-\`\`\`
-
-
-
-Confira:
-
-
-
-\`\`\`bash
-
+# Revise o conteúdo
+git diff --check
 git diff
 
-git status
+# Publique apenas após validar
+git add README.md
+git commit -m "docs: amplia manual tecnico da aplicacao Growly"
+git push origin site
+```
 
-\`\`\`
+Os comandos acima são **um exemplo de publicação do README**, não uma instrução para executá-los sem revisão. Caso existam alterações não relacionadas, evite incluí-las no mesmo commit.
 
+### Transferência pontual entre branches
 
+É possível consultar ou recuperar arquivos específicos com `git show`, respeitando os caminhos diferentes. Exemplo de **consulta**, sem modificar arquivos:
 
-E, após validar:
+```bash
+git show 'main:Protótipos/GROWLY 1.05/GROWLY/js/app.js'
+```
 
+Para transferir mudanças, confirme primeiro o caminho correto, preserve o arquivo de destino e revise o resultado antes do commit. Não assuma que o conteúdo da raiz da `site` é idêntico ao protótipo armazenado na `main`.
 
+### Cuidados com o domínio
 
-\`\`\`bash
+O arquivo `CNAME` integra a configuração de domínio personalizado da publicação. Não o remova durante reorganizações. Depois de atualizar a branch, confira a página no endereço público **https://growly.com.br/**.
 
-git add .
+---
 
-git commit -m "Sincroniza correção da versão publicada"
+## 👥 Equipe e referências
 
-git push origin main
+Projeto de Trabalho de Conclusão de Curso do **Técnico em Desenvolvimento de Sistemas — ETEC Professor Camargo Aranha**.
 
-\`\`\`
+**Equipe:** Thiago Nestor Afonso dos Santos, Laís Silva Ferrari, Letícia Rodrigues Cardoso e Rebeca Carvalho Trindade.
 
+**Orientador:** Prof. Ricardo Faria Palhares.
 
+### Links
 
-**---**
+- **Aplicação:** https://growly.com.br/
+- **Código e documentação da aplicação:** https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/site
+- **Documentação acadêmica e histórico:** https://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/main
+- **Teachable Machine:** https://teachablemachine.withgoogle.com/
+- **TensorFlow.js:** https://www.tensorflow.org/js
+- **Supabase:** https://supabase.com/docs
+- **Gemini API:** https://ai.google.dev/gemini-api/docs
 
+---
 
+<div align="center">
 
-**# Atenção ao sincronizar branches**
+### 🌱 Growly
 
+**Conhecimento, tecnologia e valorização das PANCs.**
 
+`Branch site` · `Versão 1.05.7` · **Documentação de utilização e implementação**
 
-\`main\` e \`site\` possuem estruturas diferentes.
-
-
-
-Por isso, não trate as duas branches como se fossem cópias idênticas.
-
-
-
-Evite executar operações de merge ou rebase sem antes entender quais arquivos serão afetados.
-
-
-
-Em especial, não utilize automaticamente:
-
-
-
-\`\`\`bash
-
-git pull --rebase origin main
-
-\`\`\`
-
-
-
-enquanto estiver trabalhando na \`site\` apenas para "atualizar o projeto".
-
-
-
-Isso pode tentar reaplicar históricos diferentes e gerar conflitos desnecessários.
-
-
-
-Quando o objetivo é copiar arquivos específicos entre as estruturas, prefira operações explícitas e revise o \`git diff\` antes do commit.
-
-
-
-**---**
-
-
-
-**# Checklist antes de publicar**
-
-
-
-Antes de enviar uma alteração para a \`site\`, verifique:
-
-
-
-\`\`\`text
-
-[ ] Estou na branch site?
-
-[ ] O site abre normalmente?
-
-[ ] Não existem erros inesperados no console?
-
-[ ] Login funciona?
-
-[ ] Sessão permanece corretamente?
-
-[ ] Explorar carrega as PANCs?
-
-[ ] Meu Jardim funciona?
-
-[ ] Scanner carrega o modelo?
-
-[ ] As 4 imagens são aceitas?
-
-[ ] O resultado corresponde ao label correto?
-
-[ ] Eden responde?
-
-[ ] Layout funciona no desktop?
-
-[ ] Layout funciona no celular?
-
-[ ] Links e caminhos relativos estão corretos?
-
-[ ] Nenhuma chave privada foi adicionada ao código?
-
-[ ] git diff contém apenas alterações esperadas?
-
-\`\`\`
-
-
-
-Depois da publicação, realize pelo menos um teste rápido diretamente em:
-
-
-
-\`\`\`text
-
-https\://growly.com.br/
-
-\`\`\`
-
-
-
-**---**
-
-
-
-**# Testando antes de publicar**
-
-
-
-**## Console**
-
-
-
-Abra as ferramentas de desenvolvimento do navegador e verifique o Console.
-
-
-
-Erros JavaScript podem impedir funcionalidades mesmo quando a página aparentemente carregou corretamente.
-
-
-
-**## Network**
-
-
-
-A aba Network é útil para verificar:
-
-
-
-\- arquivos não encontrados;
-
-\- \`model.json\`;
-
-\- \`metadata.json\`;
-
-\- \`weights.bin\`;
-
-\- requisições ao Supabase;
-
-\- Edge Functions;
-
-\- respostas HTTP.
-
-
-
-**## Responsividade**
-
-
-
-Teste pelo menos:
-
-
-
-\`\`\`text
-
-desktop
-
-   +
-
-viewport mobile no DevTools
-
-   +
-
-dispositivo móvel real
-
-\`\`\`
-
-
-
-A simulação do navegador ajuda, mas não substitui completamente um dispositivo real.
-
-
-
-**## Scanner**
-
-
-
-Não valide o scanner apenas verificando se a tela abre.
-
-
-
-Faça o fluxo completo:
-
-
-
-\`\`\`text
-
-selecionar 4 imagens
-
-        ↓
-
-processar
-
-        ↓
-
-observar probabilidades
-
-        ↓
-
-verificar label
-
-        ↓
-
-abrir resultado
-
-        ↓
-
-testar Jardim/contribuição
-
-\`\`\`
-
-
-
-**---**
-
-
-
-**# Problemas comuns**
-
-
-
-**## CORS ao abrir localmente**
-
-
-
-**### Sintoma**
-
-
-
-Erros semelhantes a:
-
-
-
-\`\`\`text
-
-Cross origin requests are only supported...
-
-\`\`\`
-
-
-
-**### Causa provável**
-
-
-
-O projeto foi aberto diretamente com \`file:///\`.
-
-
-
-**### Solução**
-
-
-
-Execute a aplicação por um servidor HTTP local.
-
-
-
-**---**
-
-
-
-**## Modelo não carrega**
-
-
-
-Verifique:
-
-
-
-\`\`\`text
-
-model/model.json
-
-model/metadata.json
-
-model/weights.bin
-
-\`\`\`
-
-
-
-Também confirme:
-
-
-
-\- caminhos relativos;
-
-\- erros \`404\`;
-
-\- erros no console;
-
-\- se os três arquivos pertencem à mesma versão do modelo.
-
-
-
-**---**
-
-
-
-**## Resultado parece pertencer à espécie errada**
-
-
-
-Antes de concluir que o modelo precisa ser treinado novamente, verifique:
-
-
-
-1\. ordem das classes;
-
-2\. \`metadata.json\`;
-
-3\. mapeamento utilizado pelo JavaScript;
-
-4\. normalização do label;
-
-5\. registro encontrado no banco.
-
-
-
-O projeto já apresentou anteriormente um problema em que a classificação estava correta, mas o mapeamento dos rótulos na aplicação estava incorreto.
-
-
-
-**---**
-
-
-
-**## Câmera não abre**
-
-
-
-Verifique:
-
-
-
-\- permissão do navegador;
-
-\- permissão do sistema operacional;
-
-\- HTTPS no ambiente publicado;
-
-\- disponibilidade de câmera no dispositivo;
-
-\- console do navegador.
-
-
-
-O usuário também pode utilizar a seleção de imagens da galeria quando disponível.
-
-
-
-**---**
-
-
-
-**## Eden não responde**
-
-
-
-Verifique:
-
-
-
-\- conexão com a internet;
-
-\- requisição para a Edge Function;
-
-\- status HTTP;
-
-\- logs da função;
-
-\- disponibilidade do serviço externo.
-
-
-
-Respostas \`503\` podem representar indisponibilidade temporária.
-
-
-
-**---**
-
-
-
-**## Dados do usuário não carregam**
-
-
-
-Verifique:
-
-
-
-\- sessão atual;
-
-\- autenticação;
-
-\- UUID;
-
-\- políticas RLS;
-
-\- consulta ao banco;
-
-\- console/network.
-
-
-
-Não desative RLS apenas para contornar um erro sem antes identificar a causa.
-
-
-
-**---**
-
-
-
-**## Alteração aparece localmente, mas não no site**
-
-
-
-Verifique:
-
-
-
-\`\`\`bash
-
-git branch
-
-git status
-
-git log -1
-
-\`\`\`
-
-
-
-Confirme se:
-
-
-
-\- a alteração foi feita na \`site\`;
-
-\- houve commit;
-
-\- o push foi enviado;
-
-\- o deploy terminou;
-
-\- o navegador não está exibindo conteúdo em cache.
-
-
-
-**---**
-
-
-
-**# Cache**
-
-
-
-Depois de atualizar arquivos estáticos, o navegador pode continuar utilizando uma versão anterior em determinadas situações.
-
-
-
-Antes de diagnosticar um problema como erro de código:
-
-
-
-\- recarregue a página;
-
-\- faça um hard refresh;
-
-\- teste em janela privada;
-
-\- confira no Network qual arquivo foi realmente recebido.
-
-
-
-Evite utilizar cache como explicação automática: primeiro confirme a versão carregada.
-
-
-
-**---**
-
-
-
-**# Segurança**
-
-
-
-A branch \`site\` é pública e todo código executado no navegador pode ser inspecionado.
-
-
-
-**## Nunca coloque no front-end**
-
-
-
-\`\`\`text
-
-API keys privadas
-
-service_role keys
-
-senhas
-
-tokens administrativos
-
-credenciais de banco
-
-segredos de backend
-
-\`\`\`
-
-
-
-A chave da Gemini API deve permanecer protegida no backend utilizado pela Edge Function.
-
-
-
-**## Supabase**
-
-
-
-Uma chave destinada ao uso público do cliente não substitui políticas de autorização.
-
-
-
-A proteção efetiva dos registros depende das regras configuradas no backend, incluindo **\*\*Row Level Security\*\***.
-
-
-
-**## Administração**
-
-
-
-Esconder um link administrativo não é um mecanismo de segurança.
-
-
-
-O privilégio deve ser validado pelo sistema antes de permitir operações administrativas.
-
-
-
-**---**
-
-
-
-**# Arquivos do modelo**
-
-
-
-Ao atualizar o classificador, trate os arquivos exportados como um conjunto:
-
-
-
-\`\`\`text
-
-model.json
-
-metadata.json
-
-weights.bin
-
-\`\`\`
-
-
-
-Misturar arquivos de versões diferentes pode produzir erros ou resultados inconsistentes.
-
-
-
-Depois de substituir o modelo:
-
-
-
-1\. confirme os labels;
-
-2\. confira o tamanho de entrada;
-
-3\. teste todas as classes;
-
-4\. teste entradas inválidas;
-
-5\. verifique o mapeamento para o catálogo;
-
-6\. teste no ambiente publicado.
-
-
-
-**---**
-
-
-
-**# Status atual**
-
-
-
-**\*\*Versão:\*\*** \`1.05.6\`
-
-
-
-\| Recurso | Estado |
-
-\|---|---|
-
-\| Aplicação web responsiva | Implementado |
-
-\| Cadastro e login | Implementado |
-
-\| Catálogo | Implementado |
-
-\| Jardim Virtual | Implementado |
-
-\| Scanner de quatro imagens | Implementado |
-
-\| TensorFlow\.js | Implementado / em aprimoramento |
-
-\| Eden IA | Implementado |
-
-\| Supabase | Implementado |
-
-\| PostgreSQL | Implementado |
-
-\| Storage privado | Implementado |
-
-\| RLS | Implementado |
-
-\| Contribuição de imagens | Implementado |
-
-\| Revisão administrativa | Implementado |
-
-\| Ampliação do dataset | Em andamento |
-
-\| Novas espécies | Planejado |
-
-
-
-**---**
-
-
-
-**# Limitações da versão atual**
-
-
-
-O classificador reconhece um conjunto limitado de espécies.
-
-
-
-A qualidade da previsão depende do dataset e das condições da fotografia.
-
-
-
-Durante os testes do projeto, Tanchagem e Vinagreira apresentaram maior instabilidade em determinadas situações.
-
-
-
-O modelo continuará sendo aprimorado conforme novas imagens adequadas forem obtidas, revisadas e utilizadas em treinamentos futuros.
-
-
-
-A aplicação também depende de serviços externos para determinadas funcionalidades, como autenticação, persistência e Eden.
-
-
-
-**---**
-
-
-
-**# Documentação**
-
-
-
-Este README é específico da **\*\*branch \`site\`\*\*** e prioriza utilização, execução, manutenção e publicação.
-
-
-
-A documentação técnica completa do Growly está disponível na branch:
-
-
-
-**## \`main\`**
-
-
-
-Ela contém explicações aprofundadas sobre:
-
-
-
-\- arquitetura;
-
-\- banco de dados;
-
-\- Inteligência Artificial;
-
-\- pipeline de inferência;
-
-\- autenticação;
-
-\- autorização;
-
-\- RLS;
-
-\- Storage;
-
-\- Eden;
-
-\- testes;
-
-\- decisões técnicas;
-
-\- metodologia;
-
-\- evolução do projeto;
-
-\- dataset;
-
-\- pesquisa de campo;
-
-\- instituições;
-
-\- documentação acadêmica.
-
-
-
-**\*\*[Abrir a branch main]\(**&#x68;ttps\://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho/tree/mai&#x6E;**)\*\***
-
-
-
-**---**
-
-
-
-**# Equipe**
-
-
-
-Projeto desenvolvido pelos estudantes do **\*\*3º ano do curso Técnico em Desenvolvimento de Sistemas — período da tarde — da ETEC Professor Camargo Aranha\*\***:
-
-
-
-\| Integrante |
-
-\|---|
-
-\| **\*\*Thiago Nestor Afonso dos Santos\*\*** |
-
-\| **\*\*Laís Silva Ferrari\*\*** |
-
-\| **\*\*Letícia Rodrigues Cardoso\*\*** |
-
-\| **\*\*Rebeca Carvalho Trindade\*\*** |
-
-
-
-**\*\*Orientação:\*\*** Prof. Ricardo Faria Palhares.
-
-
-
-**---**
-
-
-
-**# Links**
-
-
-
-**\*\*Aplicação:\*\***  
-
-https\://growly.com.br/
-
-
-
-**\*\*Repositório:\*\***  
-
-https\://github.com/ThiagoNestor/tcc-thiago-nestor-lais-ferrari-leticia-cardoso-rebeca-carvalho
-
-
-
-**\*\*Documentação técnica completa:\*\***  
-
-branch \`main\`
-
-
-
-**\*\*Versão de produção:\*\***  
-
-branch \`site\`
-
-
-
-**---**
-
-
-
-\<div *align*="center">
-
-
-
-**## Growly**
-
-
-
-*\*Onde cada planta encontra seu caminho para florescer.\**
-
-
-
-**\*\*Branch \`site\` · versão 1.05.6\*\***
-
-
-
-\</div>
+</div>
