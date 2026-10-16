@@ -239,10 +239,10 @@ formSenha.addEventListener(
       senhaConfirmar.value;
 
 
-    if (nova.length < 6) {
+    if (nova.length < 8) {
 
       mostrarStatus(
-        "A nova senha deve ter pelo menos 6 caracteres.",
+        "A nova senha deve ter pelo menos 8 caracteres.",
         true
       );
 
